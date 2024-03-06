@@ -20,3 +20,7 @@ make dev-run; # dotnet run
 ```sh
 make dev-shell; # inicia o bash dentro do container debian configurado com o dotnet sdk
 ```
+
+## Licença
+
+[MIT - Ladesa e Contribuidores, 2024](./LICENSE).
