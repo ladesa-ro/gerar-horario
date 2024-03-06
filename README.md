@@ -3,7 +3,7 @@
 ## Desenvolvimento
 
 ```sh
-https://github.com/sisgha/gerar-horario.git;
+git clone https://github.com/sisgha/gerar-horario.git;
 cd gerar-horario;
 ```
 
