@@ -21,6 +21,21 @@ make dev-run; # dotnet run
 make dev-shell; # inicia o bash dentro do container debian configurado com o dotnet sdk
 ```
 
+### Estudo Node Z3
+
+```sh
+cd estudo-node-z3/projeto;
+```
+
+```sh
+make dev-run; # npm i && npm run dev-start
+```
+
+```sh
+make dev-shell; # inicia o bash dentro do container debian configurado com o docker
+```
+
+
 ## Licença
 
 [MIT - Ladesa e Contribuidores, 2024](./LICENSE).
