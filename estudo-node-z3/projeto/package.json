@@ -1,8 +1,9 @@
 {
-  "name": "projeto",
+  "name": "gerar-horario-estudo-node-z3",
   "scripts": {
     "dev-start": "ts-node-dev --respawn --transpile-only src/hello.ts",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest dev",
     "coverage": "vitest run --coverage"
   },
   "author": "Gabriel R. Antunes",
