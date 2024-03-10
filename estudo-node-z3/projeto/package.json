@@ -4,7 +4,9 @@
     "dev-start": "ts-node-dev --respawn --transpile-only src/hello.ts",
     "test": "vitest run",
     "test:watch": "vitest dev",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "format:check": "prettier --cache --ignore-unknown \"**/*\" --check",
+    "format:write": "prettier --cache --ignore-unknown \"**/*\" --write"
   },
   "author": "Gabriel R. Antunes",
   "dependencies": {
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.202",
     "@vitest/coverage-v8": "^1.3.1",
+    "prettier": "^3.2.5",
     "typescript": "^5.4.2",
     "vitest": "^1.3.1"
   }

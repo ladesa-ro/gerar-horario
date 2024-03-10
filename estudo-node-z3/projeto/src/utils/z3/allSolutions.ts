@@ -19,7 +19,9 @@ import type { Bool, Model } from "z3-solver";
  */
 // TODO(ritave): Use faster solution https://stackoverflow.com/a/70656700
 // TODO(ritave): Move to high-level.ts
-export async function* allSolutions<Name extends string>(...assertions: Bool<Name>[]): AsyncIterable<Model<Name>> {
+export async function* allSolutions<Name extends string>(
+  ...assertions: Bool<Name>[]
+): AsyncIterable<Model<Name>> {
   if (assertions.length === 0) {
     return;
   }
@@ -46,8 +48,8 @@ export async function* allSolutions<Name extends string>(...assertions: Bool<Nam
             // TODO(ritave): Assert not an array / uninterpreted sort
             const value = model.eval(term, true);
             return term.neq(value);
-          })
-      )
+          }),
+      ),
     );
   }
 }

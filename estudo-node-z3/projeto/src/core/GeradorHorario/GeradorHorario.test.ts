@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
-import { DiaSemanaIso, GeradorHorario, gerarTempos } from "./gerar-horario";
+import { DiaSemanaIso } from "../../models/DiaSemanaIso";
+import { gerarIntervalos } from "../../utils/generators/gerarIntervalos";
+import { GeradorHorario } from "./GeradorHorario";
 
 test("adds 1 + 2 to equal 3", async () => {
   const gerador = new GeradorHorario();
@@ -11,10 +13,10 @@ test("adds 1 + 2 to equal 3", async () => {
 
     tempos: [
       //
-      ...gerarTempos("07:30", 50, 3),
-      ...gerarTempos("10:20", 50, 2),
-      ...gerarTempos("13:00", 50, 3),
-      ...gerarTempos("15:50", 50, 2),
+      ...gerarIntervalos("07:30", 50, 3),
+      ...gerarIntervalos("10:20", 50, 2),
+      ...gerarIntervalos("13:00", 50, 3),
+      ...gerarIntervalos("15:50", 50, 2),
     ],
 
     //
