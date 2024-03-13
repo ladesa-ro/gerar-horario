@@ -39,4 +39,5 @@ make dev-shell; # inicia o bash dentro do container debian configurado com o doc
 ## Licença
 
 [MIT - Ladesa e Contribuidores, 2024](./LICENSE).
+
 [MIT - Gabriel R. Antunes, 2024](./LICENSE).
