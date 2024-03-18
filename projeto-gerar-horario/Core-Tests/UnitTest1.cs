@@ -1,4 +1,6 @@
-﻿namespace Core_Tests;
+﻿using Core;
+
+namespace Core_Tests;
 
 public class Tests
 {
@@ -10,6 +12,11 @@ public class Tests
     [Test]
     public void Test1()
     {
+        var conexao = new Class1();
+
+        bool metodoTrue = conexao.Retorno();
+
+        Assert.IsTrue(metodoTrue);
         Assert.Pass();
     }
 }
