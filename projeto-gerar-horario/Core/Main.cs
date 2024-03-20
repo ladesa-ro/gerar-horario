@@ -7,11 +7,25 @@ public class Main
 
     public bool Retorno()
     {
-        var gerador = new Gerador();
-
+        // ====================================================
         var gerarHorarioOptions = new GerarHorarioOptions { };
+        // ====================================================
+        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
+        // ====================================================
 
-        return gerador.GerarHorario(gerarHorarioOptions);
+        var melhorHorario = horarioGeradoEnumerator.First();
+        Console.WriteLine($"Melhor horário gerado: {melhorHorario}");
+
+        // ====================================================
+
+        foreach (var horarioGerado in horarioGeradoEnumerator)
+        {
+            Console.WriteLine($"Horário Gerado: {horarioGerado}");
+        }
+
+        // ====================================================
+
+        return true;
     }
 }
 

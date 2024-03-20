@@ -15,7 +15,7 @@ public class Gerador
     return model;
   }
 
-  public bool GerarHorario(
+  public static IEnumerable<IHorarioGerado> GerarHorario(
     IGerarHorarioOptions gerarHorarioOptions,
     bool verbose = true)
   {
@@ -48,8 +48,11 @@ public class Gerador
       Console.WriteLine($"  - wall time : {solver.WallTime()}s");
     }
 
+    var horarioGerado = new HorarioGerado { };
 
-    return true;
+    yield return horarioGerado;
+    yield return horarioGerado;
+    yield return horarioGerado;
   }
 }
 
