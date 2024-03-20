@@ -1,6 +1,6 @@
 namespace Core;
 
-public class HorarioGeradoAula : IHorarioGeradoAula
+public class HorarioGeradoAula 
 {
     public object Diario { get; set; } = new { };
     public object IntervaloDeTempo { get; set; } = new { };

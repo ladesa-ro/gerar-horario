@@ -1,13 +1,13 @@
 namespace Core;
-public class GerarHorarioOptions : IGerarHorarioOptions
+public class GerarHorarioOptions 
 {
 
     public int DiaSemanaInicio { get; set; }
     public int DiaSemanaFim { get; set; }
 
-    public ITurma[] Turmas { get; set; }
-    public IProfessor[] Professores { get; set; }
-    public IIntervalo[] IntervalosDeAula { get; set; }
+    public Turma[] Turmas { get; set; }
+    public Professor[] Professores { get; set; }
+    public Intervalo[] IntervalosDeAula { get; set; }
 
     public override string ToString()
     {

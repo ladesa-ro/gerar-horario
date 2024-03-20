@@ -1,6 +1,6 @@
 namespace Core;
 
-public class EntidadeIdentificacao : IEntidadeIdentificacao
+public class EntidadeIdentificacao 
 {
   private string uniqueTag;
 

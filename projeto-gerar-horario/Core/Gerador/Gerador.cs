@@ -11,13 +11,13 @@ class PropostaAula(
 {
     public int diaSemanaIso = diaSemanaIso;
     public int intervaloIndex = intervaloIndex;
-    public IEntidadeIdentificacao diarioId = diarioId;
+    public EntidadeIdentificacao diarioId = diarioId;
     public BoolVar modelBoolVar = modelBoolVar;
 }
 
 public class Gerador
 {
-    public static CpModel PrepararModelComRestricoes(IGerarHorarioOptions options, bool debug = true)
+    public static CpModel PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = true)
     {
         // =================================
         var model = new CpModel();
@@ -102,8 +102,8 @@ public class Gerador
         return model;
     }
 
-    public static IEnumerable<IHorarioGerado> GerarHorario(
-      IGerarHorarioOptions options,
+    public static IEnumerable<HorarioGerado> GerarHorario(
+      GerarHorarioOptions options,
       bool verbose = true)
     {
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
