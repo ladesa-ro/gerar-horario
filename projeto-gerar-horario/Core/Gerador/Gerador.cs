@@ -2,17 +2,33 @@ using Google.OrTools.Sat;
 
 namespace Core;
 
+class PropostaAula(
+    int diaSemanaIso,
+    int intervaloIndex,
+    IEntidadeIdentificacao diarioId,
+    BoolVar modelBoolVar
+    )
+{
+    public int diaSemanaIso = diaSemanaIso;
+    public int intervaloIndex = intervaloIndex;
+    public IEntidadeIdentificacao diarioId = diarioId;
+    public BoolVar modelBoolVar = modelBoolVar;
+}
+
 public class Gerador
 {
-    public static CpModel PrepararModelComRestricoes(IGerarHorarioOptions gerarHorarioOptions, bool debug = true)
+    public static CpModel PrepararModelComRestricoes(IGerarHorarioOptions options, bool debug = true)
     {
-        Console.WriteLine(gerarHorarioOptions);
+        Console.WriteLine(options);
 
         var model = new CpModel();
 
-        int diasDeTrabalho = ((int)gerarHorarioOptions.DiaFim) + 1 - ((int)gerarHorarioOptions.DiaInicio);
-        int totalIntervalos = 10;
-        int totalDiarios = 1;
+        var todasAsPropostasDeAula = new List<PropostaAula>();
+
+        int diasDeTrabalho = options.DiaSemanaFim + 1 - options.DiaSemanaInicio;
+        int totalIntervalos = options.IntervalosDeAula.Length;
+
+        int totalDiarios = 15 * 15;
 
         if (debug)
         {
@@ -27,7 +43,7 @@ public class Gerador
             Console.WriteLine($"Tamanho da matriz de booleans (apenas para os dias de trabalho): {diasDeTrabalho * totalIntervalos * totalDiarios}");
         }
 
-        for (int diaSemanaIso = (int)gerarHorarioOptions.DiaInicio; diaSemanaIso <= (int)gerarHorarioOptions.DiaFim; diaSemanaIso++)
+        for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
         {
             for (int intervaloIndex = 0; intervaloIndex < 10; intervaloIndex++)
             {
@@ -41,7 +57,31 @@ public class Gerador
                     }
 
                     var boolVar = model.NewBoolVar(boolVarLabel);
+
+                    var propostaAula = new PropostaAula(diaSemanaIso, intervaloIndex, EntidadeIdentificacao.Id(diarioId), boolVar);
+                    todasAsPropostasDeAula.Add(propostaAula);
+
                     storeBoolVars[diaSemanaIso, intervaloIndex, diarioId] = boolVar;
+                }
+            }
+        }
+
+        // para cada turma
+
+        foreach (var turma in options.Turmas)
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(options.DiaSemanaInicio, options.DiaSemanaFim))
+            {
+                foreach (var intervaloIndex in Enumerable.Range(0, options.IntervalosDeAula.Length))
+                {
+                    var propostas = from propostaAula in todasAsPropostasDeAula
+                                    where
+                                       propostaAula.diaSemanaIso == diaSemanaIso
+                                       && propostaAula.intervaloIndex == intervaloIndex
+                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId)
+                                    select propostaAula.modelBoolVar;
+
+                    model.AddAtMostOne(propostas);
                 }
             }
         }
