@@ -7,6 +7,8 @@ public class Main
 
     public bool Retorno()
     {
+        var gerarTodosOsHorarios = false;
+
         // ====================================================
 
         var gerarHorarioOptions = new GerarHorarioOptions
@@ -22,11 +24,15 @@ public class Main
         var melhorHorario = horarioGeradoEnumerator.First();
         Console.WriteLine($"Melhor horário gerado: {melhorHorario}");
 
+
         // ====================================================
 
-        foreach (var horarioGerado in horarioGeradoEnumerator)
+        if (gerarTodosOsHorarios)
         {
-            Console.WriteLine($"Horário Gerado: {horarioGerado}");
+            foreach (var horarioGerado in horarioGeradoEnumerator)
+            {
+                Console.WriteLine($"Horário Gerado: {horarioGerado}");
+            }
         }
 
         // ====================================================
