@@ -19,54 +19,61 @@ public class Gerador
 {
     public static CpModel PrepararModelComRestricoes(IGerarHorarioOptions options, bool debug = true)
     {
-        Console.WriteLine(options);
-
+        // =================================
         var model = new CpModel();
+        // =================================
 
+
+        // =================================
         var todasAsPropostasDeAula = new List<PropostaAula>();
+        // =================================
 
-        int diasDeTrabalho = options.DiaSemanaFim + 1 - options.DiaSemanaInicio;
-        int totalIntervalos = options.IntervalosDeAula.Length;
+        // =================================
+        int quantidadeDeDias = options.DiaSemanaFim + 1 - options.DiaSemanaInicio;
+        int totalDeIntervalos = options.IntervalosDeAula.Length;
+        // TODO: implementar corretamente com options
+        int totalDeDiarios = 15 * 15;
 
-        int totalDiarios = 15 * 15;
+        // =================================
+
+        BoolVar[,,] storeBoolVars = new BoolVar[7, totalDeIntervalos, totalDeDiarios];
+
+        // =================================
 
         if (debug)
         {
-            Console.WriteLine($"Dias de trabalho: {diasDeTrabalho} - Total intervalos: {totalIntervalos} - Total diários: {totalDiarios}.");
+            Console.WriteLine($"Dias de trabalho: {quantidadeDeDias} - Total intervalos: {totalDeIntervalos} - Total diários: {totalDeDiarios}.");
+            Console.WriteLine($"Tamanho da matriz de booleans: {7 * totalDeIntervalos * totalDeDiarios}");
+            Console.WriteLine($"Tamanho da matriz de booleans (apenas para os dias de trabalho): {quantidadeDeDias * totalDeIntervalos * totalDeDiarios}");
         }
 
-        BoolVar[,,] storeBoolVars = new BoolVar[7, totalIntervalos, totalDiarios];
-
-        if (debug)
-        {
-            Console.WriteLine($"Tamanho da matriz de booleans: {7 * totalIntervalos * totalDiarios}");
-            Console.WriteLine($"Tamanho da matriz de booleans (apenas para os dias de trabalho): {diasDeTrabalho * totalIntervalos * totalDiarios}");
-        }
+        // ====================================================================
 
         for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
         {
             for (int intervaloIndex = 0; intervaloIndex < 10; intervaloIndex++)
             {
-                for (int diarioId = 0; diarioId < totalDiarios; diarioId++)
+                for (int diarioId = 0; diarioId < totalDeDiarios; diarioId++)
                 {
-                    var boolVarLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
+                    var label = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
+                    var modelBoolVar = model.NewBoolVar(label);
+
+                    var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, EntidadeIdentificacao.Id(diarioId), modelBoolVar);
+                    todasAsPropostasDeAula.Add(propostaDeAula);
+
+                    storeBoolVars[diaSemanaIso, intervaloIndex, diarioId] = modelBoolVar;
 
                     if (debug)
                     {
-                        Console.WriteLine($"--> init bool var | {boolVarLabel}");
+                        Console.WriteLine($"--> init proposta de aula | {label}");
                     }
-
-                    var boolVar = model.NewBoolVar(boolVarLabel);
-
-                    var propostaAula = new PropostaAula(diaSemanaIso, intervaloIndex, EntidadeIdentificacao.Id(diarioId), boolVar);
-                    todasAsPropostasDeAula.Add(propostaAula);
-
-                    storeBoolVars[diaSemanaIso, intervaloIndex, diarioId] = boolVar;
                 }
             }
         }
 
-        // para cada turma
+        // ======================================
+
+        // RESTRIÇÃO: Garantir no máximo 1 aula em um (dia e intervalo) para cada turma.
 
         foreach (var turma in options.Turmas)
         {
@@ -76,9 +83,9 @@ public class Gerador
                 {
                     var propostas = from propostaAula in todasAsPropostasDeAula
                                     where
-                                       propostaAula.diaSemanaIso == diaSemanaIso
-                                       && propostaAula.intervaloIndex == intervaloIndex
-                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId)
+                                       propostaAula.diaSemanaIso == diaSemanaIso // mesmo dia
+                                       && propostaAula.intervaloIndex == intervaloIndex // mesmo horário
+                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId) // filtrar todos os diarios dessa turma
                                     select propostaAula.modelBoolVar;
 
                     model.AddAtMostOne(propostas);
@@ -86,7 +93,11 @@ public class Gerador
             }
         }
 
-        // TODO: todas as restrições serão implementadas aqui.
+        // ======================================
+
+        // TODO: todas as restrições são implementadas aqui.
+
+        // ==========================================================================================================
 
         return model;
     }
