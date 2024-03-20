@@ -11,8 +11,8 @@ public class Main
 
         var gerarHorarioOptions = new GerarHorarioOptions
         {
-            DiaSemanaInicio = DiaSemanaIso.SEGUNDA,
-            DiaSemanaFim = DiaSemanaIso.SABADO
+            DiaSemanaInicio = (int)DiaSemanaIso.SEGUNDA,
+            DiaSemanaFim = (int)DiaSemanaIso.SABADO
         };
 
         // ====================================================
