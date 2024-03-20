@@ -16,11 +16,7 @@ export class GeradorHorario {
     const storeDiaTempoDiario = new StoreDiaTempoDiario();
 
     function* gerarDiaSemana() {
-      for (
-        let diaSemana = options.diaInicio;
-        diaSemana <= options.diaFim;
-        diaSemana++
-      ) {
+      for (let diaSemana = options.diaInicio; diaSemana <= options.diaFim; diaSemana++) {
         yield diaSemana;
       }
     }
@@ -28,10 +24,7 @@ export class GeradorHorario {
     function* gerarTempos() {
       for (const tempo of options.tempos) {
         const indexTempo = options.tempos.indexOf(tempo);
-        const [tempoInicio, tempoFim] = [
-          parseTime(tempo.inicio),
-          parseTime(tempo.fim),
-        ];
+        const [tempoInicio, tempoFim] = [parseTime(tempo.inicio), parseTime(tempo.fim)];
         yield { indexTempo, tempo, tempoInicio, tempoFim };
       }
     }
@@ -53,9 +46,7 @@ export class GeradorHorario {
         for (const tempo of options.tempos) {
           const indexTempo = options.tempos.indexOf(tempo);
 
-          for (const diario of options.turmas
-            .map((turma) => turma.diarios)
-            .flat(1)) {
+          for (const diario of options.turmas.map((turma) => turma.diarios).flat(1)) {
             yield {
               diaSemana,
               //
@@ -71,18 +62,11 @@ export class GeradorHorario {
     }
 
     for (const diaTempoDiario of gerarDiaTempoDiario()) {
-      const solve = Z3.Int.const(
-        `${diaTempoDiario.diaSemana}_${diaTempoDiario.indexTempo}_${diaTempoDiario.diario.id}`,
-      );
+      const solve = Z3.Int.const(`${diaTempoDiario.diaSemana}_${diaTempoDiario.indexTempo}_${diaTempoDiario.diario.id}`);
 
       opt.add(solve.eq(0).or(solve.eq(1)));
 
-      storeDiaTempoDiario.add(
-        diaTempoDiario.diaSemana,
-        diaTempoDiario.indexTempo,
-        diaTempoDiario.diario.id,
-        solve,
-      );
+      storeDiaTempoDiario.add(diaTempoDiario.diaSemana, diaTempoDiario.indexTempo, diaTempoDiario.diario.id, solve);
     }
 
     storeDiaTempoDiario.log();
@@ -91,10 +75,7 @@ export class GeradorHorario {
 
     for (const diaSemana of gerarDiaSemana()) {
       for (const tempo of options.tempos) {
-        const [gridAulaInicio, gridAulaFim] = [
-          parseTime(tempo.inicio),
-          parseTime(tempo.fim),
-        ];
+        const [gridAulaInicio, gridAulaFim] = [parseTime(tempo.inicio), parseTime(tempo.fim)];
 
         const indexTempo = options.tempos.indexOf(tempo);
 
@@ -102,41 +83,31 @@ export class GeradorHorario {
           const diariosSolves = storeDiaTempoDiario.filter(
             { indexTempo, diaSemana },
             (i) => turma.diarios.findIndex((j) => i.idDiario === j.id) !== -1,
-            (i) => i.solve,
+            (i) => i.solve
           );
 
-          opt.add(
-            Z3.Sum(
-              diariosSolves[0],
-              ...diariosSolves.slice(1).map((i) => i),
-            ).le(1),
-          );
+          opt.add(Z3.Sum(diariosSolves[0], ...diariosSolves.slice(1).map((i) => i)).le(1));
 
-          const turmaTemDisponibilidade = turma.disponibilidades.some(
-            (disponibilidade) => {
-              const [disponibilidadeInicio, disponibilidadeFim] = [
-                parseTime(disponibilidade.inicio),
-                parseTime(disponibilidade.fim),
-              ];
+          const turmaTemDisponibilidade = turma.disponibilidades.some((disponibilidade) => {
+            const [disponibilidadeInicio, disponibilidadeFim] = [
+              parseTime(disponibilidade.inicio),
+              parseTime(disponibilidade.fim),
+            ];
 
-              if (disponibilidade.diaSemanaIso !== diaSemana) {
-                return false;
-              }
-
-              if (
-                disponibilidadeInicio <= gridAulaInicio &&
-                disponibilidadeFim >= gridAulaFim
-              ) {
-                return true;
-              }
-
+            if (disponibilidade.diaSemanaIso !== diaSemana) {
               return false;
-            },
-          );
+            }
+
+            if (disponibilidadeInicio <= gridAulaInicio && disponibilidadeFim >= gridAulaFim) {
+              return true;
+            }
+
+            return false;
+          });
 
           console.log(
             `${turma.nome} - Dia ${diaSemana} - ${tempo.inicio} a ${tempo.fim} |`,
-            turmaTemDisponibilidade ? "  disponivel" : "indisponivel",
+            turmaTemDisponibilidade ? "  disponivel" : "indisponivel"
           );
 
           if (!turmaTemDisponibilidade) {
@@ -151,55 +122,37 @@ export class GeradorHorario {
     // Garantir diario.quantidadeMaximaSemana
 
     for (const { diario } of gerarDiarios()) {
-      const solves = storeDiaTempoDiario.filter(
-        { idDiario: diario.id },
-        null,
-        (i) => i.solve,
-      );
-      opt.add(
-        Z3.Sum(solves[0], ...solves.slice(1)).le(diario.quantidadeMaximaSemana),
-      );
+      const solves = storeDiaTempoDiario.filter({ idDiario: diario.id }, null, (i) => i.solve);
+      opt.add(Z3.Sum(solves[0], ...solves.slice(1)).le(diario.quantidadeMaximaSemana));
     }
 
     // Garantir a disponibilidade de um professor
 
     for (const { diario } of gerarDiarios()) {
-      const professor = options.professores.find(
-        (professor) => professor.id === diario.professor.id,
-      )!;
+      const professor = options.professores.find((professor) => professor.id === diario.professor.id)!;
 
       for (let diaSemana of gerarDiaSemana()) {
-        for (const {
-          indexTempo,
-          tempoInicio,
-          tempoFim,
-          tempo,
-        } of gerarTempos()) {
-          const professorTemDisponibilidade = professor.disponibilidades.some(
-            (disponibilidade) => {
-              const [disponibilidadeInicio, disponibilidadeFim] = [
-                parseTime(disponibilidade.inicio),
-                parseTime(disponibilidade.fim),
-              ];
+        for (const { indexTempo, tempoInicio, tempoFim, tempo } of gerarTempos()) {
+          const professorTemDisponibilidade = professor.disponibilidades.some((disponibilidade) => {
+            const [disponibilidadeInicio, disponibilidadeFim] = [
+              parseTime(disponibilidade.inicio),
+              parseTime(disponibilidade.fim),
+            ];
 
-              if (disponibilidade.diaSemanaIso !== diaSemana) {
-                return false;
-              }
-
-              if (
-                disponibilidadeInicio <= tempoInicio &&
-                disponibilidadeFim >= tempoFim
-              ) {
-                return true;
-              }
-
+            if (disponibilidade.diaSemanaIso !== diaSemana) {
               return false;
-            },
-          );
+            }
+
+            if (disponibilidadeInicio <= tempoInicio && disponibilidadeFim >= tempoFim) {
+              return true;
+            }
+
+            return false;
+          });
 
           console.log(
             `${professor.nome} - Dia ${diaSemana} - ${tempo.inicio} a ${tempo.fim} |`,
-            professorTemDisponibilidade ? "  disponivel" : "indisponivel",
+            professorTemDisponibilidade ? "  disponivel" : "indisponivel"
           );
 
           if (!professorTemDisponibilidade) {
@@ -222,15 +175,10 @@ export class GeradorHorario {
 
     const scoreAulas = Z3.Int.const("scoreAulas");
 
-    const gridDiaTempoAula = storeDiaTempoDiario.filter(
-      null,
-      null,
-      (i) => i.solve,
-    );
+    const gridDiaTempoAula = storeDiaTempoDiario.filter(null, null, (i) => i.solve);
 
-    opt.add(
-      scoreAulas.eq(Z3.Sum(gridDiaTempoAula[0], ...gridDiaTempoAula.slice(1))),
-    );
+    opt.add(scoreAulas.eq(Z3.Sum(gridDiaTempoAula[0], ...gridDiaTempoAula.slice(1))));
+
     opt.maximize(scoreAulas);
 
     const result = await opt.check();
@@ -244,23 +192,16 @@ export class GeradorHorario {
             const [solvedDiaTempoDiario] = storeDiaTempoDiario.filter(
               { diaSemana, indexTempo },
               (i) =>
-                model.eval(i.solve).toString() === "1" &&
-                turma.diarios.findIndex(
-                  (diario) => diario.id === i.idDiario,
-                ) !== -1,
+                model.eval(i.solve).toString() === "1" && turma.diarios.findIndex((diario) => diario.id === i.idDiario) !== -1
             );
 
             const solvedDiario =
-              (solvedDiaTempoDiario &&
-                turma.diarios.find(
-                  (diario) => diario.id === solvedDiaTempoDiario.idDiario,
-                )) ??
-              null;
+              (solvedDiaTempoDiario && turma.diarios.find((diario) => diario.id === solvedDiaTempoDiario.idDiario)) ?? null;
 
             console.log(
               `${turma.nome} - ${diaSemana} - ${tempo.inicio} a ${tempo.fim} - ${
                 (solvedDiario ? solvedDiario?.disciplina?.nome : null) ?? "nem"
-              }`,
+              }`
             );
           }
         }

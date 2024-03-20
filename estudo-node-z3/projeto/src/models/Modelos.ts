@@ -18,18 +18,19 @@ export type ITempo = {
   inicio: string;
   fim: string;
 };
+
 type IDisponibilidade = {
   diaSemanaIso: number;
   inicio: string;
   fim: string;
 };
+
 type IProfessor = {
   id: number;
-
   nome: string;
-
   disponibilidades: IDisponibilidade[];
 };
+
 type ITurma = {
   id: number;
   nome: string;
@@ -45,6 +46,7 @@ export type IGerarHorarioInput = {
   turmas: ITurma[];
   professores: IProfessor[];
 };
+
 export type IDiaTempoDiario = {
   diaSemana: number;
   indexTempo: number;

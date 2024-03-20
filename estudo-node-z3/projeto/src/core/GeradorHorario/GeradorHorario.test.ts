@@ -15,8 +15,10 @@ test("adds 1 + 2 to equal 3", async () => {
       //
       ...gerarIntervalos("07:30", 50, 3),
       ...gerarIntervalos("10:20", 50, 2),
+      //
       ...gerarIntervalos("13:00", 50, 3),
       ...gerarIntervalos("15:50", 50, 2),
+      //
     ],
 
     //
