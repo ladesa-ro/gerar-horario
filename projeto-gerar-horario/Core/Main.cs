@@ -8,7 +8,13 @@ public class Main
     public bool Retorno()
     {
         // ====================================================
-        var gerarHorarioOptions = new GerarHorarioOptions { };
+
+        var gerarHorarioOptions = new GerarHorarioOptions
+        {
+            DiaInicio = DiaSemanaIso.SEGUNDA,
+            DiaFim = DiaSemanaIso.SABADO
+        };
+
         // ====================================================
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
         // ====================================================
