@@ -13,8 +13,8 @@ test("adds 1 + 2 to equal 3", async () => {
 
     tempos: [
       //
-      ...gerarIntervalos("07:30", 50, 3),
-      ...gerarIntervalos("10:20", 50, 2),
+      ...gerarIntervalos("07:30", 50, 3), // 07:30 - 08:20 ||||| 08:20 - 09:10  |||| 09:10 - 10:00
+      ...gerarIntervalos("10:20", 50, 2), // 10:20 - 11:10  |||| 11:10 - 12:00
       //
       ...gerarIntervalos("13:00", 50, 3),
       ...gerarIntervalos("15:50", 50, 2),
