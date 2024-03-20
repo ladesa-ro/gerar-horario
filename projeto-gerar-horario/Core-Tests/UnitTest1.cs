@@ -12,7 +12,7 @@ public class Tests
     [Test]
     public void Test1()
     {
-        var conexao = new Class1();
+        var conexao = new Main();
 
         bool metodoTrue = conexao.Retorno();
 
