@@ -92,15 +92,15 @@ public class Gerador
     }
 
     public static IEnumerable<IHorarioGerado> GerarHorario(
-      IGerarHorarioOptions gerarHorarioOptions,
+      IGerarHorarioOptions options,
       bool verbose = true)
     {
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
-        CpModel model = PrepararModelComRestricoes(gerarHorarioOptions);
+        var model = PrepararModelComRestricoes(options);
 
         // RESOLVE O MODELO
-        CpSolver solver = new CpSolver();
-        CpSolverStatus status = solver.Solve(model);
+        var solver = new CpSolver();
+        var status = solver.Solve(model);
 
         // STATUS DA SOLUÇÃO
         Console.WriteLine($"Solve status: {status}");
@@ -124,11 +124,12 @@ public class Gerador
             Console.WriteLine($"  - wall time : {solver.WallTime()}s");
         }
 
-        var horarioGerado = new HorarioGerado { };
+        // TODO: gerar mais de um horário com CpSolverSolutionCallback OnSolutionCallback
 
+        // TODO: transofomar propostasDeAula com modelBoolVar == true para HorarioGerado
+        var horarioGerado = new HorarioGerado { };
         yield return horarioGerado;
-        yield return horarioGerado;
-        yield return horarioGerado;
+
     }
 }
 
