@@ -4,11 +4,13 @@ namespace Core;
 
 public class Gerador
 {
-  public static CpModel PrepararModel(IGerarHorarioOptions gerarHorarioOptions)
+  public static CpModel PrepararModelComRestricoes(IGerarHorarioOptions gerarHorarioOptions)
   {
     Console.WriteLine(gerarHorarioOptions);
 
     CpModel model = new CpModel();
+
+    // TODO: todas as restrições serão implementadas aqui.
 
     return model;
   }
@@ -17,15 +19,17 @@ public class Gerador
     IGerarHorarioOptions gerarHorarioOptions,
     bool verbose = true)
   {
-    CpModel model = PrepararModel(gerarHorarioOptions);
+    // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
+    CpModel model = PrepararModelComRestricoes(gerarHorarioOptions);
 
-    // Solve
+    // RESOLVE O MODELO
     CpSolver solver = new CpSolver();
     CpSolverStatus status = solver.Solve(model);
 
+    // STATUS DA SOLUÇÃO
     Console.WriteLine($"Solve status: {status}");
 
-    // Print solution.
+    // Mostra a solução.
     // Check that the problem has a feasible solution.
     if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
     {
