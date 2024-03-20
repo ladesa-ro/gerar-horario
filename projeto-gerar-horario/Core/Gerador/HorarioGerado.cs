@@ -2,8 +2,11 @@ namespace Core;
 
 public class HorarioGerado : IHorarioGerado
 {
-  public override string ToString()
-  {
-    return "HorarioGerado {  }";
-  }
+
+    public IHorarioGeradoAula[] Aulas { get; set; } = [];
+
+    public override string ToString()
+    {
+        return "HorarioGerado {  }";
+    }
 }
