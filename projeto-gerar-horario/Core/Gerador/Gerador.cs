@@ -1,6 +1,8 @@
+using Core.Dtos.Configuracoes;
+using Core.Dtos.HorarioGerado;
 using Google.OrTools.Sat;
 
-namespace Core;
+namespace Core.Gerador;
 
 public class Gerador
 {

@@ -1,4 +1,5 @@
-﻿using Google.OrTools.Bop;
+﻿using Core.Dtos.Configuracoes;
+using Core.Dtos.Entidades;
 
 namespace Core;
 
@@ -18,7 +19,7 @@ public class Main
         };
 
         // ====================================================
-        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
+        var horarioGeradoEnumerator = Gerador.Gerador.GerarHorario(gerarHorarioOptions);
         // ====================================================
 
         var melhorHorario = horarioGeradoEnumerator.First();

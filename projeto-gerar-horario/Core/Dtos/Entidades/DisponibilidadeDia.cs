@@ -1,4 +1,5 @@
-namespace Core;
+namespace Core.Dtos.Entidades;
+
 public class DisponibilidadeDia
 {
     public int DiaSemanaIso { get; set; }

@@ -1,4 +1,7 @@
-namespace Core;
+using Core.Dtos.Entidades;
+
+namespace Core.Dtos.Configuracoes;
+
 public class GerarHorarioOptions
 {
 

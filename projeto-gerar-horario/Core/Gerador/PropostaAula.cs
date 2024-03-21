@@ -1,6 +1,6 @@
 using Google.OrTools.Sat;
 
-namespace Core;
+namespace Core.Gerador;
 
 public class PropostaAula(
     int diaSemanaIso,

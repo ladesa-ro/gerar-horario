@@ -1,4 +1,5 @@
-namespace Core;
+namespace Core.Dtos.Entidades;
+
 public class Diario
 {
     public string Id { get; set; }

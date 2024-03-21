@@ -1,4 +1,5 @@
-namespace Core;
+namespace Core.Dtos.Entidades;
+
 public class Turma
 {
     public string Id { get; set; }
