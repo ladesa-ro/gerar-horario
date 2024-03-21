@@ -19,7 +19,7 @@ public class Gerador
 
         // =================================
         int quantidadeDeDias = options.DiaSemanaFim + 1 - options.DiaSemanaInicio;
-        int totalDeIntervalos = options.IntervalosDeAula.Length;
+        int totalDeIntervalos = options.HorariosDeAula.Length;
         // TODO: implementar corretamente com options
         int totalDeDiarios = 15 * 15;
 
@@ -68,7 +68,7 @@ public class Gerador
         {
             foreach (var diaSemanaIso in Enumerable.Range(options.DiaSemanaInicio, options.DiaSemanaFim))
             {
-                foreach (var intervaloIndex in Enumerable.Range(0, options.IntervalosDeAula.Length))
+                foreach (var intervaloIndex in Enumerable.Range(0, options.HorariosDeAula.Length))
                 {
                     var propostas = from propostaAula in todasAsPropostasDeAula
                                     where

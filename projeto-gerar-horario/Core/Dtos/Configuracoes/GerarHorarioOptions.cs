@@ -10,7 +10,7 @@ public class GerarHorarioOptions
 
     public Turma[] Turmas { get; set; }
     public Professor[] Professores { get; set; }
-    public Intervalo[] IntervalosDeAula { get; set; }
+    public Intervalo[] HorariosDeAula { get; set; }
 
     public override string ToString()
     {
