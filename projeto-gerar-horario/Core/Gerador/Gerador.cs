@@ -2,19 +2,6 @@ using Google.OrTools.Sat;
 
 namespace Core;
 
-class PropostaAula(
-    int diaSemanaIso,
-    int intervaloIndex,
-    IEntidadeIdentificacao diarioId,
-    BoolVar modelBoolVar
-    )
-{
-    public int diaSemanaIso = diaSemanaIso;
-    public int intervaloIndex = intervaloIndex;
-    public EntidadeIdentificacao diarioId = diarioId;
-    public BoolVar modelBoolVar = modelBoolVar;
-}
-
 public class Gerador
 {
     public static CpModel PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = true)
@@ -58,7 +45,7 @@ public class Gerador
                     var label = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
                     var modelBoolVar = model.NewBoolVar(label);
 
-                    var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, EntidadeIdentificacao.Id(diarioId), modelBoolVar);
+                    var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, Convert.ToString(diarioId), modelBoolVar);
                     todasAsPropostasDeAula.Add(propostaDeAula);
 
                     storeBoolVars[diaSemanaIso, intervaloIndex, diarioId] = modelBoolVar;

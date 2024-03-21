@@ -1,5 +1,5 @@
 namespace Core;
-public class GerarHorarioOptions 
+public class GerarHorarioOptions
 {
 
     public int DiaSemanaInicio { get; set; }
