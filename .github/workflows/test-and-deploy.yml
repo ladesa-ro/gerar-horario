@@ -32,7 +32,7 @@ jobs:
           dotnet test
         continue-on-error: true
       - name: Check files
-        run: ls ./projeto-gerar-horario/bin/Debug/net8.0/allure-results/
+        run: ls ./projeto-gerar-horario/bin/Debug/net8.0/
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4.0.0
         with:
