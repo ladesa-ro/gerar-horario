@@ -20,6 +20,8 @@ jobs:
           dotnet-version: 8.0.x
       - name: Navigate to project folder
         run: cd projeto-gerar-horario/
+      - name: Check folder
+        run: ls
       - name: Restore dependencies
         run: dotnet restore
       - name: Test
