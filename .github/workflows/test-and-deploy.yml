@@ -34,20 +34,26 @@ jobs:
       - name: Check files
         run: ls 
       - name: Check files
-        run: ls projeto-gerar-horario/
+        run: ls projeto-gerar-horario/Core-Tests/
+        continue-on-error: true
+
       - name: Check files
-        run: ls projeto-gerar-horario/bin/
+        run: ls projeto-gerar-horario/Core-Tests/bin/
+        continue-on-error: true
       - name: Check files
-        run: ls projeto-gerar-horario/bin/Debug
+        run: ls projeto-gerar-horario/Core-Tests/bin/Debug
+        continue-on-error: true
       - name: Check files
-        run: ls projeto-gerar-horario/bin/Debug/net8.0/
+        run: ls projeto-gerar-horario/Core-Tests/bin/Debug/net8.0/
+        continue-on-error: true
       - name: Check files
-        run: ls projeto-gerar-horario/bin/Debug/net8.0/allure-results/
+        run: ls projeto-gerar-horario/Core-Tests/bin/Debug/net8.0/allure-results/
+        continue-on-error: true
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4.0.0
         with:
           name: allure-results
-          path: projeto-gerar-horario/bin/Debug/net8.0/allure-results
+          path: projeto-gerar-horario/Core-Tests/bin/Debug/net8.0/allure-results
           if-no-files-found: error
           retention-days: 20
       - name: Clean up gh-pages branch (optional)
