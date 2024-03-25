@@ -1,7 +1,8 @@
 ﻿using Core;
+using NUnit.Allure.Core;
 
 namespace Core_Tests;
-
+[AllureNUnit]
 public class Tests
 {
     [SetUp]
