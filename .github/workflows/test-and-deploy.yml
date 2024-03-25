@@ -31,24 +31,6 @@ jobs:
           cd projeto-gerar-horario/
           dotnet test
         continue-on-error: true
-      - name: Check files
-        run: ls 
-      - name: Check files
-        run: ls projeto-gerar-horario/Core-Tests/
-        continue-on-error: true
-
-      - name: Check files
-        run: ls projeto-gerar-horario/Core-Tests/bin/
-        continue-on-error: true
-      - name: Check files
-        run: ls projeto-gerar-horario/Core-Tests/bin/Debug
-        continue-on-error: true
-      - name: Check files
-        run: ls projeto-gerar-horario/Core-Tests/bin/Debug/net8.0/
-        continue-on-error: true
-      - name: Check files
-        run: ls projeto-gerar-horario/Core-Tests/bin/Debug/net8.0/allure-results/
-        continue-on-error: true
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4.0.0
         with:
@@ -60,6 +42,7 @@ jobs:
         run: |
           git checkout -f gh-pages
           git rm -rf .
+        continue-on-error: true
   report:
     needs: test
 
