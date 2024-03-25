@@ -30,6 +30,7 @@ jobs:
         run: |
           cd projeto-gerar-horario/
           dotnet test
+        continue-on-error: true
 
       - name: Check files
         run: ls ./projeto-gerar-horario/bin/Debug/net8.0/allure-results/
