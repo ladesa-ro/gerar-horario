@@ -1,5 +1,7 @@
 # gerar-horario
 
+[![CodeQL](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql)
+
 ## Desenvolvimento
 
 ```sh
