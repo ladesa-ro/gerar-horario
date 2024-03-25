@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
+      - name: Navigate to project folder
+        run: cd projeto-gerar-horario/
       - name: Restore dependencies
         run: dotnet restore
       - name: Test
@@ -27,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           name: allure-results
-          path: .\bin\Debug\net6.0\allure-results
+          path: .\projeto-gerar-horario\bin\Debug\net8.0\allure-results
           if-no-files-found: error
           retention-days: 20
 
@@ -45,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v4.1.0
         with:
           name: allure-results
-          path: ./allure-results
+          path: ./projeto-gerar-horario/allure-results
 
       - name: Get Allure history (optional)
         uses: actions/checkout@v4.1.1
