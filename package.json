@@ -1,0 +1,12 @@
+{
+  "name": "gerar-horarior-root",
+  "private": true,
+  "workspaces": [
+    "estudo-node-z3/projeto"
+  ],
+  "author": "Gabriel R. Antunes",
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "coverage": "npm run coverage --workspaces --if-present"
+  }
+}
