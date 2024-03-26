@@ -17,24 +17,8 @@ public class Gerador
         var todasAsPropostasDeAula = new List<PropostaAula>();
         // =================================
 
-        // =================================
-        int quantidadeDeDias = options.DiaSemanaFim + 1 - options.DiaSemanaInicio;
-        int totalDeIntervalos = options.HorariosDeAula.Length;
         // TODO: implementar corretamente com options
         int totalDeDiarios = 15 * 15;
-
-        // =================================
-
-        BoolVar[,,] storeBoolVars = new BoolVar[7, totalDeIntervalos, totalDeDiarios];
-
-        // =================================
-
-        if (debug)
-        {
-            Console.WriteLine($"Dias de trabalho: {quantidadeDeDias} - Total intervalos: {totalDeIntervalos} - Total diários: {totalDeDiarios}.");
-            Console.WriteLine($"Tamanho da matriz de booleans: {7 * totalDeIntervalos * totalDeDiarios}");
-            Console.WriteLine($"Tamanho da matriz de booleans (apenas para os dias de trabalho): {quantidadeDeDias * totalDeIntervalos * totalDeDiarios}");
-        }
 
         // ====================================================================
 
@@ -49,8 +33,6 @@ public class Gerador
 
                     var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, Convert.ToString(diarioId), modelBoolVar);
                     todasAsPropostasDeAula.Add(propostaDeAula);
-
-                    storeBoolVars[diaSemanaIso, intervaloIndex, diarioId] = modelBoolVar;
 
                     if (debug)
                     {
@@ -126,7 +108,7 @@ public class Gerador
 
         // TODO: gerar mais de um horário com CpSolverSolutionCallback OnSolutionCallback
 
-        // TODO: transofomar propostasDeAula com modelBoolVar == true para HorarioGerado
+        // TODO: Incluir propostasDeAula com (modelBoolVar == true) em  para HorarioGerado#HorarioGeradoAula[]
         var horarioGerado = new HorarioGerado { };
         yield return horarioGerado;
 
