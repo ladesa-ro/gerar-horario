@@ -6,7 +6,7 @@ namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
-    public static CpModel PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = true)
+    public static CpModel PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = false)
     {
         // =================================
         var model = new CpModel();
@@ -75,10 +75,10 @@ public class Gerador
 
     public static IEnumerable<HorarioGerado> GerarHorario(
       GerarHorarioOptions options,
-      bool verbose = true)
+      bool verbose = false)
     {
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
-        var model = PrepararModelComRestricoes(options);
+        var model = PrepararModelComRestricoes(options, verbose);
 
         // RESOLVE O MODELO
         var solver = new CpSolver();
