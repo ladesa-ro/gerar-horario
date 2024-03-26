@@ -1,7 +1,13 @@
 namespace Sisgea.GerarHorario.Core.Dtos.Entidades;
 
-public class Intervalo
+public record Intervalo
 {
-    public string HorarioInicio { get; set; }
-    public string HorarioFim { get; set; }
+    public string HorarioInicio { get; init; }
+    public string HorarioFim { get; init; }
+
+    public Intervalo(string horarioInicio, string horarioFim)
+    {
+        HorarioInicio = horarioInicio;
+        HorarioFim = horarioFim;
+    }
 }

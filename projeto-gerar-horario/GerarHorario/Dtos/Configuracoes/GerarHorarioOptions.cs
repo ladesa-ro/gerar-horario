@@ -12,6 +12,16 @@ public class GerarHorarioOptions
     public Professor[] Professores { get; set; }
     public Intervalo[] HorariosDeAula { get; set; }
 
+    public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula)
+    {
+        DiaSemanaInicio = diaSemanaInicio;
+        DiaSemanaFim = diaSemanaFim;
+        Turmas = turmas;
+        Professores = professores;
+        HorariosDeAula = horariosDeAula;
+    }
+
+
     public override string ToString()
     {
         return "GerarHorarioOptions { nenhuma configuração }";
