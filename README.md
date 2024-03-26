@@ -1,9 +1,9 @@
 # gerar-horario
 
-Home (Allure Report): <https://sisgha.github.io/gerar-horario>.
-
 [![CodeQL](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql)
 [![NUnit Tests + Allure Reports](https://github.com/sisgha/gerar-horario/actions/workflows/test-and-deploy.yml/badge.svg)](https://github.com/sisgha/gerar-horario/actions/workflows/test-and-deploy.yml)
+
+Allure Report: <https://sisgha.github.io/gerar-horario>.
 
 ## Desenvolvimento
 
