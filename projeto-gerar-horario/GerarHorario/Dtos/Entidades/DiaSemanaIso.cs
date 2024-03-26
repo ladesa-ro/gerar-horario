@@ -1,4 +1,4 @@
-namespace Core.Dtos.Entidades;
+namespace Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 
 public enum DiaSemanaIso

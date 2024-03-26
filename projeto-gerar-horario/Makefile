@@ -8,4 +8,4 @@ restore:
 	dotnet restore
 
 start:
-	dotnet run --project Core-Playground/
+	dotnet run --project GerarHorario-Playground/

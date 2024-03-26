@@ -1,7 +1,8 @@
-﻿using Core;
+﻿using Sisgea.GerarHorario.Core;
 using NUnit.Allure.Core;
 
-namespace Core_Tests;
+namespace Sisgea.GerarHorario.Tests;
+
 [AllureNUnit]
 public class Tests
 {

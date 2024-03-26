@@ -1,6 +1,6 @@
 using Google.OrTools.Sat;
 
-namespace Core.Gerador;
+namespace Sisgea.GerarHorario.Core;
 
 public class PropostaAula(
     int diaSemanaIso,

@@ -1,8 +1,8 @@
-using Core.Dtos.Configuracoes;
-using Core.Dtos.HorarioGerado;
 using Google.OrTools.Sat;
+using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
+using Sisgea.GerarHorario.Core.Dtos.HorarioGerado;
 
-namespace Core.Gerador;
+namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
