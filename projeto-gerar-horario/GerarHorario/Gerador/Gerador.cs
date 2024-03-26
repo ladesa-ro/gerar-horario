@@ -6,7 +6,7 @@ namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
-    public static CpModel PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = false)
+    public static (CpModel, List<PropostaAula>) PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = false)
     {
         // =================================
         var model = new CpModel();
@@ -17,26 +17,26 @@ public class Gerador
         var todasAsPropostasDeAula = new List<PropostaAula>();
         // =================================
 
-        // TODO: implementar corretamente com options
-        int totalDeDiarios = 15 * 15;
-
-        // ====================================================================
-
         for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
         {
             for (int intervaloIndex = 0; intervaloIndex < 10; intervaloIndex++)
             {
-                for (int diarioId = 0; diarioId < totalDeDiarios; diarioId++)
+                foreach (var turma in options.Turmas)
                 {
-                    var label = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
-                    var modelBoolVar = model.NewBoolVar(label);
-
-                    var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, Convert.ToString(diarioId), modelBoolVar);
-                    todasAsPropostasDeAula.Add(propostaDeAula);
-
-                    if (debug)
+                    foreach (var diario in turma.DiariosDaTurma)
                     {
-                        Console.WriteLine($"--> init proposta de aula | {label}");
+                        var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diario.Id}";
+
+                        var modelBoolVar = model.NewBoolVar(propostaLabel);
+
+                        var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, diario.Id, modelBoolVar);
+
+                        todasAsPropostasDeAula.Add(propostaDeAula);
+
+                        if (debug)
+                        {
+                            Console.WriteLine($"--> init proposta de aula | {propostaLabel}");
+                        }
                     }
                 }
             }
@@ -64,13 +64,15 @@ public class Gerador
             }
         }
 
-        // ======================================
+        // ==========================================================================================================
 
         // TODO: todas as restrições são implementadas aqui.
 
+        // ...
+
         // ==========================================================================================================
 
-        return model;
+        return (model, todasAsPropostasDeAula);
     }
 
     public static IEnumerable<HorarioGerado> GerarHorario(
@@ -78,7 +80,7 @@ public class Gerador
       bool verbose = false)
     {
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
-        var model = PrepararModelComRestricoes(options, verbose);
+        var (model, todasAsPropostasDeAula) = PrepararModelComRestricoes(options, verbose);
 
         // RESOLVE O MODELO
         var solver = new CpSolver();
@@ -106,11 +108,34 @@ public class Gerador
             Console.WriteLine($"  - wall time : {solver.WallTime()}s");
         }
 
+        // ====================================================================================
+
         // TODO: gerar mais de um horário com CpSolverSolutionCallback OnSolutionCallback
 
-        // TODO: Incluir propostasDeAula com (modelBoolVar == true) em  para HorarioGerado#HorarioGeradoAula[]
-        var horarioGerado = new HorarioGerado { };
+        // ....
+
+        // ==================
+
+        // Filtrar propostasDeAula com modelBoolVar == true na solução atual
+
+        var propostasAtivas = from propostaAula in todasAsPropostasDeAula
+                              where
+                                  solver.BooleanValue(propostaAula.modelBoolVar)
+                              select new HorarioGeradoAula
+                              {
+                                  Diario = propostaAula.diarioId,
+                                  DiaDaSemanaIso = propostaAula.diaSemanaIso,
+                                  IntervaloDeTempo = propostaAula.intervaloIndex
+                              };
+
+        var horarioGerado = new HorarioGerado
+        {
+            Aulas = propostasAtivas.ToArray()
+        };
+
         yield return horarioGerado;
+
+        // ====================================================================================
 
     }
 }
