@@ -5,14 +5,12 @@ Home (Allure Report): <https://sisgha.github.io/gerar-horario>.
 [![CodeQL](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sisgha/gerar-horario/actions/workflows/github-code-scanning/codeql)
 [![NUnit Tests + Allure Reports](https://github.com/sisgha/gerar-horario/actions/workflows/test-and-deploy.yml/badge.svg)](https://github.com/sisgha/gerar-horario/actions/workflows/test-and-deploy.yml)
 
-
 ## Desenvolvimento
 
 ```sh
 git clone https://github.com/sisgha/gerar-horario.git;
 cd gerar-horario;
 ```
-
 
 ## Projeto Gerar Horário
 
@@ -30,34 +28,14 @@ dotnet run --project Core.Playground;
 
 ## Estudo
 
-### Estudo CSharp
-
-```sh
-cd estudo-csharp;
+```
+cd estudo;
 ```
 
-```sh
-make dev-run; # dotnet run
-```
+- Estudo CSharp: `./estudo/estudo-csharp`;
+- Estudo Node Z3: `./estudo/estudo-node-z3/projeto`;
 
-```sh
-make dev-shell; # inicia o bash dentro do container debian configurado com o dotnet sdk
-```
-
-### Estudo Node Z3
-
-```sh
-cd estudo-node-z3/projeto;
-```
-
-```sh
-make dev-run; # npm i && npm run dev-start
-```
-
-```sh
-make dev-shell; # inicia o bash dentro do container debian configurado com o node
-```
-
+Continue em [./estudo/README.md](./estudo/README.md).
 
 ## Licença
 

@@ -1,4 +1,4 @@
-name: Runs tests of estudo-node-z3
+name: Runs tests of estudo/estudo-node-z3
 
 on:
   push:
@@ -26,16 +26,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - name: Install deps
         run: npm ci
-      - name: 'Test'
-        working-directory: ./estudo-node-z3/projeto
+      - name: "Test"
+        working-directory: ./estudo/estudo-node-z3/projeto
         run: npm run coverage
-      - name: 'Report Coverage'
+      - name: "Report Coverage"
         # Set if: always() to also generate the report if tests are failing
         # Only works if you set `reportOnFailure: true` in your vite config as specified above
         if: always()
         with:
-          working-directory: ./estudo-node-z3/projeto
-        uses:  davelosert/vitest-coverage-report-action@v2
+          working-directory: ./estudo/estudo-node-z3/projeto
+        uses: davelosert/vitest-coverage-report-action@v2
