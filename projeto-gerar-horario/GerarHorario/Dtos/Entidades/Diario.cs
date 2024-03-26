@@ -1,10 +1,4 @@
 namespace Sisgea.GerarHorario.Core.Dtos.Entidades;
 
-public class Diario
-{
-    public string Id { get; set; }
-    public string TurmaId { get; set; }
-    public string ProfessorId { get; set; }
-    public string DisciplinaId { get; set; }
-    public int QuantidadeMaximaSemana { get; set; }
-}
+public record Diario(string Id, string TurmaId, string ProfessorId, string DisciplinaId, int QuantidadeMaximaSemana);
+
