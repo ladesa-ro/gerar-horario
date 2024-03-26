@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Tue Mar 26 12:14:46 GMT 2024","Tue Mar 26 12:14:46 GMT 2024","18","","","","Tests","Test1","Test1",""
+"failed","Tue Mar 26 12:21:35 GMT 2024","Tue Mar 26 12:21:35 GMT 2024","30","","","","Tests","Test1","Test1",""
