@@ -10,6 +10,23 @@ git clone https://github.com/sisgha/gerar-horario.git;
 cd gerar-horario;
 ```
 
+
+## Projeto Gerar Horário
+
+```sh
+cd projeto-gerar-horario;
+```
+
+```sh
+dotnet test;
+```
+
+```sh
+dotnet run --project Core.Playground;
+```
+
+## Estudo
+
 ### Estudo CSharp
 
 ```sh
@@ -35,7 +52,7 @@ make dev-run; # npm i && npm run dev-start
 ```
 
 ```sh
-make dev-shell; # inicia o bash dentro do container debian configurado com o docker
+make dev-shell; # inicia o bash dentro do container debian configurado com o node
 ```
 
 
