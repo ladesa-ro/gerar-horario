@@ -8,9 +8,7 @@ public class HorarioGerado
     public override string ToString()
     {
         return $@"HorarioGerado {{
-    Aulas ({Aulas.Length}) [
-        
-    ]
+    Aulas ({Aulas.Length}) []
 }}";
     }
 }

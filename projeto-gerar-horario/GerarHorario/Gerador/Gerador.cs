@@ -29,7 +29,7 @@ public class Gerador
 
                         var modelBoolVar = model.NewBoolVar(propostaLabel);
 
-                        var propostaDeAula = new PropostaAula(diaSemanaIso, intervaloIndex, diario.Id, modelBoolVar);
+                        var propostaDeAula = new PropostaAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
 
                         todasAsPropostasDeAula.Add(propostaDeAula);
 
@@ -54,10 +54,10 @@ public class Gerador
                 {
                     var propostas = from propostaAula in todasAsPropostasDeAula
                                     where
-                                       propostaAula.diaSemanaIso == diaSemanaIso // mesmo dia
-                                       && propostaAula.intervaloIndex == intervaloIndex // mesmo horário
-                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId)
-                                    select propostaAula.modelBoolVar;
+                                       propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
+                                       && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
+                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.DiarioId)
+                                    select propostaAula.ModelBoolVar;
 
 
                     var propostasList = propostas.ToList();
@@ -79,8 +79,8 @@ public class Gerador
             {
                 var propostasDoDiario = from propostaAula in todasAsPropostasDeAula
                                         where
-                                            propostaAula.diarioId == diario.Id
-                                        select propostaAula.modelBoolVar;
+                                            propostaAula.DiarioId == diario.Id
+                                        select propostaAula.ModelBoolVar;
 
                 model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
             }
@@ -98,7 +98,7 @@ public class Gerador
 
         foreach (var propostaDeAula in todasAsPropostasDeAula)
         {
-            score.AddTerm((IntVar)propostaDeAula.modelBoolVar, 1);
+            score.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
         }
 
         model.Maximize(score);
@@ -133,13 +133,13 @@ public class Gerador
             Console.WriteLine("No solution found.");
         }
 
-        if (verbose)
-        {
-            Console.WriteLine("Statistics");
-            Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
-            Console.WriteLine($"  - branches  : {solver.NumBranches()}");
-            Console.WriteLine($"  - wall time : {solver.WallTime()}s");
-        }
+        Console.WriteLine("============================");
+        Console.WriteLine("Statistics");
+        Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
+        Console.WriteLine($"  - branches  : {solver.NumBranches()}");
+        Console.WriteLine($"  - wall time : {solver.WallTime()}s");
+        Console.WriteLine("============================");
+        Console.WriteLine("");
 
         // ====================================================================================
 
@@ -153,8 +153,8 @@ public class Gerador
 
         var propostasAtivas = from propostaAula in todasAsPropostasDeAula
                               where
-                                solver.BooleanValue(propostaAula.modelBoolVar)
-                              select new HorarioGeradoAula(propostaAula.diarioId, propostaAula.intervaloIndex, propostaAula.diaSemanaIso);
+                                solver.BooleanValue(propostaAula.ModelBoolVar)
+                              select new HorarioGeradoAula(propostaAula.TurmaId, propostaAula.DiarioId, propostaAula.IntervaloIndex, propostaAula.DiaSemanaIso);
 
         var horarioGerado = new HorarioGerado
         {

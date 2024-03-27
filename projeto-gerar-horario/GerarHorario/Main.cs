@@ -8,6 +8,8 @@ public class Main
 
     public bool Retorno()
     {
+        var verbose = false;
+
         var gerarTodosOsHorarios = false;
 
         // ====================================================
@@ -17,11 +19,46 @@ public class Main
                 "turma:1",
                 "Turma da Pesada",
                 [
-                    new Diario ("diario:1", "turma:1", "professor:1", "disciplina:1", 3),
-                    new Diario ("diario:2", "turma:1", "professor:1", "disciplina:1", 2),
+                    new Diario ("diario:1_3", "turma:1", "professor:1", "disciplina:3", 1),
+                    new Diario ("diario:1_1", "turma:1", "professor:1", "disciplina:1", 3),
+                    new Diario ("diario:1_2", "turma:1", "professor:1", "disciplina:2", 2),
                 ],
                 [
-                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30"))
+                    //
+                    new DisponibilidadeDia(1, new Intervalo("07:30", "12:00")),
+                    //
+                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(2, new Intervalo("13:00", "17:30")),
+                    //
+                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),
+                    //
+                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(4, new Intervalo("13:00", "17:30")),
+                    //
+                    new DisponibilidadeDia(5, new Intervalo("13:00", "17:30")),
+                ]
+            ),
+            new(
+                "turma:2",
+                "Turma diferenciada",
+                [
+                    new Diario ("diario:2_1", "turma:2", "professor:2", "disciplina:4", 1),
+                    new Diario ("diario:2_3", "turma:2", "professor:2", "disciplina:1", 3),
+                    new Diario ("diario:2_2", "turma:2", "professor:2", "disciplina:2", 2),
+                ],
+                [
+                    //
+                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30")),
+                    //
+                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(2, new Intervalo("13:00", "17:30")),
+                    //
+                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),
+                    //
+                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(4, new Intervalo("13:00", "17:30")),
+                    //
+                    new DisponibilidadeDia(5, new Intervalo("07:30", "12:00")),
                 ]
             ),
         };
@@ -44,18 +81,75 @@ public class Main
             new("11:10", "12:00"),
         };
 
-        var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEGUNDA, turmas, professores, horariosDeAula);
+        var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula);
 
         // ====================================================
-        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
+        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions, verbose);
         // ====================================================
 
         var melhorHorario = horarioGeradoEnumerator.First();
-        Console.WriteLine($"Melhor horário gerado: {melhorHorario}");
+        Console.WriteLine("============================");
+        Console.WriteLine("Melhor horário gerado:");
+        Console.WriteLine("");
+        Console.WriteLine(melhorHorario);
+        Console.WriteLine("============================");
+        Console.WriteLine("");
 
-        foreach (var aula in melhorHorario.Aulas)
+        foreach (var turma in gerarHorarioOptions.Turmas)
         {
-            Console.WriteLine($"Aula - {aula.DiaDaSemanaIso}  - {aula.IntervaloDeTempo} - {aula.DiarioId}");
+            Console.WriteLine($"Turma (Id={turma.Id}, Nome={turma.Nome ?? "Sem nome"})");
+            var turmaAulas = from aula in melhorHorario.Aulas
+                             where aula.TurmaId == turma.Id
+                             select aula;
+
+            foreach (var aula in turmaAulas)
+            {
+                string dia = Convert.ToString(aula.DiaDaSemanaIso);
+
+                switch (aula.DiaDaSemanaIso)
+                {
+                    case 0:
+                        {
+                            dia = "DOM";
+                            break;
+                        }
+                    case 1:
+                        {
+                            dia = "SEG";
+                            break;
+                        }
+                    case 2:
+                        {
+                            dia = "TER";
+                            break;
+                        }
+                    case 3:
+                        {
+                            dia = "QUA";
+                            break;
+                        }
+                    case 4:
+                        {
+                            dia = "QUI";
+                            break;
+                        }
+                    case 5:
+                        {
+                            dia = "SEX";
+                            break;
+                        }
+                    case 6:
+                        {
+                            dia = "SAB";
+                            break;
+                        }
+                }
+
+                Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Diário: {aula.DiarioId}");
+
+            }
+            Console.WriteLine();
+
         }
 
         // ====================================================

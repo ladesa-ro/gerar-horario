@@ -1,3 +1,5 @@
+using Google.OrTools.ConstraintSolver;
+
 namespace Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 public record Intervalo
@@ -9,5 +11,10 @@ public record Intervalo
     {
         HorarioInicio = horarioInicio;
         HorarioFim = horarioFim;
+    }
+
+    public override string ToString()
+    {
+        return $"[{HorarioInicio} - {HorarioFim}]";
     }
 }
