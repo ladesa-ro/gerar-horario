@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: "/playground/_devops"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: nuget
+    directory: "/playground/projeto-gerar-horario"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
