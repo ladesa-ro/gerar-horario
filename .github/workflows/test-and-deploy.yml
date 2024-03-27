@@ -85,5 +85,5 @@ jobs:
           PUBLISH_DIR: allure-report
           destination_dir: ${{
             github.ref == 'refs/heads/development' && 'b/development' || (
-            github.ref == 'refs/heads/main' && 'b/main' || 'r/${{ github.run_number }}'
+            github.ref == 'refs/heads/main' && 'b/main' || format('r/{0}', github.run_number)
             ) }}
