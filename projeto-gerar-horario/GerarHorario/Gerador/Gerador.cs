@@ -19,7 +19,7 @@ public class Gerador
 
         for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
         {
-            for (int intervaloIndex = 0; intervaloIndex < 10; intervaloIndex++)
+            for (int intervaloIndex = 0; intervaloIndex < options.HorariosDeAula.Length; intervaloIndex++)
             {
                 foreach (var turma in options.Turmas)
                 {
@@ -56,11 +56,33 @@ public class Gerador
                                     where
                                        propostaAula.diaSemanaIso == diaSemanaIso // mesmo dia
                                        && propostaAula.intervaloIndex == intervaloIndex // mesmo horário
-                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId) // filtrar todos os diarios dessa turma
+                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.diarioId)
                                     select propostaAula.modelBoolVar;
 
-                    model.AddAtMostOne(propostas);
+
+                    var propostasList = propostas.ToList();
+
+                    Console.WriteLine($"Turma: {turma.Id} | Dia: {diaSemanaIso} | Intervalo: {intervaloIndex} | Propostas: {propostasList.Count}");
+
+                    model.AddAtMostOne(propostasList);
                 }
+            }
+        }
+
+        // ==========================================================================================================
+
+        // RESTRIÇÃO: Diário: quantidade máxima na semana
+
+        foreach (var turma in options.Turmas)
+        {
+            foreach (var diario in turma.DiariosDaTurma)
+            {
+                var propostasDoDiario = from propostaAula in todasAsPropostasDeAula
+                                        where
+                                            propostaAula.diarioId == diario.Id
+                                        select propostaAula.modelBoolVar;
+
+                model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
             }
         }
 
@@ -131,13 +153,8 @@ public class Gerador
 
         var propostasAtivas = from propostaAula in todasAsPropostasDeAula
                               where
-                                  solver.BooleanValue(propostaAula.modelBoolVar)
-                              select new HorarioGeradoAula
-                              {
-                                  Diario = propostaAula.diarioId,
-                                  DiaDaSemanaIso = propostaAula.diaSemanaIso,
-                                  IntervaloDeTempo = propostaAula.intervaloIndex
-                              };
+                                solver.BooleanValue(propostaAula.modelBoolVar)
+                              select new HorarioGeradoAula(propostaAula.diarioId, propostaAula.intervaloIndex, propostaAula.diaSemanaIso);
 
         var horarioGerado = new HorarioGerado
         {
