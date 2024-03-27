@@ -1,0 +1,1 @@
+{"06194d94470e68e6c69a66ed66c4cb98":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"4e27f802d605f70d","reportUrl":"https://sisgha.github.io/gerar-horario/82//#testresult/4e27f802d605f70d","status":"passed","statusDetails":"Test1","time":{"start":1711553234149,"stop":1711553234173,"duration":24}}]}}
