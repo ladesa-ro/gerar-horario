@@ -43,7 +43,7 @@ jobs:
           path: gh-pages
 
       - name: Upload Allure Results
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: allure-results
           path: projeto-gerar-horario/GerarHorario-Tests/bin/Debug/net8.0/allure-results
