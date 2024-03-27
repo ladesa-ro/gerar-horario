@@ -6,11 +6,13 @@ on:
       - development
     paths:
       - projeto-gerar-horario/**
+      - .github/workflows/test-and-deploy.yml
   pull_request:
     branches:
       - development
     paths:
       - projeto-gerar-horario/**
+      - .github/workflows/test-and-deploy.yml
   workflow_dispatch:
 
 permissions:
@@ -71,7 +73,7 @@ jobs:
         if: always()
         id: allure-report
         with:
-          gh_pages: allure-report
+          gh_pages: allure-report/b/development
           allure_history: allure-history
           allure_results: allure-results
           keep_reports: 20
