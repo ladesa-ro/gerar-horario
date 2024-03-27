@@ -37,7 +37,6 @@ Continue em [./playground/README.md](./playground/README.md).
 cd estudo;
 ```
 
-- Estudo CSharp: `./estudo/estudo-csharp`;
 - Estudo Node Z3: `./estudo/estudo-node-z3/projeto`;
 
 Continue em [./estudo/README.md](./estudo/README.md).
