@@ -72,6 +72,17 @@ public class Gerador
 
         // ==========================================================================================================
 
+        LinearExprBuilder score = LinearExpr.NewBuilder();
+
+        foreach (var propostaDeAula in todasAsPropostasDeAula)
+        {
+            score.AddTerm((IntVar)propostaDeAula.modelBoolVar, 1);
+        }
+
+        model.Maximize(score);
+
+        // ==========================================================================================================
+
         return (model, todasAsPropostasDeAula);
     }
 
