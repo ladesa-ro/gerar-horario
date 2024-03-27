@@ -145,7 +145,9 @@ public class Main
                         }
                 }
 
-                Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Diário: {aula.DiarioId}");
+                var diario = turma.DiariosDaTurma.Where(diario => diario.Id == aula.DiarioId).First();
+
+                Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | {diario.DisciplinaId}");
 
             }
             Console.WriteLine();
