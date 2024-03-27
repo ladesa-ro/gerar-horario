@@ -53,9 +53,9 @@ Total cost: 12
 
 ============================
 Statistics
-  - conflicts : 0
-  - branches  : 192
-  - wall time : 0.012406662s
+  - conflicts : 3
+  - branches  : 642
+  - wall time : 0.01264618s
 ============================
 
 ============================
@@ -67,18 +67,18 @@ HorarioGerado {
 ============================
 
 Turma (Id=turma:1, Nome=Turma da Pesada)
-- Dia: SEG | Intervalo: [07:30 - 08:20] | Diário: diario:1_1
-- Dia: SEX | Intervalo: [07:30 - 08:20] | Diário: diario:1_1
-- Dia: SEX | Intervalo: [08:20 - 09:10] | Diário: diario:1_1
-- Dia: SEX | Intervalo: [09:10 - 10:00] | Diário: diario:1_2
-- Dia: SEX | Intervalo: [10:20 - 11:10] | Diário: diario:1_2
-- Dia: SEX | Intervalo: [11:10 - 12:00] | Diário: diario:1_3
+- Dia: SEG | Intervalo: [07:30 - 08:20] | disciplina:2
+- Dia: SEG | Intervalo: [09:10 - 10:00] | disciplina:1
+- Dia: TER | Intervalo: [07:30 - 08:20] | disciplina:2
+- Dia: TER | Intervalo: [08:20 - 09:10] | disciplina:1
+- Dia: TER | Intervalo: [09:10 - 10:00] | disciplina:1
+- Dia: SEX | Intervalo: [11:10 - 12:00] | disciplina:3
 
 Turma (Id=turma:2, Nome=Turma diferenciada)
-- Dia: QUI | Intervalo: [11:10 - 12:00] | Diário: diario:2_3
-- Dia: SEX | Intervalo: [07:30 - 08:20] | Diário: diario:2_3
-- Dia: SEX | Intervalo: [08:20 - 09:10] | Diário: diario:2_3
-- Dia: SEX | Intervalo: [09:10 - 10:00] | Diário: diario:2_2
-- Dia: SEX | Intervalo: [10:20 - 11:10] | Diário: diario:2_2
-- Dia: SEX | Intervalo: [11:10 - 12:00] | Diário: diario:2_1
+- Dia: SEG | Intervalo: [07:30 - 08:20] | disciplina:1
+- Dia: SEG | Intervalo: [08:20 - 09:10] | disciplina:1
+- Dia: TER | Intervalo: [07:30 - 08:20] | disciplina:2
+- Dia: TER | Intervalo: [08:20 - 09:10] | disciplina:2
+- Dia: QUA | Intervalo: [09:10 - 10:00] | disciplina:1
+- Dia: SEX | Intervalo: [11:10 - 12:00] | disciplina:4
 
