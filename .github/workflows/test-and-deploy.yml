@@ -34,14 +34,6 @@ jobs:
           dotnet test
         continue-on-error: true
 
-      - name: Load test report history
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4.3.1
         with:
@@ -49,11 +41,6 @@ jobs:
           path: projeto-gerar-horario/GerarHorario-Tests/bin/Debug/net8.0/allure-results
           if-no-files-found: error
           retention-days: 20
-      # - name: Clean up gh-pages branch (optional)
-      #   run: |
-      #     git checkout -f gh-pages
-      #     # git rm -rf .
-      #   continue-on-error: true
   report:
     needs: test
 
@@ -66,7 +53,7 @@ jobs:
           name: allure-results
           path: ./allure-results
 
-      - name: Get Allure history (optional)
+      - name: Get Allure history
         uses: actions/checkout@v4
         if: always()
         continue-on-error: true
