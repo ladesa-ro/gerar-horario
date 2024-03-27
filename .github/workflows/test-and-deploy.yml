@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - development
+    paths:
+      - projeto-gerar-horario/**
   pull_request:
     branches:
       - development
+    paths:
+      - projeto-gerar-horario/**
 
 permissions:
   contents: write
@@ -72,20 +76,13 @@ jobs:
           keep_reports: 20
 
       - name: Deploy report to Github Pages
-        if: always()
-        # uses: peaceiris/actions-github-pages@v3.1.12
         uses: peaceiris/actions-gh-pages@v3.9.3
+        if: always()
         with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-report
-
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: "Test report"
-          state: "success"
-          sha: ${{ github.event.pull_request.head.sha }}
-          target_url: sisgha.github.io/gerar-horario/${{ github.run_number }}
+          destination_dir: ${{
+            github.ref == 'refs/heads/development' && 'b/development' || (
+            github.ref == 'refs/heads/main' && 'b/main' || 'r/${{ github.run_number }}'
+            ) }}
