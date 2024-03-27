@@ -70,19 +70,7 @@ public class Gerador
         // ==========================================================================================================
 
         // RESTRIÇÃO: Diário: quantidade máxima na semana
-
-        foreach (var turma in options.Turmas)
-        {
-            foreach (var diario in turma.DiariosDaTurma)
-            {
-                var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
-                                        where
-                                            propostaAula.DiarioId == diario.Id
-                                        select propostaAula.ModelBoolVar;
-
-                contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
-            }
-        }
+        Restricoes.AplicarLimiteDiarioSemana(contexto);
 
         // ==========================================================================================================
 
