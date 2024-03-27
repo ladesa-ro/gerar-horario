@@ -40,7 +40,7 @@ jobs:
       - name: Clean up gh-pages branch (optional)
         run: |
           git checkout -f gh-pages
-          git rm -rf .
+          # git rm -rf .
         continue-on-error: true
   report:
     needs: test
