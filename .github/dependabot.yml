@@ -7,7 +7,7 @@ updates:
     open-pull-requests-limit: 10
 
   - package-ecosystem: nuget
-    directory: "/playground/projeto-gerar-horario"
+    directory: "/projeto-gerar-horario"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
