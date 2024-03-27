@@ -75,7 +75,7 @@ jobs:
           path: gh-pages
 
       - name: Generate report
-        uses: simple-elf/allure-report-action@v1.7
+        uses: simple-elf/allure-report-action@v1.9
         if: always()
         id: allure-report
         with:
