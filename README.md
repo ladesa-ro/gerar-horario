@@ -22,9 +22,15 @@ cd projeto-gerar-horario;
 dotnet test;
 ```
 
-```sh
-dotnet run --project Core.Playground;
+## Playground (com jupyter e .net interactive)
+
 ```
+cd playground;
+```
+
+- Notebooks Jupyter: `./playground/notebooks`;
+
+Continue em [./playground/README.md](./playground/README.md).
 
 ## Estudo
 
