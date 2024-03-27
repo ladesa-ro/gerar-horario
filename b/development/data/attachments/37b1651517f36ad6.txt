@@ -55,7 +55,7 @@ Total cost: 12
 Statistics
   - conflicts : 3
   - branches  : 642
-  - wall time : 0.01264618s
+  - wall time : 0.013831099000000001s
 ============================
 
 ============================
