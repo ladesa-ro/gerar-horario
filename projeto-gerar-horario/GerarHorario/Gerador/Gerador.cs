@@ -6,16 +6,14 @@ namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
-    public static (CpModel, List<PropostaAula>) PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = false)
+    public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options, bool debug = false)
     {
-        // =================================
-        var model = new CpModel();
-        // =================================
-
-
-        // =================================
-        var todasAsPropostasDeAula = new List<PropostaAula>();
-        // =================================
+        // ================================================
+        var contexto = new GerarHorarioContext(options);
+        // options -> contexto.Options;
+        // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
+        // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
+        // ================================================
 
         for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
         {
@@ -27,11 +25,11 @@ public class Gerador
                     {
                         var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diario.Id}";
 
-                        var modelBoolVar = model.NewBoolVar(propostaLabel);
+                        var modelBoolVar = contexto.Model.NewBoolVar(propostaLabel);
 
                         var propostaDeAula = new PropostaAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
 
-                        todasAsPropostasDeAula.Add(propostaDeAula);
+                        contexto.TodasAsPropostasDeAula.Add(propostaDeAula);
 
                         if (debug)
                         {
@@ -52,7 +50,7 @@ public class Gerador
             {
                 foreach (var intervaloIndex in Enumerable.Range(0, options.HorariosDeAula.Length))
                 {
-                    var propostas = from propostaAula in todasAsPropostasDeAula
+                    var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
                                     where
                                        propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
                                        && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
@@ -64,7 +62,7 @@ public class Gerador
 
                     Console.WriteLine($"Turma: {turma.Id} | Dia: {diaSemanaIso} | Intervalo: {intervaloIndex} | Propostas: {propostasList.Count}");
 
-                    model.AddAtMostOne(propostasList);
+                    contexto.Model.AddAtMostOne(propostasList);
                 }
             }
         }
@@ -77,12 +75,12 @@ public class Gerador
         {
             foreach (var diario in turma.DiariosDaTurma)
             {
-                var propostasDoDiario = from propostaAula in todasAsPropostasDeAula
+                var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
                                         where
                                             propostaAula.DiarioId == diario.Id
                                         select propostaAula.ModelBoolVar;
 
-                model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
+                contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
             }
         }
 
@@ -96,16 +94,16 @@ public class Gerador
 
         LinearExprBuilder score = LinearExpr.NewBuilder();
 
-        foreach (var propostaDeAula in todasAsPropostasDeAula)
+        foreach (var propostaDeAula in contexto.TodasAsPropostasDeAula)
         {
             score.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
         }
 
-        model.Maximize(score);
+        contexto.Model.Maximize(score);
 
         // ==========================================================================================================
 
-        return (model, todasAsPropostasDeAula);
+        return contexto;
     }
 
     public static IEnumerable<HorarioGerado> GerarHorario(
@@ -113,11 +111,11 @@ public class Gerador
       bool verbose = false)
     {
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
-        var (model, todasAsPropostasDeAula) = PrepararModelComRestricoes(options, verbose);
+        var contexto = PrepararModelComRestricoes(options, verbose);
 
         // RESOLVE O MODELO
         var solver = new CpSolver();
-        var status = solver.Solve(model);
+        var status = solver.Solve(contexto.Model);
 
         // STATUS DA SOLUÇÃO
         Console.WriteLine($"Solve status: {status}");
@@ -151,7 +149,7 @@ public class Gerador
 
         // Filtrar propostasDeAula com modelBoolVar == true na solução atual
 
-        var propostasAtivas = from propostaAula in todasAsPropostasDeAula
+        var propostasAtivas = from propostaAula in contexto.TodasAsPropostasDeAula
                               where
                                 solver.BooleanValue(propostaAula.ModelBoolVar)
                               select new HorarioGeradoAula(propostaAula.TurmaId, propostaAula.DiarioId, propostaAula.IntervaloIndex, propostaAula.DiaSemanaIso);
