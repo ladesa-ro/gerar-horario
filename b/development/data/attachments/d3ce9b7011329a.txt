@@ -1,0 +1,8 @@
+Solve status: Optimal
+Total cost: -0
+
+Melhor horário gerado: HorarioGerado {
+    Aulas (0) [
+        
+    ]
+}
