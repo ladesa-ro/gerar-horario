@@ -8,7 +8,7 @@ public class Main
 
     public bool Retorno()
     {
-        var gerarTodosOsHorarios = false;
+        // var gerarTodosOsHorarios = false;
 
         // ====================================================
 
