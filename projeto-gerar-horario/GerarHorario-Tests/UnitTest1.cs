@@ -18,7 +18,7 @@ public class Tests
 
         bool metodoTrue = conexao.Retorno();
 
-        Assert.IsTrue(metodoTrue);
+        Assert.That(metodoTrue, Is.True);
         Assert.Pass();
     }
 }
