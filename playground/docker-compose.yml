@@ -1,0 +1,17 @@
+services:
+  lab:
+    user: user
+    build: ./_devops
+    entrypoint: [
+        #
+        "jupyter",
+        "notebook",
+        "--no-browser",
+        "--ip=0.0.0.0",
+        "--NotebookApp.token=''",
+        "--NotebookApp.notebook_dir='/home/user/gerar-horario/playground/notebooks'",
+      ]
+    volumes:
+      - ../:/home/user/gerar-horario
+    ports:
+      - 127.0.0.1:8888:8888
