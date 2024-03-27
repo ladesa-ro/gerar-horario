@@ -1,6 +1,9 @@
 start:
 	docker compose up lab -d;
 
+stop:
+	docker compose down -v;
+
 logs:
 	docker compose logs lab -f;
 
