@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
 
       - name: Install .NET Core
         uses: actions/setup-dotnet@v3
@@ -35,7 +35,7 @@ jobs:
         continue-on-error: true
 
       - name: Load test report history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
@@ -67,7 +67,7 @@ jobs:
           path: ./allure-results
 
       - name: Get Allure history (optional)
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
