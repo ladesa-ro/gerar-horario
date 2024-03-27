@@ -10,8 +10,8 @@ public class Gerador
     {
         // ================================================
         var contexto = new GerarHorarioContext(options);
+        // model -> contexto.Model;
         // options -> contexto.Options;
-        // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
         // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
         // ================================================
 
