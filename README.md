@@ -9,13 +9,12 @@ Allure Report: <https://sisgha.github.io/gerar-horario>.
 
 ```sh
 git clone https://github.com/sisgha/gerar-horario.git;
-cd gerar-horario;
 ```
 
 ## Projeto Gerar Horário
 
 ```sh
-cd projeto-gerar-horario;
+cd gerar-horario/projeto-gerar-horario;
 ```
 
 ```sh
@@ -25,7 +24,7 @@ dotnet test;
 ## Playground (com jupyter e .net interactive)
 
 ```
-cd playground;
+cd gerar-horario/playground;
 ```
 
 - Notebooks Jupyter: `./playground/notebooks`;
