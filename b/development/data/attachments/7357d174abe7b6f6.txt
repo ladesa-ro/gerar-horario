@@ -61,7 +61,7 @@ Status de solução: Optimal
   - Score do horário: 14
   - conflicts : 1
   - branches  : 708
-  - wall time : 0.017322229s
+  - wall time : 0.021305227000000003s
 ============================
 
 ============================
