@@ -2,7 +2,7 @@ using Google.OrTools.Sat;
 
 namespace Sisgea.GerarHorario.Core;
 
-public record PropostaAula(
+public record PropostaDeAula(
     //
     string TurmaId,
     string DiarioId,

@@ -11,10 +11,10 @@ public class GerarHorarioContext
   public GerarHorarioOptions Options { get; init; }
   public CpModel Model { get; init; }
 
-  public List<PropostaAula> TodasAsPropostasDeAula { get; init; }
+  public List<PropostaDeAula> TodasAsPropostasDeAula { get; init; }
 
 
-  public GerarHorarioContext(GerarHorarioOptions options, CpModel? model = null, List<PropostaAula>? todasAsPropostasDeAula = null)
+  public GerarHorarioContext(GerarHorarioOptions options, CpModel? model = null, List<PropostaDeAula>? todasAsPropostasDeAula = null)
   {
     Options = options;
     Model = model ?? new CpModel();
@@ -37,7 +37,7 @@ public class GerarHorarioContext
 
             var modelBoolVar = this.Model.NewBoolVar(propostaLabel);
 
-            var propostaDeAula = new PropostaAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
+            var propostaDeAula = new PropostaDeAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
 
             this.TodasAsPropostasDeAula.Add(propostaDeAula);
 
