@@ -20,35 +20,12 @@ public class Gerador
         // ======================================
 
         // RESTRIÇÃO: Garantir no máximo 1 aula em um (dia e intervalo) para cada turma.
-
-        foreach (var diaSemanaIso in Enumerable.Range(options.DiaSemanaInicio, options.DiaSemanaFim))
-        {
-            foreach (var intervaloIndex in Enumerable.Range(0, options.HorariosDeAula.Length))
-            {
-                foreach (var turma in options.Turmas)
-                {
-                    var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
-                                    where
-                                       propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
-                                       && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
-                                       && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.DiarioId)
-                                    select propostaAula.ModelBoolVar;
-
-
-                    var propostasList = propostas.ToList();
-
-                    Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostasList.Count}");
-
-                    contexto.Model.AddAtMostOne(propostasList);
-                }
-            }
-            Console.WriteLine("");
-        }
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
 
         // ==========================================================================================================
 
         // RESTRIÇÃO: Diário: quantidade máxima na semana
-        Restricoes.AplicarLimiteDiarioSemana(contexto);
+        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
 
         // ==========================================================================================================
 
