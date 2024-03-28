@@ -10,21 +10,19 @@ public class Gerador
     {
         // ================================================
         var contexto = new GerarHorarioContext(options);
-        // model -> contexto.Model;
-        // options -> contexto.Options;
-        // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
+        // contexto.Model; contexto.Options; contexto.TodasAsPropostasDeAula;
         // ================================================
 
         contexto.IniciarTodasAsPropostasDeAula();
 
         // ======================================
 
-        // RESTRIÇÃO: Garantir no máximo 1 aula em um (dia e intervalo) para cada turma.
+        // RESTRIÇÃO: Turma: não ter mais de uma aula ativa ao mesmo tempo.
         Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
 
         // ==========================================================================================================
 
-        // RESTRIÇÃO: Diário: quantidade máxima na semana
+        // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
         Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
 
         // ==========================================================================================================
