@@ -115,7 +115,6 @@ public class Gerador
 
             Console.WriteLine("=> Gerador#gerarHorario | aguardando a geração do próximo horário");
             tickGenerated.WaitOne();
-            Console.WriteLine("=> Gerador#gerarHorario | geração do próximo horário recebida");
 
 
             // Console.WriteLine("");
@@ -144,7 +143,7 @@ public class Gerador
 
             if (horarioGerado != null)
             {
-                Console.WriteLine("=> Gerador#gerarHorario | recebeu um horário não nulo");
+                Console.WriteLine("=> Gerador#gerarHorario | geração do próximo horário recebida");
                 yield return horarioGerado;
             }
             else
