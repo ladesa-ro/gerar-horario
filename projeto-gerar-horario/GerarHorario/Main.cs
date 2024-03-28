@@ -8,8 +8,6 @@ public class Main
 
     public bool Retorno()
     {
-        var gerarTodosOsHorarios = false;
-
         // ====================================================
 
         var turmas = new Turma[] {
@@ -83,94 +81,112 @@ public class Main
         var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula);
 
         // ====================================================
+        Console.WriteLine("[debug] vamo chamar o GerarHorario");
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
+        Console.WriteLine("[debug] <- GerarHorario retornou");
         // ====================================================
 
-        var melhorHorario = horarioGeradoEnumerator.First();
-        Console.WriteLine("============================");
-        Console.WriteLine("Melhor horário gerado:");
-        Console.WriteLine("");
-        Console.WriteLine(melhorHorario);
-        Console.WriteLine("============================");
-        Console.WriteLine("");
+        var limiteGeracao = 2;
+        var indiceGeracao = 0;
 
-        string? diaAnterior = null;
-
-        foreach (var turma in gerarHorarioOptions.Turmas)
+        foreach (var horarioGerado in horarioGeradoEnumerator)
         {
-            Console.WriteLine($"Turma (Id={turma.Id}, Nome={turma.Nome ?? "Sem nome"})");
-            var turmaAulas = from aula in melhorHorario.Aulas
-                             where aula.TurmaId == turma.Id
-                             select aula;
 
-
-            foreach (var aula in turmaAulas)
+            if (indiceGeracao < limiteGeracao)
             {
-                string dia = Convert.ToString(aula.DiaDaSemanaIso);
+                Console.WriteLine($"\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                Console.WriteLine($"[ HORARIO {indiceGeracao + 1} ]");
+                Console.WriteLine($"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-                switch (aula.DiaDaSemanaIso)
+                Console.WriteLine("============================");
+                Console.WriteLine("Horário gerado:");
+                Console.WriteLine("");
+                Console.WriteLine(horarioGerado);
+                Console.WriteLine("============================");
+                Console.WriteLine("");
+
+                string? diaAnterior = null;
+
+                foreach (var turma in gerarHorarioOptions.Turmas)
                 {
-                    case 0:
+                    Console.WriteLine($"Turma (Id={turma.Id}, Nome={turma.Nome ?? "Sem nome"})");
+                    var turmaAulas = from aula in horarioGerado.Aulas
+                                     where aula.TurmaId == turma.Id
+                                     select aula;
+
+
+                    foreach (var aula in turmaAulas)
+                    {
+                        string dia = Convert.ToString(aula.DiaDaSemanaIso);
+
+                        switch (aula.DiaDaSemanaIso)
                         {
-                            dia = "DOM";
-                            break;
+                            case 0:
+                                {
+                                    dia = "DOM";
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    dia = "SEG";
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    dia = "TER";
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    dia = "QUA";
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    dia = "QUI";
+                                    break;
+                                }
+                            case 5:
+                                {
+                                    dia = "SEX";
+                                    break;
+                                }
+                            case 6:
+                                {
+                                    dia = "SAB";
+                                    break;
+                                }
                         }
-                    case 1:
+
+                        var diario = turma.DiariosDaTurma.Where(diario => diario.Id == aula.DiarioId).First();
+
+                        if (dia != diaAnterior)
                         {
-                            dia = "SEG";
-                            break;
+                            Console.WriteLine("");
                         }
-                    case 2:
-                        {
-                            dia = "TER";
-                            break;
-                        }
-                    case 3:
-                        {
-                            dia = "QUA";
-                            break;
-                        }
-                    case 4:
-                        {
-                            dia = "QUI";
-                            break;
-                        }
-                    case 5:
-                        {
-                            dia = "SEX";
-                            break;
-                        }
-                    case 6:
-                        {
-                            dia = "SAB";
-                            break;
-                        }
+
+                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | {diario.DisciplinaId}");
+
+                        diaAnterior = dia;
+                    }
+                    Console.WriteLine();
+
                 }
 
-                var diario = turma.DiariosDaTurma.Where(diario => diario.Id == aula.DiarioId).First();
-
-                if (dia != diaAnterior)
-                {
-                    Console.WriteLine("");
-                }
-
-                Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | {diario.DisciplinaId}");
-
-                diaAnterior = dia;
+                indiceGeracao++;
             }
-            Console.WriteLine();
+            else
+            {
+                break;
+            }
 
         }
 
-        // ====================================================
 
-        if (gerarTodosOsHorarios)
-        {
-            foreach (var horarioGerado in horarioGeradoEnumerator)
-            {
-                Console.WriteLine($"Horário Gerado: {horarioGerado}");
-            }
-        }
+        Console.WriteLine("");
+        Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        Console.WriteLine($"-- quantidade de horários gerados: {indiceGeracao} | limite: {limiteGeracao}");
+        Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         // ====================================================
 

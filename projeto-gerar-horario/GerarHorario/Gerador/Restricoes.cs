@@ -5,6 +5,9 @@ namespace Sisgea.GerarHorario.Core;
 public class Restricoes
 {
 
+    ///<summary>
+    /// RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
+    ///</summary>
     public static void AplicarLimiteDeDiarioNaSemana(
       GerarHorarioContext contexto
     )
@@ -23,6 +26,10 @@ public class Restricoes
         }
 
     }
+
+    ///<summary>
+    /// RESTRIÇÃO: Turma: não ter mais de uma aula ativa ao mesmo tempo.
+    ///</summary>
     public static void AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(GerarHorarioContext contexto)
     {
         foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))

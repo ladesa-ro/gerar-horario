@@ -14,11 +14,16 @@ public class GerarHorarioContext
     public List<PropostaDeAula> TodasAsPropostasDeAula { get; init; }
 
 
-    public GerarHorarioContext(GerarHorarioOptions options, CpModel? model = null, List<PropostaDeAula>? todasAsPropostasDeAula = null)
+    public GerarHorarioContext(GerarHorarioOptions options, CpModel? model = null, List<PropostaDeAula>? todasAsPropostasDeAula = null, bool iniciarTodasAsPropostasDeAula = true)
     {
         Options = options;
         Model = model ?? new CpModel();
         TodasAsPropostasDeAula = todasAsPropostasDeAula ?? [];
+
+        if (iniciarTodasAsPropostasDeAula)
+        {
+            this.IniciarTodasAsPropostasDeAula();
+        }
     }
 
     public void IniciarTodasAsPropostasDeAula()
