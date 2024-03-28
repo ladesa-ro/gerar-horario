@@ -58,10 +58,10 @@ Dia: 5 | Intervalo: [11:10 - 12:00] | turma:2 | Quantidade de Propostas: 4
 
 => Gerador#gerarHorario | aguarda o thread de solução iniciar
 ==> [thread de solução] | iniciado
+==> [thread de solução] | aguardando tickGenerateNext para iniciar o solver.Solve
 => Gerador#gerarHorario | thread de solução iniciou
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
-==> [thread de solução] | aguardando tickGenerateNext para iniciar o solver.Solve
 ==> [thread de solução] | recebeu permissão para iniciar a geração
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando tickGenerated
@@ -107,9 +107,149 @@ Turma (Id=turma:2, Nome=Turma diferenciada)
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para continuar a geração
-==> [thread de solução] | terminou a geração de todas as soluções possíveis
-=> Gerador#gerarHorario | recebeu um horário nulo. bye
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 14
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[ HORARIO 2 ]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+============================
+Horário gerado:
+
+HorarioGerado {
+    Aulas (13) []
+}
+============================
+
+Turma (Id=turma:1, Nome=Turma da Pesada)
+
+- Dia: TER | Intervalo: [11:10 - 12:00] | língua portuguesa
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | língua portuguesa
+- Dia: QUA | Intervalo: [08:20 - 09:10] | química
+- Dia: QUA | Intervalo: [09:10 - 10:00] | língua portuguesa
+
+- Dia: QUI | Intervalo: [11:10 - 12:00] | geografia
+
+- Dia: SEX | Intervalo: [07:30 - 08:20] | geografia
+
+Turma (Id=turma:2, Nome=Turma diferenciada)
+
+- Dia: TER | Intervalo: [10:20 - 11:10] | filosofia
+- Dia: TER | Intervalo: [11:10 - 12:00] | filosofia
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | educação física
+
+- Dia: QUI | Intervalo: [08:20 - 09:10] | educação física
+- Dia: QUI | Intervalo: [09:10 - 10:00] | redes
+- Dia: QUI | Intervalo: [10:20 - 11:10] | filosofia
+
+- Dia: SEX | Intervalo: [08:20 - 09:10] | redes
+
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para continuar a geração
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 13
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[ HORARIO 3 ]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+============================
+Horário gerado:
+
+HorarioGerado {
+    Aulas (12) []
+}
+============================
+
+Turma (Id=turma:1, Nome=Turma da Pesada)
+
+- Dia: TER | Intervalo: [11:10 - 12:00] | geografia
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | química
+- Dia: QUA | Intervalo: [09:10 - 10:00] | língua portuguesa
+
+- Dia: QUI | Intervalo: [09:10 - 10:00] | língua portuguesa
+- Dia: QUI | Intervalo: [11:10 - 12:00] | geografia
+
+Turma (Id=turma:2, Nome=Turma diferenciada)
+
+- Dia: TER | Intervalo: [10:20 - 11:10] | filosofia
+- Dia: TER | Intervalo: [11:10 - 12:00] | educação física
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | redes
+
+- Dia: QUI | Intervalo: [08:20 - 09:10] | filosofia
+- Dia: QUI | Intervalo: [09:10 - 10:00] | filosofia
+- Dia: QUI | Intervalo: [11:10 - 12:00] | educação física
+
+- Dia: SEX | Intervalo: [08:20 - 09:10] | redes
+
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para continuar a geração
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 12
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[ HORARIO 4 ]
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+============================
+Horário gerado:
+
+HorarioGerado {
+    Aulas (11) []
+}
+============================
+
+Turma (Id=turma:1, Nome=Turma da Pesada)
+
+- Dia: TER | Intervalo: [11:10 - 12:00] | geografia
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | língua portuguesa
+- Dia: QUA | Intervalo: [08:20 - 09:10] | língua portuguesa
+
+- Dia: QUI | Intervalo: [09:10 - 10:00] | química
+
+- Dia: SEX | Intervalo: [08:20 - 09:10] | língua portuguesa
+
+Turma (Id=turma:2, Nome=Turma diferenciada)
+
+- Dia: TER | Intervalo: [10:20 - 11:10] | educação física
+- Dia: TER | Intervalo: [11:10 - 12:00] | filosofia
+
+- Dia: QUA | Intervalo: [07:30 - 08:20] | educação física
+
+- Dia: QUI | Intervalo: [08:20 - 09:10] | filosofia
+- Dia: QUI | Intervalo: [09:10 - 10:00] | filosofia
+- Dia: QUI | Intervalo: [11:10 - 12:00] | química
+
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para continuar a geração
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 11
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- quantidade de horários gerados: 1 | limite: 2
+-- quantidade de horários gerados: 4 | limite: 4
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
