@@ -55,8 +55,8 @@ Statistics
 Status de solução: Optimal
   - Score do horário: 12
   - conflicts : 0
-  - branches  : 192
-  - wall time : 0.012118130000000001s
+  - branches  : 282
+  - wall time : 0.012603065s
 ============================
 
 ============================
