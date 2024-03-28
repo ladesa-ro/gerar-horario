@@ -15,30 +15,7 @@ public class Gerador
         // todasAsPropostasDeAula -> contexto.TodasAsPropostasDeAula;
         // ================================================
 
-        for (int diaSemanaIso = options.DiaSemanaInicio; diaSemanaIso <= options.DiaSemanaFim; diaSemanaIso++)
-        {
-            for (int intervaloIndex = 0; intervaloIndex < options.HorariosDeAula.Length; intervaloIndex++)
-            {
-                foreach (var turma in options.Turmas)
-                {
-                    foreach (var diario in turma.DiariosDaTurma)
-                    {
-                        var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diario.Id}";
-
-                        var modelBoolVar = contexto.Model.NewBoolVar(propostaLabel);
-
-                        var propostaDeAula = new PropostaAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
-
-                        contexto.TodasAsPropostasDeAula.Add(propostaDeAula);
-
-                        if (debug)
-                        {
-                            Console.WriteLine($"--> init proposta de aula | {propostaLabel}");
-                        }
-                    }
-                }
-            }
-        }
+        contexto.IniciarTodasAsPropostasDeAula();
 
         // ======================================
 
@@ -101,26 +78,30 @@ public class Gerador
         // CRIA UM MODELO COM AS RESTRIÇÕES VINDAS DAS OPÇÕES
         var contexto = PrepararModelComRestricoes(options, verbose);
 
+
         // RESOLVE O MODELO
         var solver = new CpSolver();
-        var status = solver.Solve(contexto.Model);
+
+        Console.WriteLine("");
+        Console.WriteLine("============================");
+
+        Console.WriteLine("Statistics");
 
         // STATUS DA SOLUÇÃO
-        Console.WriteLine($"Solve status: {status}");
+        var status = solver.Solve(contexto.Model);
+        Console.WriteLine($"Status de solução: {status}");
 
         // Mostra a solução.
         // Check that the problem has a feasible solution.
         if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
         {
-            Console.WriteLine($"Total cost: {solver.ObjectiveValue}\n");
+            Console.WriteLine($"  - Score do horário: {solver.ObjectiveValue}");
         }
         else
         {
-            Console.WriteLine("No solution found.");
+            Console.WriteLine("  - Score do horário: No solution found.");
         }
 
-        Console.WriteLine("============================");
-        Console.WriteLine("Statistics");
         Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
         Console.WriteLine($"  - branches  : {solver.NumBranches()}");
         Console.WriteLine($"  - wall time : {solver.WallTime()}s");

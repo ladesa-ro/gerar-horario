@@ -12,13 +12,16 @@ public class GerarHorarioOptions
     public Professor[] Professores { get; set; }
     public Intervalo[] HorariosDeAula { get; set; }
 
-    public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula)
+    public bool LogDebug { get; set; }
+
+    public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula, bool logDebug = false)
     {
         DiaSemanaInicio = diaSemanaInicio;
         DiaSemanaFim = diaSemanaFim;
         Turmas = turmas;
         Professores = professores;
         HorariosDeAula = horariosDeAula;
+        LogDebug = logDebug;
     }
 
 
