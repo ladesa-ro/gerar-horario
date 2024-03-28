@@ -25,29 +25,52 @@ public class GerarHorarioContext
     {
         this.TodasAsPropostasDeAula.Clear();
 
-        for (int diaSemanaIso = this.Options.DiaSemanaInicio; diaSemanaIso <= this.Options.DiaSemanaFim; diaSemanaIso++)
+        IEnumerable<(int, int, string, string)> GerarTodasAsCombinacoes()
         {
-            for (int intervaloIndex = 0; intervaloIndex < this.Options.HorariosDeAula.Length; intervaloIndex++)
+            for (int diaSemanaIso = this.Options.DiaSemanaInicio; diaSemanaIso <= this.Options.DiaSemanaFim; diaSemanaIso++)
             {
-                foreach (var turma in this.Options.Turmas)
+                for (int intervaloIndex = 0; intervaloIndex < this.Options.HorariosDeAula.Length; intervaloIndex++)
                 {
-                    foreach (var diario in turma.DiariosDaTurma)
+                    foreach (var turma in this.Options.Turmas)
                     {
-                        var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diario.Id}";
-
-                        var modelBoolVar = this.Model.NewBoolVar(propostaLabel);
-
-                        var propostaDeAula = new PropostaDeAula(turma.Id, diario.Id, diaSemanaIso, intervaloIndex, modelBoolVar);
-
-                        this.TodasAsPropostasDeAula.Add(propostaDeAula);
-
-                        if (this.Options.LogDebug)
+                        foreach (var diario in turma.DiariosDaTurma)
                         {
-                            Console.WriteLine($"--> init proposta de aula | {propostaLabel}");
+                            yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id);
                         }
-
                     }
                 }
+            }
+        }
+
+        IEnumerable<(int, int, string, string)> GerarCombinacoesComDisponibilidade()
+        {
+            foreach (var combinacao in GerarTodasAsCombinacoes())
+            {
+                var disponivel = true;
+
+                // TODO: filtrar de acordo com a disponibilidade da turma e do professor.
+                if (disponivel)
+                {
+                    yield return combinacao;
+                }
+            }
+        }
+
+        foreach (var combinacao in GerarCombinacoesComDisponibilidade())
+        {
+            var (diaSemanaIso, intervaloIndex, turmaId, diarioId) = combinacao;
+
+            var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
+
+            var modelBoolVar = this.Model.NewBoolVar(propostaLabel);
+
+            var propostaDeAula = new PropostaDeAula(turmaId, diarioId, diaSemanaIso, intervaloIndex, modelBoolVar);
+
+            this.TodasAsPropostasDeAula.Add(propostaDeAula);
+
+            if (this.Options.LogDebug)
+            {
+                Console.WriteLine($"--> init proposta de aula | {propostaLabel}");
             }
         }
 
