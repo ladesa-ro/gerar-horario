@@ -8,8 +8,6 @@ public class Main
 
     public bool Retorno()
     {
-        var verbose = false;
-
         var gerarTodosOsHorarios = false;
 
         // ====================================================
@@ -84,7 +82,7 @@ public class Main
         var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula);
 
         // ====================================================
-        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions, verbose);
+        var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
         // ====================================================
 
         var melhorHorario = horarioGeradoEnumerator.First();
