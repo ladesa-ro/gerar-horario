@@ -67,7 +67,6 @@ Dia: 5 | Intervalo: [11:10 - 12:00] | turma:2 | Quantidade de Propostas: 4
 ==> [thread de solução] | disparando tickGenerated
 ==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
-=> Gerador#gerarHorario | recebeu um horário não nulo
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -109,7 +108,6 @@ Turma (Id=turma:2, Nome=Turma diferenciada)
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para continuar a geração
 ==> [thread de solução] | terminou a geração de todas as soluções possíveis
-=> Gerador#gerarHorario | geração do próximo horário recebida
 => Gerador#gerarHorario | recebeu um horário nulo. bye
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
