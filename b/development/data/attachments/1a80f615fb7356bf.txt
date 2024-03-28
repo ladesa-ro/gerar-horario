@@ -60,8 +60,8 @@ Statistics
 Status de solução: Optimal
   - Score do horário: 14
   - conflicts : 1
-  - branches  : 250
-  - wall time : 0.013172133s
+  - branches  : 708
+  - wall time : 0.017322229s
 ============================
 
 ============================
@@ -75,23 +75,25 @@ HorarioGerado {
 Turma (Id=turma:1, Nome=Turma da Pesada)
 
 - Dia: SEG | Intervalo: [07:30 - 08:20] | língua portuguesa
+- Dia: SEG | Intervalo: [08:20 - 09:10] | geografia
+- Dia: SEG | Intervalo: [09:10 - 10:00] | língua portuguesa
 
-- Dia: SEX | Intervalo: [07:30 - 08:20] | língua portuguesa
-- Dia: SEX | Intervalo: [08:20 - 09:10] | língua portuguesa
-- Dia: SEX | Intervalo: [09:10 - 10:00] | geografia
-- Dia: SEX | Intervalo: [10:20 - 11:10] | geografia
+- Dia: TER | Intervalo: [07:30 - 08:20] | geografia
+
+- Dia: QUA | Intervalo: [09:10 - 10:00] | língua portuguesa
+
 - Dia: SEX | Intervalo: [11:10 - 12:00] | química
 
 Turma (Id=turma:2, Nome=Turma diferenciada)
 
-- Dia: SEG | Intervalo: [07:30 - 08:20] | química
+- Dia: SEG | Intervalo: [07:30 - 08:20] | redes
+- Dia: SEG | Intervalo: [08:20 - 09:10] | redes
+- Dia: SEG | Intervalo: [09:10 - 10:00] | filosofia
+- Dia: SEG | Intervalo: [10:20 - 11:10] | filosofia
+- Dia: SEG | Intervalo: [11:10 - 12:00] | filosofia
 
-- Dia: QUI | Intervalo: [10:20 - 11:10] | redes
-- Dia: QUI | Intervalo: [11:10 - 12:00] | redes
+- Dia: TER | Intervalo: [08:20 - 09:10] | educação física
+- Dia: TER | Intervalo: [09:10 - 10:00] | educação física
 
-- Dia: SEX | Intervalo: [07:30 - 08:20] | filosofia
-- Dia: SEX | Intervalo: [08:20 - 09:10] | filosofia
-- Dia: SEX | Intervalo: [09:10 - 10:00] | filosofia
-- Dia: SEX | Intervalo: [10:20 - 11:10] | educação física
-- Dia: SEX | Intervalo: [11:10 - 12:00] | educação física
+- Dia: SEX | Intervalo: [11:10 - 12:00] | química
 
