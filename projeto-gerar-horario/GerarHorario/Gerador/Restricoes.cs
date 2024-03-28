@@ -19,19 +19,18 @@ public class Restricoes
       {
         foreach (var turma in contexto.Options.Turmas)
         {
-          var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
-                          where
-                             propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
-                             && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
-                             && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.DiarioId)
-                          select propostaAula.ModelBoolVar;
+          var propostas = (from propostaAula in contexto.TodasAsPropostasDeAula
+                           where
+                              propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
+                              && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
+                              && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.DiarioId)
+                           select propostaAula.ModelBoolVar).ToList();
 
 
-          var propostasList = propostas.ToList();
 
-          Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostasList.Count}");
+          Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
 
-          contexto.Model.AddAtMostOne(propostasList);
+          contexto.Model.AddAtMostOne(propostas);
         }
       }
 
