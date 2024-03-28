@@ -1,3 +1,4 @@
+--> Quantidade de propostas: 150
 Turma: turma:1 | Dia: 1 | Intervalo: 0 | Propostas: 3
 Turma: turma:1 | Dia: 1 | Intervalo: 1 | Propostas: 3
 Turma: turma:1 | Dia: 1 | Intervalo: 2 | Propostas: 3
@@ -48,14 +49,14 @@ Turma: turma:2 | Dia: 5 | Intervalo: 1 | Propostas: 3
 Turma: turma:2 | Dia: 5 | Intervalo: 2 | Propostas: 3
 Turma: turma:2 | Dia: 5 | Intervalo: 3 | Propostas: 3
 Turma: turma:2 | Dia: 5 | Intervalo: 4 | Propostas: 3
-Solve status: Optimal
-Total cost: 12
 
 ============================
 Statistics
+Status de solução: Optimal
+  - Score do horário: 12
   - conflicts : 0
   - branches  : 192
-  - wall time : 0.012278227000000001s
+  - wall time : 0.012118130000000001s
 ============================
 
 ============================
