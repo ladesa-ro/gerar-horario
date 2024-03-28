@@ -17,9 +17,9 @@ public class Main
                 "turma:1",
                 "Turma da Pesada",
                 [
-                    new Diario ("diario:1_3", "turma:1", "professor:1", "disciplina:3", 1),
-                    new Diario ("diario:1_1", "turma:1", "professor:1", "disciplina:1", 3),
-                    new Diario ("diario:1_2", "turma:1", "professor:1", "disciplina:2", 2),
+                    new Diario ("diario:1_3", "turma:1", "professor:1", "química", 1),
+                    new Diario ("diario:1_1", "turma:1", "professor:1", "língua portuguesa", 3),
+                    new Diario ("diario:1_2", "turma:1", "professor:1", "geografia", 2),
                 ],
                 [
                     //
@@ -40,9 +40,10 @@ public class Main
                 "turma:2",
                 "Turma diferenciada",
                 [
-                    new Diario ("diario:2_1", "turma:2", "professor:2", "disciplina:4", 1),
-                    new Diario ("diario:2_3", "turma:2", "professor:2", "disciplina:1", 3),
-                    new Diario ("diario:2_2", "turma:2", "professor:2", "disciplina:2", 2),
+                    new Diario ("diario:2_1", "turma:2", "professor:2", "química", 1),
+                    new Diario ("diario:2_2", "turma:2", "professor:2", "redes", 2),
+                    new Diario ("diario:2_3", "turma:2", "professor:2", "filosofia", 3),
+                    new Diario ("diario:2_4", "turma:2", "professor:2", "educação física", 2),
                 ],
                 [
                     //
@@ -93,12 +94,15 @@ public class Main
         Console.WriteLine("============================");
         Console.WriteLine("");
 
+        string? diaAnterior = null;
+
         foreach (var turma in gerarHorarioOptions.Turmas)
         {
             Console.WriteLine($"Turma (Id={turma.Id}, Nome={turma.Nome ?? "Sem nome"})");
             var turmaAulas = from aula in melhorHorario.Aulas
                              where aula.TurmaId == turma.Id
                              select aula;
+
 
             foreach (var aula in turmaAulas)
             {
@@ -145,8 +149,14 @@ public class Main
 
                 var diario = turma.DiariosDaTurma.Where(diario => diario.Id == aula.DiarioId).First();
 
+                if (dia != diaAnterior)
+                {
+                    Console.WriteLine("");
+                }
+
                 Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | {diario.DisciplinaId}");
 
+                diaAnterior = dia;
             }
             Console.WriteLine();
 

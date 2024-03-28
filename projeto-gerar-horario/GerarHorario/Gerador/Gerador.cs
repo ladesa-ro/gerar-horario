@@ -21,11 +21,11 @@ public class Gerador
 
         // RESTRIÇÃO: Garantir no máximo 1 aula em um (dia e intervalo) para cada turma.
 
-        foreach (var turma in options.Turmas)
+        foreach (var diaSemanaIso in Enumerable.Range(options.DiaSemanaInicio, options.DiaSemanaFim))
         {
-            foreach (var diaSemanaIso in Enumerable.Range(options.DiaSemanaInicio, options.DiaSemanaFim))
+            foreach (var intervaloIndex in Enumerable.Range(0, options.HorariosDeAula.Length))
             {
-                foreach (var intervaloIndex in Enumerable.Range(0, options.HorariosDeAula.Length))
+                foreach (var turma in options.Turmas)
                 {
                     var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
                                     where
@@ -37,11 +37,12 @@ public class Gerador
 
                     var propostasList = propostas.ToList();
 
-                    Console.WriteLine($"Turma: {turma.Id} | Dia: {diaSemanaIso} | Intervalo: {intervaloIndex} | Propostas: {propostasList.Count}");
+                    Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostasList.Count}");
 
                     contexto.Model.AddAtMostOne(propostasList);
                 }
             }
+            Console.WriteLine("");
         }
 
         // ==========================================================================================================
