@@ -122,7 +122,6 @@ public class Gerador
 
                 Console.WriteLine($"==> [thread de solução] | sat: {sat}");
 
-
                 if (sat == CpSolverStatus.Feasible || sat == CpSolverStatus.Optimal)
                 {
                     var solverScore = solver.ObjectiveValue;
@@ -134,6 +133,29 @@ public class Gerador
                 {
                     previousScore = 0;
                 }
+
+
+
+                Console.WriteLine("");
+                Console.WriteLine("============================");
+                Console.WriteLine("Statistics");
+                // STATUS DA SOLUÇÃO
+                Console.WriteLine($"Status de solução: {sat}");
+                // Mostra a solução.
+                // Check that the problem has a feasible solution.
+                if (sat == CpSolverStatus.Optimal || sat == CpSolverStatus.Feasible)
+                {
+                    Console.WriteLine($"  - Score do horário: {solver.ObjectiveValue}");
+                }
+                else
+                {
+                    Console.WriteLine("  - Score do horário: No solution found.");
+                }
+                Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
+                Console.WriteLine($"  - branches  : {solver.NumBranches()}");
+                Console.WriteLine($"  - wall time : {solver.WallTime()}s");
+                Console.WriteLine("============================");
+                Console.WriteLine("");
             } while (previousScore > 0);
 
             Console.WriteLine("==> [thread de solução] | terminou a geração de todas as soluções possíveis");
@@ -156,31 +178,6 @@ public class Gerador
 
             Console.WriteLine("=> Gerador#gerarHorario | aguardando a geração do próximo horário");
             tickGenerated.WaitOne();
-
-
-            // Console.WriteLine("");
-            // Console.WriteLine("============================");
-            // Console.WriteLine("Statistics");
-            // // STATUS DA SOLUÇÃO
-            // Console.WriteLine($"Status de solução: {status}");
-
-            // // Mostra a solução.
-            // // Check that the problem has a feasible solution.
-            // if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
-            // {
-            //     Console.WriteLine($"  - Score do horário: {solver.ObjectiveValue}");
-            // }
-            // else
-            // {
-            //     Console.WriteLine("  - Score do horário: No solution found.");
-            // }
-
-            // Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
-            // Console.WriteLine($"  - branches  : {solver.NumBranches()}");
-            // Console.WriteLine($"  - wall time : {solver.WallTime()}s");
-            // Console.WriteLine("============================");
-            // Console.WriteLine("");
-
 
             if (horarioGerado != null)
             {
