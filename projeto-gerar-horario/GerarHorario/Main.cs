@@ -86,7 +86,7 @@ public class Main
         Console.WriteLine("[debug] <- GerarHorario retornou");
         // ====================================================
 
-        var limiteGeracao = 2;
+        var limiteGeracao = 4;
         var indiceGeracao = 0;
 
         foreach (var horarioGerado in horarioGeradoEnumerator)
