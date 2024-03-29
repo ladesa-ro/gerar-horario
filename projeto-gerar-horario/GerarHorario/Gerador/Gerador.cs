@@ -6,59 +6,6 @@ namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
-    ///<summary>
-    /// Visto que podem haver várias soluções válidas possíveis, precisamos  
-    /// otimizar a resposta para que seja a mais satisfatória possível de
-    /// acordo com as preferências de agrupamento da turma e preferências
-    /// de cada professor.
-    ///</summary>
-    public static void OtimizarResultadoDeAcordoComAsPreferencias(GerarHorarioContext contexto, long? limiteScore = null)
-    {
-        LinearExprBuilder score = LinearExpr.NewBuilder();
-
-        foreach (var propostaDeAula in contexto.TodasAsPropostasDeAula)
-        {
-            score.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
-        }
-
-        if (limiteScore != null)
-        {
-            contexto.Model.Add(score <= contexto.Model.NewConstant((long)limiteScore));
-        }
-
-        contexto.Model.Maximize(score);
-    }
-
-    ///<summary>
-    /// Ponto de partida que inicia, restringe e otimizar o modelo para
-    /// solucionar o problema da geração de horário.
-    ///</summary>
-    public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options)
-    {
-        // ================================================
-        var contexto = new GerarHorarioContext(options, iniciarTodasAsPropostasDeAula: true);
-        // ================================================
-
-        // contexto.Model -> Google.OrTools.Sat.CpModel;
-        // contexto.Options -> GerarHorarioOptions;
-        // contexto.TodasAsPropostasDeAula -> List<PropostaDeAula>;
-
-        // ======================================
-        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
-        // ==========================================================================================================
-        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
-        // ==========================================================================================================
-        // TODO: mais restrições serão implementadas aqui.
-        // ==========================================================================================================
-        // ...
-        // ==========================================================================================================
-
-        Gerador.OtimizarResultadoDeAcordoComAsPreferencias(contexto);
-
-        // ==========================================================================================================
-
-        return contexto;
-    }
 
     public static IEnumerable<HorarioGerado> GerarHorario(
       GerarHorarioOptions options)
@@ -193,5 +140,61 @@ public class Gerador
 
         yield break;
     }
+
+
+    ///<summary>
+    /// Ponto de partida que inicia, restringe e otimizar o modelo para
+    /// solucionar o problema da geração de horário.
+    ///</summary>
+    public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options)
+    {
+        // ================================================
+        var contexto = new GerarHorarioContext(options, iniciarTodasAsPropostasDeAula: true);
+        // ================================================
+
+        // contexto.Model -> Google.OrTools.Sat.CpModel;
+        // contexto.Options -> GerarHorarioOptions;
+        // contexto.TodasAsPropostasDeAula -> List<PropostaDeAula>;
+
+        // ======================================
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
+        // ==========================================================================================================
+        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        // ==========================================================================================================
+        // TODO: mais restrições serão implementadas aqui.
+        // ==========================================================================================================
+        // ...
+        // ==========================================================================================================
+
+        Gerador.OtimizarResultadoDeAcordoComAsPreferencias(contexto);
+
+        // ==========================================================================================================
+
+        return contexto;
+    }
+
+    ///<summary>
+    /// Visto que podem haver várias soluções válidas possíveis, precisamos  
+    /// otimizar a resposta para que seja a mais satisfatória possível de
+    /// acordo com as preferências de agrupamento da turma e preferências
+    /// de cada professor.
+    ///</summary>
+    public static void OtimizarResultadoDeAcordoComAsPreferencias(GerarHorarioContext contexto, long? limiteScore = null)
+    {
+        var score = LinearExpr.NewBuilder();
+
+        foreach (var propostaDeAula in contexto.TodasAsPropostasDeAula)
+        {
+            score.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
+        }
+
+        if (limiteScore != null)
+        {
+            contexto.Model.Add(score <= contexto.Model.NewConstant((long)limiteScore));
+        }
+
+        contexto.Model.Maximize(score);
+    }
+
 }
 

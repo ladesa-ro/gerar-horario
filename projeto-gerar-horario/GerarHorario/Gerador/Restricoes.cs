@@ -42,7 +42,7 @@ public class Restricoes
                                      where
                                         propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
                                         && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
-                                        && turma.DiariosDaTurma.Any(diario => diario.Id == propostaAula.DiarioId)
+                                        && propostaAula.TurmaId == turma.Id // mesma turma
                                      select propostaAula.ModelBoolVar).ToList();
 
 
