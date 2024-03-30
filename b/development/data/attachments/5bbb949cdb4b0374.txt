@@ -82,26 +82,26 @@ HorarioGerado {
 
 Turma (Id=1, Nome=1A INFORMATICA)
 
-- Dia: SEG | Intervalo: [09:10 - 10:00] |  1
+- Dia: SEG | Intervalo: [09:10 - 10:00] | Professor: 1
 
-- Dia: TER | Intervalo: [07:30 - 08:20] |  1
-- Dia: TER | Intervalo: [09:10 - 10:00] |  1
-- Dia: TER | Intervalo: [10:20 - 11:10] |  1
+- Dia: TER | Intervalo: [07:30 - 08:20] | Professor: 1
+- Dia: TER | Intervalo: [09:10 - 10:00] | Professor: 1
+- Dia: TER | Intervalo: [10:20 - 11:10] | Professor: 1
 
-- Dia: QUA | Intervalo: [09:10 - 10:00] |  1
-- Dia: QUA | Intervalo: [10:20 - 11:10] |  1
+- Dia: QUA | Intervalo: [09:10 - 10:00] | Professor: 1
+- Dia: QUA | Intervalo: [10:20 - 11:10] | Professor: 1
 
 Turma (Id=2, Nome=1B INFORMATICA)
 
-- Dia: SEG | Intervalo: [07:30 - 08:20] |  2
-- Dia: SEG | Intervalo: [08:20 - 09:10] |  2
-- Dia: SEG | Intervalo: [10:20 - 11:10] |  2
+- Dia: SEG | Intervalo: [07:30 - 08:20] | Professor: 2
+- Dia: SEG | Intervalo: [08:20 - 09:10] | Professor: 2
+- Dia: SEG | Intervalo: [10:20 - 11:10] | Professor: 2
 
-- Dia: TER | Intervalo: [08:20 - 09:10] |  2
+- Dia: TER | Intervalo: [08:20 - 09:10] | Professor: 2
 
-- Dia: QUA | Intervalo: [08:20 - 09:10] |  2
+- Dia: QUA | Intervalo: [08:20 - 09:10] | Professor: 2
 
-- Dia: SEX | Intervalo: [11:10 - 12:00] |  2
+- Dia: SEX | Intervalo: [11:10 - 12:00] | Professor: 2
 
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
@@ -115,7 +115,7 @@ Status de solução: Optimal
   - Score do horário: 12
   - conflicts : 0
   - branches  : 405
-  - wall time : 0.007712450000000001s
+  - wall time : 0.009233135s
 ============================
 
 ==> [thread de solução] | gerou um horário
