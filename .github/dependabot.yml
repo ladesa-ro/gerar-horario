@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: docker
-    directory: "/_devops"
+    directory: "/_devops/dotnet-sdk"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
