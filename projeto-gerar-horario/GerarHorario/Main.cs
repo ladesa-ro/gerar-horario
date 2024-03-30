@@ -83,9 +83,9 @@ public class Main
         var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula);
 
         // ====================================================
-        Console.WriteLine("[debug] vamo chamar o GerarHorario");
+       // Console.WriteLine("[debug] vamo chamar o GerarHorario");
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
-        Console.WriteLine("[debug] <- GerarHorario retornou");
+       // Console.WriteLine("[debug] <- GerarHorario retornou");
         // ====================================================
 
         var limiteGeracao = 1;
@@ -96,7 +96,7 @@ public class Main
 
             if (indiceGeracao < limiteGeracao)
             {
-                Console.WriteLine($"\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                /*Console.WriteLine($"\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 Console.WriteLine($"[ HORARIO {indiceGeracao + 1} ]");
                 Console.WriteLine($"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
@@ -105,7 +105,7 @@ public class Main
                 Console.WriteLine("");
                 Console.WriteLine(horarioGerado);
                 Console.WriteLine("============================");
-                Console.WriteLine("");
+                Console.WriteLine("");*/
 
                 string? diaAnterior = null;
 
@@ -169,6 +169,9 @@ public class Main
 
                         Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Professor: {diario.ProfessorId}");
 
+
+                       
+
                         diaAnterior = dia;
                     }
                     Console.WriteLine();
@@ -185,12 +188,12 @@ public class Main
         }
 
 
-        Console.WriteLine("");
+        /*Console.WriteLine("");
         Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         Console.WriteLine($"-- quantidade de horários gerados: {indiceGeracao} | limite: {limiteGeracao}");
         Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-        // ====================================================
+        // ====================================================*/
 
         return true;
     }

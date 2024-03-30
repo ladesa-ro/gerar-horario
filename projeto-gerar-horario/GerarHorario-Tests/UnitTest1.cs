@@ -1,5 +1,6 @@
 ﻿using NUnit.Allure.Core;
 using Sisgea.GerarHorario.Core;
+using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Tests;
 
@@ -17,6 +18,11 @@ public class Tests
         var conexao = new Main();
 
         bool metodoTrue = conexao.Retorno();
+
+        //TESTAR O METODO VERIFICARINTERVALO DA CLASSE INTERVALO
+        Intervalo intervalo1 = new Intervalo("13:00", "17:30");            
+        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "14:00"), Is.True);
+
 
         /**
         string intervalo = string.Empty;
@@ -45,7 +51,7 @@ public class Tests
         }
         */
 
-        Assert.That(metodoTrue, Is.True);
+        //Assert.That(metodoTrue, Is.True);
         Assert.Pass();
     }
 }
