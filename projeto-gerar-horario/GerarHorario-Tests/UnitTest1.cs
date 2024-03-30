@@ -19,9 +19,21 @@ public class Tests
 
         bool metodoTrue = conexao.Retorno();
 
-        //TESTAR O METODO VERIFICARINTERVALO DA CLASSE INTERVALO
-        Intervalo intervalo1 = new Intervalo("13:00", "17:30");            
-        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "14:00"), Is.True);
+        /*=======================================
+        TESTE
+        Intervalo (18:00 - 19:59)
+        checar 05:00 -> false
+        checar 19:14 -> true
+        checar 19:59 -> true
+        checar 18:00 -> true
+        =======================================*/
+        Intervalo intervalo1 = new Intervalo("18:00", "19:59");
+        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "05:00"), Is.True);
+        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:14"), Is.True);
+        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:59"), Is.True);
+        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "18:00"), Is.True);
+
+
 
 
         /**
@@ -51,7 +63,7 @@ public class Tests
         }
         */
 
-        //Assert.That(metodoTrue, Is.True);
+        Assert.That(metodoTrue, Is.True);
         Assert.Pass();
     }
 }
