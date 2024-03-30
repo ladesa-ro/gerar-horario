@@ -34,12 +34,13 @@ Continue em [./playground/README.md](./playground/README.md).
 ### Estudo
 
 ```
-cd estudo;
+git checkout -b estudo-ts;
 ```
 
-- Estudo Node Z3: `./estudo/estudo-node-z3/projeto`;
+- Estudo Node Z3: <https://github.com/sisgha/gerar-horario/tree/estudo-ts/estudo/estudo-node-z3/projeto>;
+- Estudo CSharp Or-Tools: <https://github.com/sisgha/gerar-horario/tree/estudo-ts/estudo/estudo-csharp/dotnet-project>;
 
-Continue em [./estudo/README.md](./estudo/README.md).
+Continue em <https://github.com/sisgha/gerar-horario/blob/estudo-ts/README.md>.
 
 ## Licença
 
