@@ -1,4 +1,4 @@
-﻿using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
+using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
@@ -172,7 +172,7 @@ public class Main
                             Console.WriteLine("");
                         }
 
-                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} |  {diario.ProfessorId}");
+                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Professor: {diario.ProfessorId}");
 
                         diaAnterior = dia;
                     }
