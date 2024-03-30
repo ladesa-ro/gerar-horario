@@ -34,7 +34,7 @@ Continue em [`./playground/README.md`](./playground/README.md).
 ### Estudo
 
 ```
-git checkout -b estudo-ts;
+git checkout estudo-ts;
 ```
 
 - Estudo Node Z3: [`tree/estudo-ts/estudo/estudo-node-z3/projeto`](https://github.com/sisgha/gerar-horario/tree/estudo-ts/estudo/estudo-node-z3/projeto);
