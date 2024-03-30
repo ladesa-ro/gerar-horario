@@ -115,7 +115,7 @@ Status de solução: Optimal
   - Score do horário: 12
   - conflicts : 0
   - branches  : 405
-  - wall time : 0.009233135s
+  - wall time : 0.008023341s
 ============================
 
 ==> [thread de solução] | gerou um horário
