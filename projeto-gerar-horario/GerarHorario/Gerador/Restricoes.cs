@@ -1,9 +1,28 @@
 using Google.OrTools.Sat;
+using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
 
 public class Restricoes
 {
+    public static bool VerificarIntervaloEmDisponibilidades(
+        IEnumerable<DisponibilidadeDia> disponibilidades,
+        int diaSemanaIso,
+#pragma warning disable IDE0060 // Remover o parâmetro não utilizado
+        Intervalo intervalo
+#pragma warning restore IDE0060 // Remover o parâmetro não utilizado
+    )
+    {
+        return disponibilidades.Any(disponibilidade =>
+        {
+            if (disponibilidade.DiaSemanaIso == diaSemanaIso)
+            {
+                // TODO: retornar corretamente
+                // return Intervalo.VerificarIntervalo(disponibilidade.Intervalo, intervaloAula)
+            }
+            return true;
+        });
+    }
 
     ///<summary>
     /// RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
