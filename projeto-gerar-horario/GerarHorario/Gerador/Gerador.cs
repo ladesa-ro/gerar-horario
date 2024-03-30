@@ -159,6 +159,8 @@ public class Gerador
         // ======================================
         Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
         // ==========================================================================================================
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+        // ==========================================================================================================
         Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
         // ==========================================================================================================
         // TODO: mais restrições serão implementadas aqui.

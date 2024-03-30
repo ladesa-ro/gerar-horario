@@ -56,4 +56,31 @@ public class Restricoes
             Console.WriteLine("");
         }
     }
+
+    ///<summary>
+    /// RESTRIÇÃO: PREVENCAO CASO O MESMO PROFESSOR ESTEJA DANDO AULA EM DIAS IGUAIS E EM MESMOS HORARIOS
+    ///</summary>
+    public static void AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(GerarHorarioContext contexto)
+    {
+
+        foreach (var professor in contexto.Options.Professores)
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+            {
+                foreach (var intervaloIndex in Enumerable.Range(0, contexto.Options.HorariosDeAula.Length))
+                {
+                    var propostas = from propostaDeAula in contexto.TodasAsPropostasDeAula
+                                    where
+                                       propostaDeAula.DiaSemanaIso == diaSemanaIso
+                                       &&
+                                       propostaDeAula.IntervaloIndex == intervaloIndex
+                                       &&
+                                        contexto.Options.Turmas.Any(turma => turma.DiariosDaTurma.Any(diario => diario.ProfessorId == professor.Id))
+                                    select propostaDeAula.ModelBoolVar;
+
+                    contexto.Model.AddAtMostOne(propostas);
+                }
+            }
+        }
+    }
 }

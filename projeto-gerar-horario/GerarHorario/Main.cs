@@ -12,57 +12,59 @@ public class Main
 
         var turmas = new Turma[] {
             new(
-                "turma:1",
-                "Turma da Pesada",
+                "1",//TURMA
+                "1A INFORMATICA",//NOME DA TURMA
                 [
-                    new Diario ("diario:1_3", "turma:1", "professor:1", "química", 1),
-                    new Diario ("diario:1_1", "turma:1", "professor:1", "língua portuguesa", 3),
-                    new Diario ("diario:1_2", "turma:1", "professor:1", "geografia", 2),
+                    new Diario ("diario:1_3", "turma:1", "professor:1", "disciplina:3", 1),
+                    new Diario ("diario:1_1", "turma:1", "professor:1", "disciplina:1", 3),
+                    new Diario ("diario:1_2", "turma:1", "professor:1", "disciplina:2", 2),
                 ],
                 [
                     //
-                    new DisponibilidadeDia(1, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(1, new Intervalo("07:30", "12:00")),//O 1A INFORMATICA TERA AULA NA SEGUNDA DAS 07:30 AS 12:00
                     //
-                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),//O 1A INFORMATICA TERA AULA NA TERÇA DAS 07:30 AS 12:00 E DAS 13:00 AS 17:30
                     new DisponibilidadeDia(2, new Intervalo("13:00", "17:30")),
                     //
-                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),//O 1A INFORMATICA TERA AULA NA QUARTA DAS 07:30 AS 12:00
                     //
-                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),//O 1A INFORMATICA TERA AULA NA QUINTA DAS 07:30 AS 12:00 E DAS 13:00 AS 17:30
                     new DisponibilidadeDia(4, new Intervalo("13:00", "17:30")),
                     //
-                    new DisponibilidadeDia(5, new Intervalo("13:00", "17:30")),
+                    new DisponibilidadeDia(5, new Intervalo("13:00", "17:30")),//O 1A INFORMATICA TERA AULA NA SEXTA DAS 13:00 AS 17:30
                 ]
             ),
+
+
+
             new(
-                "turma:2",
-                "Turma diferenciada",
+                "2",
+                "1B INFORMATICA",
                 [
-                    new Diario ("diario:2_1", "turma:2", "professor:2", "química", 1),
-                    new Diario ("diario:2_2", "turma:2", "professor:2", "redes", 2),
-                    new Diario ("diario:2_3", "turma:2", "professor:2", "filosofia", 3),
-                    new Diario ("diario:2_4", "turma:2", "professor:2", "educação física", 2),
+                    new Diario ("diario:2_1", "turma:2", "professor:2", "disciplina:4", 1),
+                    new Diario ("diario:2_3", "turma:2", "professor:2", "disciplina:1", 3),
+                    new Diario ("diario:2_2", "turma:2", "professor:2", "disciplina:2", 2),
                 ],
                 [
                     //
-                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30")),
+                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30")),//SEGUNDA DAS 13:00 AS 17:30
                     //
-                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),
-                    new DisponibilidadeDia(2, new Intervalo("13:00", "17:30")),
+                    new DisponibilidadeDia(2, new Intervalo("07:30", "12:00")),//TERCA DAS 07:30 AS 12:00 E AS 13:00 AS 17:30
+                    new DisponibilidadeDia(2, new Intervalo("13:00", "17:30")),//TERCA
                     //
-                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(3, new Intervalo("07:30", "12:00")),//QUARTA DAS 07:30 AS 12:00
                     //
-                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),
-                    new DisponibilidadeDia(4, new Intervalo("13:00", "17:30")),
+                    new DisponibilidadeDia(4, new Intervalo("07:30", "12:00")),//QUINTA DAS 07:30 AS 12:00 E 13:00 AS 17:30
+                    new DisponibilidadeDia(4, new Intervalo("13:00", "17:30")),//QUINTA
                     //
-                    new DisponibilidadeDia(5, new Intervalo("07:30", "12:00")),
+                    new DisponibilidadeDia(5, new Intervalo("07:30", "12:00")),//SEXTA DAS 07:30 AS 12:00
                 ]
             ),
         };
 
         var professores = new Professor[] {
             new(
-                "professor:1",
+                "1",
                 "Flinstons",
                 [
                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30"))
@@ -165,7 +167,7 @@ public class Main
                             Console.WriteLine("");
                         }
 
-                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | {diario.DisciplinaId}");
+                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Professor: {diario.ProfessorId}");
 
                         diaAnterior = dia;
                     }
