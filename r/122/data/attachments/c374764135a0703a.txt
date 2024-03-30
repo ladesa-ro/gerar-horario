@@ -1,0 +1,110 @@
+--> Quantidade de propostas: 150
+Dia: 1 | Intervalo: [07:30 - 08:20] | 1 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [07:30 - 08:20] | 2 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [08:20 - 09:10] | 1 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [08:20 - 09:10] | 2 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [09:10 - 10:00] | 1 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [09:10 - 10:00] | 2 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [10:20 - 11:10] | 1 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [10:20 - 11:10] | 2 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [11:10 - 12:00] | 1 | Quantidade de Propostas: 3
+Dia: 1 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
+
+Dia: 2 | Intervalo: [07:30 - 08:20] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [07:30 - 08:20] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [08:20 - 09:10] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [08:20 - 09:10] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [09:10 - 10:00] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [09:10 - 10:00] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [10:20 - 11:10] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [10:20 - 11:10] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [11:10 - 12:00] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
+
+Dia: 3 | Intervalo: [07:30 - 08:20] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [07:30 - 08:20] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [08:20 - 09:10] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [08:20 - 09:10] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [09:10 - 10:00] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [09:10 - 10:00] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [10:20 - 11:10] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [10:20 - 11:10] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [11:10 - 12:00] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
+
+Dia: 4 | Intervalo: [07:30 - 08:20] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [07:30 - 08:20] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [08:20 - 09:10] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [08:20 - 09:10] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [09:10 - 10:00] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [09:10 - 10:00] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [10:20 - 11:10] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [10:20 - 11:10] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [11:10 - 12:00] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
+
+Dia: 5 | Intervalo: [07:30 - 08:20] | 1 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [07:30 - 08:20] | 2 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [08:20 - 09:10] | 1 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [08:20 - 09:10] | 2 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [09:10 - 10:00] | 1 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [09:10 - 10:00] | 2 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [10:20 - 11:10] | 1 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [10:20 - 11:10] | 2 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [11:10 - 12:00] | 1 | Quantidade de Propostas: 3
+Dia: 5 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
+
+=> Gerador#gerarHorario | aguarda o thread de solução iniciar
+==> [thread de solução] | iniciado
+==> [thread de solução] | aguardando tickGenerateNext para iniciar o solver.Solve
+=> Gerador#gerarHorario | thread de solução iniciou
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para iniciar a geração
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+Turma (Id=1, Nome=1A INFORMATICA)
+
+- Dia: SEG | Intervalo: [09:10 - 10:00] | Professor: 1
+
+- Dia: TER | Intervalo: [07:30 - 08:20] | Professor: 1
+- Dia: TER | Intervalo: [09:10 - 10:00] | Professor: 1
+- Dia: TER | Intervalo: [10:20 - 11:10] | Professor: 1
+
+- Dia: QUA | Intervalo: [09:10 - 10:00] | Professor: 1
+- Dia: QUA | Intervalo: [10:20 - 11:10] | Professor: 1
+
+Turma (Id=2, Nome=1B INFORMATICA)
+
+- Dia: SEG | Intervalo: [07:30 - 08:20] | Professor: 2
+- Dia: SEG | Intervalo: [08:20 - 09:10] | Professor: 2
+- Dia: SEG | Intervalo: [10:20 - 11:10] | Professor: 2
+
+- Dia: TER | Intervalo: [08:20 - 09:10] | Professor: 2
+
+- Dia: QUA | Intervalo: [08:20 - 09:10] | Professor: 2
+
+- Dia: SEX | Intervalo: [11:10 - 12:00] | Professor: 2
+
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para continuar a geração
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 12
+
+============================
+Statistics
+Status de solução: Optimal
+  - Score do horário: 12
+  - conflicts : 0
+  - branches  : 405
+  - wall time : 0.007433318s
+============================
+
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+O horario 05:00:00 NAO esta dentro do intervalo 18:00 - 19:59
