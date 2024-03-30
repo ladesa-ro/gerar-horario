@@ -1,0 +1,2 @@
+[debug] vamo chamar o GerarHorario
+[debug] <- GerarHorario retornou
