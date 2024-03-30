@@ -1,6 +1,3 @@
-
-
-
 using Google.OrTools.Sat;
 using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 
@@ -51,9 +48,41 @@ public class GerarHorarioContext
         {
             foreach (var combinacao in GerarTodasAsCombinacoes())
             {
-                var disponivel = true;
+                var (diaSemanaIso, intervaloIndex, turmaId, diarioId) = combinacao;
 
-                // TODO: filtrar de acordo com a disponibilidade da turma e do professor.
+                var intervaloAula = this.Options.HorariosDeAula[intervaloIndex];
+
+                if (intervaloAula == null)
+                {
+                    throw new Exception($"Intervalo não encontrado: {intervaloIndex}.");
+                }
+
+                var turma = this.Options.Turmas.ToList().Find(turma => turma.Id == turmaId);
+
+                if (turma == null)
+                {
+                    throw new Exception($"Turma não encontrada: {turmaId}.");
+                }
+
+                var diario = turma.DiariosDaTurma.ToList().Find(diario => diario.Id == diarioId);
+
+                if (diario == null)
+                {
+                    throw new Exception($"Diário não encontrado: {diarioId}.");
+                }
+
+                var professor = this.Options.Professores.ToList().Find(professor => professor.Id == diario.ProfessorId);
+
+                if (professor == null)
+                {
+                    throw new Exception($"Professor não encontrado: {diario.ProfessorId} (diário: {diario.Id}, turma: {turma.Id}).");
+                }
+
+                var disponivelParaTurma = Restricoes.VerificarIntervaloEmDisponibilidades(turma.Disponibilidades, diaSemanaIso, intervaloAula);
+                var disponivelParaProfessor = Restricoes.VerificarIntervaloEmDisponibilidades(professor.Disponibilidades, diaSemanaIso, intervaloAula);
+
+                var disponivel = disponivelParaTurma && disponivelParaProfessor;
+
                 if (disponivel)
                 {
                     yield return combinacao;
@@ -65,17 +94,12 @@ public class GerarHorarioContext
         {
             var (diaSemanaIso, intervaloIndex, turmaId, diarioId) = combinacao;
 
-            var propostaLabel = $"dia_{diaSemanaIso}::intervalo_{intervaloIndex}::diario_{diarioId}";
-
-            var modelBoolVar = this.Model.NewBoolVar(propostaLabel);
-
-            var propostaDeAula = new PropostaDeAula(turmaId, diarioId, diaSemanaIso, intervaloIndex, modelBoolVar);
-
+            var propostaDeAula = new PropostaDeAula(this, turmaId, diarioId, diaSemanaIso, intervaloIndex);
             this.TodasAsPropostasDeAula.Add(propostaDeAula);
 
             if (this.Options.LogDebug)
             {
-                Console.WriteLine($"--> init proposta de aula | {propostaLabel}");
+                Console.WriteLine($"--> init proposta de aula | dia: {diaSemanaIso} | intervalo: {intervaloIndex} | diario: {diarioId}");
             }
         }
 

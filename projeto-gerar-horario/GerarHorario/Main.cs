@@ -1,4 +1,4 @@
-﻿using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
+using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
@@ -15,9 +15,9 @@ public class Main
                 "1",//TURMA
                 "1A INFORMATICA",//NOME DA TURMA
                 [
-                    new Diario ("diario:1_3", "turma:1", "professor:1", "disciplina:3", 1),
-                    new Diario ("diario:1_1", "turma:1", "professor:1", "disciplina:1", 3),
-                    new Diario ("diario:1_2", "turma:1", "professor:1", "disciplina:2", 2),
+                    new Diario ("diario:1_3", "turma:1", "1", "disciplina:3", 1),
+                    new Diario ("diario:1_1", "turma:1", "1", "disciplina:1", 3),
+                    new Diario ("diario:1_2", "turma:1", "1", "disciplina:2", 2),
                 ],
                 [
                     //
@@ -35,15 +35,13 @@ public class Main
                 ]
             ),
 
-
-
             new(
                 "2",
                 "1B INFORMATICA",
                 [
-                    new Diario ("diario:2_1", "turma:2", "professor:2", "disciplina:4", 1),
-                    new Diario ("diario:2_3", "turma:2", "professor:2", "disciplina:1", 3),
-                    new Diario ("diario:2_2", "turma:2", "professor:2", "disciplina:2", 2),
+                    new Diario ("diario:2_1", "turma:2", "2", "disciplina:4", 1),
+                    new Diario ("diario:2_3", "turma:2", "2", "disciplina:1", 3),
+                    new Diario ("diario:2_2", "turma:2", "2", "disciplina:2", 2),
                 ],
                 [
                     //
@@ -68,6 +66,13 @@ public class Main
                 "Flinstons",
                 [
                    new DisponibilidadeDia(1, new Intervalo("13:00", "17:30"))
+                ]
+            ),
+            new(
+                "2",
+                "Poucas",
+                [
+                   new DisponibilidadeDia(1, new Intervalo("07:30", "12:00"))
                 ]
             ),
         };

@@ -12,7 +12,7 @@ public class GerarHorarioOptions
     public Professor[] Professores { get; set; }
     public Intervalo[] HorariosDeAula { get; set; }
 
-    public bool LogDebug { get; set; }
+    public bool LogDebug { get; set; } = false;
 
     public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula, bool logDebug = false)
     {
