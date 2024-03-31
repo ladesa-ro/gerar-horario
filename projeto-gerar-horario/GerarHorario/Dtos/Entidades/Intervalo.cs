@@ -17,4 +17,29 @@ public record Intervalo
     {
         return $"[{HorarioInicio} - {HorarioFim}]";
     }
+
+    public static bool VerificarIntervalo(Intervalo intervalo, TimeSpan horario){
+        
+        TimeSpan horarioInicio = TimeSpan.Parse(intervalo.HorarioInicio);
+        TimeSpan horarioFim = TimeSpan.Parse(intervalo.HorarioFim);
+
+        if ((horarioInicio <= horario) && (horario <= horarioFim)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static bool VerificarIntervalo(Intervalo intervalo, string horario){
+        
+      
+        TimeSpan horarioConvertido = TimeSpan.Parse(horario);
+
+        return VerificarIntervalo(intervalo, horarioConvertido);
+    }
+
+     public static bool VerificarIntervalo(Intervalo intervalo, Intervalo intervalo2){
+          return VerificarIntervalo(intervalo, intervalo2.HorarioInicio) && VerificarIntervalo(intervalo, intervalo2.HorarioFim);
+    }
 }
