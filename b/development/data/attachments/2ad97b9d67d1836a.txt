@@ -1,5 +1,3 @@
-[debug] vamo chamar o GerarHorario
-[debug] <- GerarHorario retornou
 [warn]: TODO: VerificarIntervaloEmDisponibilidades: retornar corretamente
 [warn]: TODO: VerificarIntervaloEmDisponibilidades: retornar corretamente
 --> init proposta de aula | dia: 1 | intervalo: 0 | diario: diario:1_3
@@ -517,19 +515,6 @@ Dia: 5 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
 ==> [thread de solução] | disparando horário foi gerado
 ==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-[ HORARIO 1 ]
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-============================
-Horário gerado:
-
-HorarioGerado {
-    Aulas (12) []
-}
-============================
-
 Turma (Id=1, Nome=1A INFORMATICA)
 
 - Dia: SEG | Intervalo: [07:30 - 08:20] | Professor: 1
@@ -563,14 +548,10 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 409
-  - wall time : 0.008199924s
+  - wall time : 0.008579956s
 ============================
 
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
 ==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
--- quantidade de horários gerados: 1 | limite: 1
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
