@@ -28,10 +28,17 @@ public class Tests
         checar 18:00 -> true
         =======================================*/
         Intervalo intervalo1 = new Intervalo("18:00", "19:59");
-        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "05:00"), Is.True);
-        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:14"), Is.True);
-        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:59"), Is.True);
-        Assert.That(Intervalo.VerificarIntervalo(intervalo1, "18:00"), Is.True);
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(Intervalo.VerificarIntervalo(intervalo1, "05:00"), Is.False);
+
+            Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:14"), Is.True);
+
+            Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:59"), Is.True);
+
+            Assert.That(Intervalo.VerificarIntervalo(intervalo1, "18:00"), Is.True);
+        });
 
 
 
