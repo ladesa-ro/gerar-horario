@@ -9,7 +9,7 @@ using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, st
 public class Restricoes
 {
     ///<summary>
-    /// UTILITÁRIO: Verifica que um (diaSemanaId, intervalo)
+    /// UTILITÁRIO: Verifica que um (diaSemanaIso, intervalo)
     /// pode ocorer em um conjunto de disponibilidades.
     ///</summary>
     public static bool VerificarIntervaloEmDisponibilidades(

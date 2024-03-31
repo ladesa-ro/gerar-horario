@@ -176,7 +176,7 @@ public class Gerador
     }
 
     ///<summary>
-    /// Visto que podem haver várias soluções válidas possíveis, precisamos  
+    /// Visto que podem haver várias soluções válidas possíveis, precisamos
     /// otimizar a resposta para que seja a mais satisfatória possível de
     /// acordo com as preferências de agrupamento da turma e preferências
     /// de cada professor.
