@@ -508,13 +508,13 @@ Dia: 5 | Intervalo: [11:10 - 12:00] | 2 | Quantidade de Propostas: 3
 
 => Gerador#gerarHorario | aguarda o thread de solução iniciar
 ==> [thread de solução] | iniciado
-==> [thread de solução] | aguardando tickGenerateNext para iniciar o solver.Solve
+==> [thread de solução] | aguardando permissão para iniciar o solver.Solve
 => Gerador#gerarHorario | thread de solução iniciou
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para iniciar a geração
 ==> [thread de solução] | gerou um horário
-==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | disparando horário foi gerado
 ==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
 
@@ -555,19 +555,19 @@ Turma (Id=2, Nome=1B INFORMATICA)
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para continuar a geração
 ==> [thread de solução] | sat: Optimal
-==> [thread de solução] | solverScore: 12
+==> [thread de solução] | solverScore: 12.
 
 ============================
-Statistics
-Status de solução: Optimal
+Estatísticas
+Status da solução: Optimal
   - Score do horário: 12
-  - conflicts : 0
-  - branches  : 409
-  - wall time : 0.008000851s
+  - conflitos : 0
+  - galhos    : 409
+  - wall time : 0.008199924s
 ============================
 
 ==> [thread de solução] | gerou um horário
-==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | disparando horário foi gerado
 ==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
 
