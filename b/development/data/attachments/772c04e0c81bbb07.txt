@@ -563,14 +563,14 @@ Status de solução: Optimal
   - Score do horário: 12
   - conflicts : 0
   - branches  : 409
-  - wall time : 0.008814639s
+  - wall time : 0.008000851s
 ============================
 
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando tickGenerated
+==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 -- quantidade de horários gerados: 1 | limite: 1
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-==> [thread de solução] | aguardando permissão para continuar a geração
