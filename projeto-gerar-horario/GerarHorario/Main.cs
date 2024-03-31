@@ -1,4 +1,4 @@
-using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
+﻿using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
@@ -15,9 +15,9 @@ public class Main
                 "1",//TURMA
                 "1A INFORMATICA",//NOME DA TURMA
                 [
-                    new Diario ("diario:1_3", "turma:1", "1", "disciplina:3", 1),
-                    new Diario ("diario:1_1", "turma:1", "1", "disciplina:1", 3),
-                    new Diario ("diario:1_2", "turma:1", "1", "disciplina:2", 2),
+                    new Diario (Id: "diario:1_3", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:3", QuantidadeMaximaSemana: 1),
+                    new Diario (Id: "diario:1_1", TurmaId: "turma:1", ProfessorId:  "2", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 3),
+                    new Diario (Id: "diario:1_2", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 2),
                 ],
                 [
                     //
@@ -39,9 +39,9 @@ public class Main
                 "2",
                 "1B INFORMATICA",
                 [
-                    new Diario ("diario:2_1", "turma:2", "2", "disciplina:4", 1),
-                    new Diario ("diario:2_3", "turma:2", "2", "disciplina:1", 3),
-                    new Diario ("diario:2_2", "turma:2", "2", "disciplina:2", 2),
+                    new Diario (Id: "diario:2_1", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:4", QuantidadeMaximaSemana: 1),
+                    new Diario (Id: "diario:2_3", TurmaId: "turma:2", ProfessorId: "1", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 3),
+                    new Diario (Id: "diario:2_2", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 2),
                 ],
                 [
                     //
@@ -85,7 +85,7 @@ public class Main
             new("11:10", "12:00"),
         };
 
-        var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula);
+        var gerarHorarioOptions = new GerarHorarioOptions((int)DiaSemanaIso.SEGUNDA, (int)DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula, true);
 
         // ====================================================
         Console.WriteLine("[debug] vamo chamar o GerarHorario");
