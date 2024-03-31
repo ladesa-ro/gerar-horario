@@ -6,6 +6,42 @@ namespace Sisgea.GerarHorario.Core;
 
 public class Gerador
 {
+    ///<summary>
+    /// Ponto de partida que inicia, restringe e otimizar o modelo para
+    /// solucionar o problema da geração de horário.
+    ///</summary>
+    public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options)
+    {
+        // ====================================================================
+        // contexto.Model -> Google.OrTools.Sat.CpModel;
+        // contexto.Options -> GerarHorarioOptions;
+        // contexto.TodasAsPropostasDeAula -> List<PropostaDeAula>;
+        var contexto = new GerarHorarioContext(options, iniciarTodasAsPropostasDeAula: true);
+        // ================================================
+
+
+        // ====================================================================
+        // RESTRIÇÃO: Turma: não ter mais de uma aula ativa ao mesmo tempo.
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
+        // ======================================
+        // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+        // ======================================
+        // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
+        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        // ======================================
+        // Mais restrições são implementadas aqui.
+        // ====================================================================
+
+
+        // Ajudar o modelo para gerar o resultado mais satisfatório dentre
+        // todas as soluções possíveis.
+        Gerador.OtimizarResultadoDeAcordoComAsPreferencias(contexto);
+
+        // ====================================================================
+
+        return contexto;
+    }
 
     public static IEnumerable<HorarioGerado> GerarHorario(
       GerarHorarioOptions options)
@@ -16,13 +52,13 @@ public class Gerador
 
         // ==============================================================
 
-        // evento thread de solução iniciado
+        // Gatilho para quando o "o thread de solução foi iniciado".
         var tickThreadStarted = new AutoResetEvent(false);
 
-        // evento horário gerado
+        // Gatilho para quando "um horário foi gerado".
         var tickGenerated = new AutoResetEvent(false);
 
-        // evento permissão para gerar o próximo horário
+        // Gatilho para quando "houver permissão para gerar o próximo horário".
         var tickGenerateNext = new AutoResetEvent(false);
 
         HorarioGerado? horarioGerado = null;
@@ -33,7 +69,7 @@ public class Gerador
             Console.WriteLine("==> [thread de solução] | iniciado");
             tickThreadStarted.Set();
 
-            Console.WriteLine("==> [thread de solução] | aguardando tickGenerateNext para iniciar o solver.Solve");
+            Console.WriteLine("==> [thread de solução] | aguardando permissão para iniciar o solver.Solve");
             tickGenerateNext.WaitOne();
 
             Console.WriteLine("==> [thread de solução] | recebeu permissão para iniciar a geração");
@@ -52,7 +88,7 @@ public class Gerador
                     horarioGerado = spHorarioGerado;
                     Console.WriteLine("==> [thread de solução] | gerou um horário");
 
-                    Console.WriteLine("==> [thread de solução] | disparando tickGenerated");
+                    Console.WriteLine("==> [thread de solução] | disparando horário foi gerado");
                     tickGenerated.Set();
 
                     Console.WriteLine("==> [thread de solução] | aguardando permissão para continuar a geração");
@@ -72,8 +108,7 @@ public class Gerador
                 if (sat == CpSolverStatus.Feasible || sat == CpSolverStatus.Optimal)
                 {
                     var solverScore = solver.ObjectiveValue;
-                    Console.WriteLine($"==> [thread de solução] | solverScore: {solverScore}");
-
+                    Console.WriteLine($"==> [thread de solução] | solverScore: {solverScore}.");
                     previousScore = (long)solverScore;
                 }
                 else
@@ -81,26 +116,24 @@ public class Gerador
                     previousScore = 0;
                 }
 
-
-
                 Console.WriteLine("");
                 Console.WriteLine("============================");
-                Console.WriteLine("Statistics");
-                // STATUS DA SOLUÇÃO
-                Console.WriteLine($"Status de solução: {sat}");
-                // Mostra a solução.
-                // Check that the problem has a feasible solution.
+                Console.WriteLine("Estatísticas");
+                Console.WriteLine($"Status da solução: {sat}");
+
                 if (sat == CpSolverStatus.Optimal || sat == CpSolverStatus.Feasible)
                 {
                     Console.WriteLine($"  - Score do horário: {solver.ObjectiveValue}");
                 }
                 else
                 {
-                    Console.WriteLine("  - Score do horário: No solution found.");
+                    Console.WriteLine("  - Score do horário: Solução viável não foi encontrada.");
                 }
-                Console.WriteLine($"  - conflicts : {solver.NumConflicts()}");
-                Console.WriteLine($"  - branches  : {solver.NumBranches()}");
+
+                Console.WriteLine($"  - conflitos : {solver.NumConflicts()}");
+                Console.WriteLine($"  - galhos    : {solver.NumBranches()}");
                 Console.WriteLine($"  - wall time : {solver.WallTime()}s");
+
                 Console.WriteLine("============================");
                 Console.WriteLine("");
             } while (previousScore > 0);
@@ -133,46 +166,12 @@ public class Gerador
             }
             else
             {
-                Console.WriteLine("=> Gerador#gerarHorario | recebeu um horário nulo. bye");
+                Console.WriteLine("=> Gerador#gerarHorario | recebeu um horário nulo. bye.");
             }
 
         } while (horarioGerado != null);
 
         yield break;
-    }
-
-
-    ///<summary>
-    /// Ponto de partida que inicia, restringe e otimizar o modelo para
-    /// solucionar o problema da geração de horário.
-    ///</summary>
-    public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options)
-    {
-        // ================================================
-        var contexto = new GerarHorarioContext(options, iniciarTodasAsPropostasDeAula: true);
-        // ================================================
-
-        // contexto.Model -> Google.OrTools.Sat.CpModel;
-        // contexto.Options -> GerarHorarioOptions;
-        // contexto.TodasAsPropostasDeAula -> List<PropostaDeAula>;
-
-        // ======================================
-        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
-        // ==========================================================================================================
-        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
-        // ==========================================================================================================
-        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
-        // ==========================================================================================================
-        // TODO: mais restrições serão implementadas aqui.
-        // ==========================================================================================================
-        // ...
-        // ==========================================================================================================
-
-        Gerador.OtimizarResultadoDeAcordoComAsPreferencias(contexto);
-
-        // ==========================================================================================================
-
-        return contexto;
     }
 
     ///<summary>
@@ -183,19 +182,19 @@ public class Gerador
     ///</summary>
     public static void OtimizarResultadoDeAcordoComAsPreferencias(GerarHorarioContext contexto, long? limiteScore = null)
     {
-        var score = LinearExpr.NewBuilder();
+        var qualidade = LinearExpr.NewBuilder();
 
         foreach (var propostaDeAula in contexto.TodasAsPropostasDeAula)
         {
-            score.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
+            qualidade.AddTerm((IntVar)propostaDeAula.ModelBoolVar, 1);
         }
 
         if (limiteScore != null)
         {
-            contexto.Model.Add(score <= contexto.Model.NewConstant((long)limiteScore));
+            contexto.Model.Add(qualidade <= contexto.Model.NewConstant((long)limiteScore));
         }
 
-        contexto.Model.Maximize(score);
+        contexto.Model.Maximize(qualidade);
     }
 
 }
