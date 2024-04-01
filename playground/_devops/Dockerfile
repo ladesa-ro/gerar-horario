@@ -1,31 +1,57 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0.203
+FROM alpine:3.17
 
-RUN apt install -y --no-install-recommends wget && \
-  apt autoremove -y && \
-  apt clean && \
-  rm -rf /var/lib/apt/lists/*
+# Instalar dependências
+RUN apk add --update \
+	--no-cache \
+	icu-libs \
+	krb5-libs \
+	libgcc \
+	libintl \
+	libssl1.1 \
+	libstdc++ \
+	zlib \
+	wget \
+	ca-certificates \
+	bash \
+    python3 \
+    py3-pip \
+    gcc \
+    python3-dev \
+    musl-dev \
+    linux-headers
+
+# Download e instalação do SDK do .NET
+RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
+	chmod +x dotnet-install.sh && \
+	./dotnet-install.sh --version latest --install-dir /usr/share/dotnet && \
+	rm dotnet-install.sh
+
+# Adicionar o diretório de ferramentas do .NET ao PATH
+ENV PATH="/usr/share/dotnet:$PATH"
 
 # Set non-root user
 ENV USER="user"
-RUN useradd -ms /bin/bash -u 1000 $USER 
+RUN adduser -D -u 1000 $USER 
 USER $USER 
 ENV HOME="/home/$USER"
 WORKDIR $HOME
 
-# Install Anaconda
-# RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh -O anaconda.sh
-RUN wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh -O anaconda.sh
-RUN chmod +x anaconda.sh
-RUN ./anaconda.sh -b -p $HOME/anaconda
-RUN rm ./anaconda.sh
-ENV PATH="/${HOME}/anaconda/bin:${PATH}"
-
-# Install .NET kernel
+# Instalar .NET Interactive
 RUN dotnet tool install -g --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" Microsoft.dotnet-interactive
-ENV PATH="/${HOME}/.dotnet/tools:${PATH}"
+
+# Configurar variáveis de ambiente
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV PATH="/home/$USER/.dotnet/tools:${PATH}"
+
+# Alterar permissões do diretório .dotnet para o usuário não root
+RUN chown -R $USER:$USER $HOME/.dotnet
+
+RUN pip3 install --no-cache-dir jupyter
+
+# Instalar o kernel do .NET para o Jupyter
 RUN dotnet interactive jupyter install
 
-# Run Jupyter Notebook
+# Expor a porta 8888 para o Jupyter Notebook
 EXPOSE 8888
-ENTRYPOINT ["jupyter", "notebook", "--no-browser", "--ip=0.0.0.0"]
+
+CMD ["jupyter", "notebook", "--no-browser", "--ip=0.0.0.0"]
