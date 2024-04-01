@@ -1,7 +1,7 @@
 services:
   lab:
     user: user
-    build: ./_devops
+    build: ./.devops
     entrypoint: [
         #
         "jupyter",

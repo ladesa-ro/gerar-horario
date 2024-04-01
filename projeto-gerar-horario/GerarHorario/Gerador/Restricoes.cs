@@ -14,25 +14,19 @@ public class Restricoes
     ///</summary>
     public static bool VerificarIntervaloEmDisponibilidades(
         IEnumerable<DisponibilidadeDia> disponibilidades,
-#pragma warning disable IDE0060 // Remover o parâmetro não utilizado
         int diaSemanaIso,
         Intervalo intervalo
-#pragma warning restore IDE0060 // Remover o parâmetro não utilizado
     )
     {
-        Console.WriteLine("[warn]: TODO: VerificarIntervaloEmDisponibilidades: retornar corretamente");
 
         return disponibilidades.Any(disponibilidade =>
         {
-            // TODO: retornar corretamente
+            if (disponibilidade.DiaSemanaIso == diaSemanaIso)
+            {
+                return Intervalo.VerificarIntervalo(disponibilidade.Intervalo, intervalo);
+            }
 
-            // if (disponibilidade.DiaSemanaIso == diaSemanaIso)
-            // {
-            //     return Intervalo.VerificarIntervalo(disponibilidade.Intervalo, intervalo)
-            // }
-            // return false;
-
-            return true;
+            return false;
         });
     }
 
@@ -113,7 +107,10 @@ public class Restricoes
                                             propostaAula.DiarioId == diario.Id
                                         select propostaAula.ModelBoolVar;
 
-                contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
+                if (propostasDoDiario.Any())
+                {
+                    contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
+                }
             }
         }
 
@@ -137,11 +134,13 @@ public class Restricoes
                                         && propostaAula.TurmaId == turma.Id // mesma turma
                                      select propostaAula.ModelBoolVar).ToList();
 
+                    if (propostas.Any())
+                    {
+                        Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
 
+                        contexto.Model.AddAtMostOne(propostas);
+                    }
 
-                    Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
-
-                    contexto.Model.AddAtMostOne(propostas);
                 }
             }
 
@@ -170,7 +169,11 @@ public class Restricoes
                                         contexto.Options.ProfessorEstaVinculadoAoDiario(diarioId: propostaDeAula.DiarioId, professorId: professor.Id)
                                     select propostaDeAula.ModelBoolVar;
 
-                    contexto.Model.AddAtMostOne(propostas);
+                    if (propostas.Any())
+                    {
+                        contexto.Model.AddAtMostOne(propostas);
+                    }
+
                 }
             }
         }

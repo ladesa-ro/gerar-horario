@@ -17,6 +17,7 @@ public class Tests
         var conexao = new Main();
 
         bool metodoTrue = conexao.Retorno();
+        Assert.That(metodoTrue, Is.True);
 
         /**
         string intervalo = string.Empty;
@@ -45,7 +46,6 @@ public class Tests
         }
         */
 
-        Assert.That(metodoTrue, Is.True);
         Assert.Pass();
     }
 }
