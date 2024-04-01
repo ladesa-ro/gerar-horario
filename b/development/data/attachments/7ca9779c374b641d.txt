@@ -81,7 +81,7 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 265
-  - wall time : 0.006573223s
+  - wall time : 0.006506593000000001s
 ============================
 
 ==> [thread de solução] | gerou um horário
