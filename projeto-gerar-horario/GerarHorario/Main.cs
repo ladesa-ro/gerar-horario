@@ -31,7 +31,7 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("07:30", "11:59:59")),//O 1A INFORMATICA TERA AULA NA QUINTA DAS 07:30 AS 12:00 E DAS 13:00 AS 17:30
                     new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("13:00", "17:29:59")),
                     //
-                    new DisponibilidadeDia(5, new Intervalo("13:00", "17:29:59")),//O 1A INFORMATICA TERA AULA NA SEXTA DAS 13:00 AS 17:30
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("13:00", "17:29:59")),//O 1A INFORMATICA TERA AULA NA SEXTA DAS 13:00 AS 17:30
                 ]
             ),
 
@@ -86,11 +86,21 @@ public class Main
         };
 
         var horariosDeAula = new Intervalo[] {
+            // =====================
             new("07:30", "08:19:59"),
             new("08:20", "09:09:59"),
             new("09:10", "09:59:59"),
+            //
             new("10:20", "11:09:59"),
             new("11:10", "11:59:59"),
+            // =====================
+            new("13:00", "13:49:59"),
+            new("13:50", "14:39:59"),
+            new("14:40", "15:29:59"),
+            //
+            new("15:50", "16:39:59"),
+            new("16:40", "17:29:59"),
+            // =====================
         };
 
         var gerarHorarioOptions = new GerarHorarioOptions(
