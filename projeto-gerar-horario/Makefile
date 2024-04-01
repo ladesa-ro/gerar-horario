@@ -9,8 +9,10 @@ restore:
 
 test:
 	dotnet test
+
 start:
-	dotnet run --project GerarHorario-Playground/
+	echo "Nenhum projeto do tipo Console para iniciar."
+	exit 1;
 
 docker-shell:
 	docker build ./.devops/dotnet-sdk;
