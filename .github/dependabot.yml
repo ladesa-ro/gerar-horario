@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: docker
-    directory: "/playground/_devops"
+    directory: "/playground/.devops"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
@@ -13,7 +13,7 @@ updates:
     open-pull-requests-limit: 10
 
   - package-ecosystem: docker
-    directory: "/projeto-gerar-horario/_devops/dotnet-sdk"
+    directory: "/projeto-gerar-horario/.devops/dotnet-sdk"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
