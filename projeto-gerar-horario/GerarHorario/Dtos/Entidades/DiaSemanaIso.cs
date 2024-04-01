@@ -1,13 +1,13 @@
 namespace Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 
-public enum DiaSemanaIso
+public class DiaSemanaIso
 {
-    DOMINGO = 0,
-    SEGUNDA = 1,
-    TERCA = 2,
-    QUARTA = 3,
-    QUINTA = 4,
-    SEXTA = 5,
-    SABADO = 6,
+    public const int DOMINGO = 0;
+    public const int SEGUNDA = 1;
+    public const int TERCA = 2;
+    public const int QUARTA = 3;
+    public const int QUINTA = 4;
+    public const int SEXTA = 5;
+    public const int SABADO = 6;
 }
