@@ -107,7 +107,7 @@ public class Restricoes
                                             propostaAula.DiarioId == diario.Id
                                         select propostaAula.ModelBoolVar;
 
-                if (propostasDoDiario.Count() > 0)
+                if (propostasDoDiario.Any())
                 {
                     contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
                 }
@@ -134,7 +134,7 @@ public class Restricoes
                                         && propostaAula.TurmaId == turma.Id // mesma turma
                                      select propostaAula.ModelBoolVar).ToList();
 
-                    if (propostas.Count > 0)
+                    if (propostas.Any())
                     {
                         Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
 
@@ -169,7 +169,7 @@ public class Restricoes
                                         contexto.Options.ProfessorEstaVinculadoAoDiario(diarioId: propostaDeAula.DiarioId, professorId: professor.Id)
                                     select propostaDeAula.ModelBoolVar;
 
-                    if (propostas.Count() > 0)
+                    if (propostas.Any())
                     {
                         contexto.Model.AddAtMostOne(propostas);
                     }
