@@ -1,5 +1,5 @@
 start:
-	docker compose up lab -d;
+	docker compose up lab -d --build;
 
 stop:
 	docker compose down -v;
