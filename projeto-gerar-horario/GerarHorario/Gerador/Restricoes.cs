@@ -14,25 +14,19 @@ public class Restricoes
     ///</summary>
     public static bool VerificarIntervaloEmDisponibilidades(
         IEnumerable<DisponibilidadeDia> disponibilidades,
-#pragma warning disable IDE0060 // Remover o parâmetro não utilizado
         int diaSemanaIso,
         Intervalo intervalo
-#pragma warning restore IDE0060 // Remover o parâmetro não utilizado
     )
     {
-        Console.WriteLine("[warn]: TODO: VerificarIntervaloEmDisponibilidades: retornar corretamente");
 
         return disponibilidades.Any(disponibilidade =>
         {
-            // TODO: retornar corretamente
+            if (disponibilidade.DiaSemanaIso == diaSemanaIso)
+            {
+                return Intervalo.VerificarIntervalo(disponibilidade.Intervalo, intervalo);
+            }
 
-            // if (disponibilidade.DiaSemanaIso == diaSemanaIso)
-            // {
-            //     return Intervalo.VerificarIntervalo(disponibilidade.Intervalo, intervalo)
-            // }
-            // return false;
-
-            return true;
+            return false;
         });
     }
 
