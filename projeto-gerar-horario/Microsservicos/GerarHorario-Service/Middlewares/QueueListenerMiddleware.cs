@@ -8,16 +8,10 @@ using Sisgea.GerarHorario.Core.Dtos.HorarioGerado;
 
 namespace GerarHorario_Service.Middlewares;
 
-public class QueueListenerMiddleware
+public class QueueService
 {
-    private readonly RequestDelegate _next;
-
-    public QueueListenerMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
-    public async Task InvokeAsync(HttpContext context)
+    
+    public static void ListenQueue()
     {
         var factory = new ConnectionFactory() { HostName = "localhost" };
            factory.UserName = "admin";

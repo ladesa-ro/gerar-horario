@@ -1,11 +1,23 @@
-using GerarHorario_Service.Extensions;
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("up", () => "up");
+using GerarHorario_Service.Middlewares;
 
 
-app.UseQueueListener();
+Thread server = new(() =>
+{
 
-app.Run();
+    var builder = WebApplication.CreateBuilder(args);
+    var app = builder.Build();
+
+    app.MapGet("/up", () => "up");
+
+
+
+    app.Run();
+});
+
+Thread queue = new(QueueService.ListenQueue);
+
+
+
+server.Start();
+queue.Start();
+
