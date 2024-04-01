@@ -1,0 +1,200 @@
+--> init proposta de aula | dia: 1 | intervalo: 0 | diario: diario:1_1
+--> init proposta de aula | dia: 1 | intervalo: 1 | diario: diario:1_1
+--> init proposta de aula | dia: 1 | intervalo: 2 | diario: diario:1_1
+--> init proposta de aula | dia: 1 | intervalo: 3 | diario: diario:1_1
+--> init proposta de aula | dia: 1 | intervalo: 4 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:1_3
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:1_2
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:2_1
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:2_3
+--> init proposta de aula | dia: 2 | intervalo: 0 | diario: diario:2_2
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:1_3
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:1_2
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:2_1
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:2_3
+--> init proposta de aula | dia: 2 | intervalo: 1 | diario: diario:2_2
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:1_3
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:1_2
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:2_1
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:2_3
+--> init proposta de aula | dia: 2 | intervalo: 2 | diario: diario:2_2
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:1_3
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:1_2
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:2_1
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:2_3
+--> init proposta de aula | dia: 2 | intervalo: 3 | diario: diario:2_2
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:1_3
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:1_1
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:1_2
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:2_1
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:2_3
+--> init proposta de aula | dia: 2 | intervalo: 4 | diario: diario:2_2
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:1_3
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:1_1
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:1_2
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:2_1
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:2_3
+--> init proposta de aula | dia: 3 | intervalo: 0 | diario: diario:2_2
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:1_3
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:1_1
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:1_2
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:2_1
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:2_3
+--> init proposta de aula | dia: 3 | intervalo: 1 | diario: diario:2_2
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:1_3
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:1_1
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:1_2
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:2_1
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:2_3
+--> init proposta de aula | dia: 3 | intervalo: 2 | diario: diario:2_2
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:1_3
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:1_1
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:1_2
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:2_1
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:2_3
+--> init proposta de aula | dia: 3 | intervalo: 3 | diario: diario:2_2
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:1_3
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:1_1
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:1_2
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:2_1
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:2_3
+--> init proposta de aula | dia: 3 | intervalo: 4 | diario: diario:2_2
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:1_3
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:1_1
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:1_2
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:2_1
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:2_3
+--> init proposta de aula | dia: 4 | intervalo: 0 | diario: diario:2_2
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:1_3
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:1_1
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:1_2
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:2_1
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:2_3
+--> init proposta de aula | dia: 4 | intervalo: 1 | diario: diario:2_2
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:1_3
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:1_1
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:1_2
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:2_1
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:2_3
+--> init proposta de aula | dia: 4 | intervalo: 2 | diario: diario:2_2
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:1_3
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:1_1
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:1_2
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:2_1
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:2_3
+--> init proposta de aula | dia: 4 | intervalo: 3 | diario: diario:2_2
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:1_3
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:1_1
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:1_2
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:2_1
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:2_3
+--> init proposta de aula | dia: 4 | intervalo: 4 | diario: diario:2_2
+--> Quantidade de propostas: 95
+Dia: 1 | Intervalo: [07:30 - 08:19:59] | 1 | Quantidade de Propostas: 1
+Dia: 1 | Intervalo: [07:30 - 08:19:59] | 2 | Quantidade de Propostas: 0
+Dia: 1 | Intervalo: [08:20 - 09:09:59] | 1 | Quantidade de Propostas: 1
+Dia: 1 | Intervalo: [08:20 - 09:09:59] | 2 | Quantidade de Propostas: 0
+Dia: 1 | Intervalo: [09:10 - 09:59:59] | 1 | Quantidade de Propostas: 1
+Dia: 1 | Intervalo: [09:10 - 09:59:59] | 2 | Quantidade de Propostas: 0
+Dia: 1 | Intervalo: [10:20 - 11:09:59] | 1 | Quantidade de Propostas: 1
+Dia: 1 | Intervalo: [10:20 - 11:09:59] | 2 | Quantidade de Propostas: 0
+Dia: 1 | Intervalo: [11:10 - 11:59:59] | 1 | Quantidade de Propostas: 1
+Dia: 1 | Intervalo: [11:10 - 11:59:59] | 2 | Quantidade de Propostas: 0
+
+Dia: 2 | Intervalo: [07:30 - 08:19:59] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [07:30 - 08:19:59] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [08:20 - 09:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [08:20 - 09:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [09:10 - 09:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [09:10 - 09:59:59] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [10:20 - 11:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [10:20 - 11:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [11:10 - 11:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 2 | Intervalo: [11:10 - 11:59:59] | 2 | Quantidade de Propostas: 3
+
+Dia: 3 | Intervalo: [07:30 - 08:19:59] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [07:30 - 08:19:59] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [08:20 - 09:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [08:20 - 09:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [09:10 - 09:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [09:10 - 09:59:59] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [10:20 - 11:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [10:20 - 11:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [11:10 - 11:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 3 | Intervalo: [11:10 - 11:59:59] | 2 | Quantidade de Propostas: 3
+
+Dia: 4 | Intervalo: [07:30 - 08:19:59] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [07:30 - 08:19:59] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [08:20 - 09:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [08:20 - 09:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [09:10 - 09:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [09:10 - 09:59:59] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [10:20 - 11:09:59] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [10:20 - 11:09:59] | 2 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [11:10 - 11:59:59] | 1 | Quantidade de Propostas: 3
+Dia: 4 | Intervalo: [11:10 - 11:59:59] | 2 | Quantidade de Propostas: 3
+
+Dia: 5 | Intervalo: [07:30 - 08:19:59] | 1 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [07:30 - 08:19:59] | 2 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [08:20 - 09:09:59] | 1 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [08:20 - 09:09:59] | 2 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [09:10 - 09:59:59] | 1 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [09:10 - 09:59:59] | 2 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [10:20 - 11:09:59] | 1 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [10:20 - 11:09:59] | 2 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [11:10 - 11:59:59] | 1 | Quantidade de Propostas: 0
+Dia: 5 | Intervalo: [11:10 - 11:59:59] | 2 | Quantidade de Propostas: 0
+
+=> Gerador#gerarHorario | aguarda o thread de solução iniciar
+==> [thread de solução] | iniciado
+==> [thread de solução] | aguardando permissão para iniciar o solver.Solve
+=> Gerador#gerarHorario | thread de solução iniciou
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para iniciar a geração
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando horário foi gerado
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
+Turma (Id=1, Nome=1A INFORMATICA)
+
+- Dia: SEG | Intervalo: [07:30 - 08:19:59] | Professor: 2
+- Dia: SEG | Intervalo: [09:10 - 09:59:59] | Professor: 2
+
+- Dia: TER | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 2
+- Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 1
+
+Turma (Id=2, Nome=1B INFORMATICA)
+- Dia: TER | Intervalo: [07:30 - 08:19:59] | Professor: 2
+- Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 2
+- Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 2
+- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 1
+
+- Dia: QUI | Intervalo: [08:20 - 09:09:59] | Professor: 1
+
+=> Gerador#gerarHorario | permite a geração do próximo horário
+=> Gerador#gerarHorario | aguardando a geração do próximo horário
+==> [thread de solução] | recebeu permissão para continuar a geração
+==> [thread de solução] | sat: Optimal
+==> [thread de solução] | solverScore: 12.
+
+============================
+Estatísticas
+Status da solução: Optimal
+  - Score do horário: 12
+  - conflitos : 0
+  - galhos    : 265
+  - wall time : 0.006069339s
+============================
+
+==> [thread de solução] | gerou um horário
+==> [thread de solução] | disparando horário foi gerado
+==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
