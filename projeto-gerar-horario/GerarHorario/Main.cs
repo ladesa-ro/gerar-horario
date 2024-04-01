@@ -93,12 +93,17 @@ public class Main
             new("11:10", "11:59:59"),
         };
 
-        var gerarHorarioOptions = new GerarHorarioOptions(DiaSemanaIso.SEGUNDA, DiaSemanaIso.SEXTA, turmas, professores, horariosDeAula, true);
+        var gerarHorarioOptions = new GerarHorarioOptions(
+            diaSemanaInicio: DiaSemanaIso.SEGUNDA,
+            diaSemanaFim: DiaSemanaIso.SEXTA,
+            turmas: turmas,
+            professores: professores,
+            horariosDeAula: horariosDeAula,
+            logDebug: false
+        );
 
         // ====================================================
-        // Console.WriteLine("[debug] vamo chamar o GerarHorario");
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
-        // Console.WriteLine("[debug] <- GerarHorario retornou");
         // ====================================================
 
         var limiteGeracao = 1;
@@ -125,6 +130,7 @@ public class Main
                 foreach (var turma in gerarHorarioOptions.Turmas)
                 {
                     Console.WriteLine($"Turma (Id={turma.Id}, Nome={turma.Nome ?? "Sem nome"})");
+
                     var turmaAulas = from aula in horarioGerado.Aulas
                                      where aula.TurmaId == turma.Id
                                      select aula;

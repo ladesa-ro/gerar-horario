@@ -107,7 +107,10 @@ public class Restricoes
                                             propostaAula.DiarioId == diario.Id
                                         select propostaAula.ModelBoolVar;
 
-                contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
+                if (propostasDoDiario.Count() > 0)
+                {
+                    contexto.Model.Add(LinearExpr.Sum(propostasDoDiario) <= diario.QuantidadeMaximaSemana);
+                }
             }
         }
 
@@ -131,11 +134,13 @@ public class Restricoes
                                         && propostaAula.TurmaId == turma.Id // mesma turma
                                      select propostaAula.ModelBoolVar).ToList();
 
+                    if (propostas.Count > 0)
+                    {
+                        Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
 
+                        contexto.Model.AddAtMostOne(propostas);
+                    }
 
-                    Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
-
-                    contexto.Model.AddAtMostOne(propostas);
                 }
             }
 
@@ -164,7 +169,11 @@ public class Restricoes
                                         contexto.Options.ProfessorEstaVinculadoAoDiario(diarioId: propostaDeAula.DiarioId, professorId: professor.Id)
                                     select propostaDeAula.ModelBoolVar;
 
-                    contexto.Model.AddAtMostOne(propostas);
+                    if (propostas.Count() > 0)
+                    {
+                        contexto.Model.AddAtMostOne(propostas);
+                    }
+
                 }
             }
         }
