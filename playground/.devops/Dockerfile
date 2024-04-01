@@ -13,12 +13,14 @@ RUN apk add --update \
 	wget \
 	ca-certificates \
 	bash \
-    python3 \
-    py3-pip \
-    gcc \
-    python3-dev \
-    musl-dev \
-    linux-headers
+	python3 \
+	py3-pip \
+	gcc \
+	python3-dev \
+	musl-dev \
+	linux-headers
+
+RUN pip3 install --no-cache-dir notebook
 
 # Download e instalação do SDK do .NET
 RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
@@ -46,7 +48,6 @@ ENV PATH="/home/$USER/.dotnet/tools:${PATH}"
 # Alterar permissões do diretório .dotnet para o usuário não root
 RUN chown -R $USER:$USER $HOME/.dotnet
 
-RUN pip3 install --no-cache-dir jupyter
 
 # Instalar o kernel do .NET para o Jupyter
 RUN dotnet interactive jupyter install
