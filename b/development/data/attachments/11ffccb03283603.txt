@@ -191,10 +191,10 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 265
-  - wall time : 0.006570622000000001s
+  - wall time : 0.006256650000000001s
 ============================
 
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
-==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
+==> [thread de solução] | aguardando permissão para continuar a geração
