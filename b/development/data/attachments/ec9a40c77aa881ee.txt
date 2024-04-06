@@ -59,6 +59,7 @@ Dia: 5 | Intervalo: [14:40 - 15:29:59] | 1 | Quantidade de Propostas: 3
 Dia: 5 | Intervalo: [15:50 - 16:39:59] | 1 | Quantidade de Propostas: 3
 Dia: 5 | Intervalo: [16:40 - 17:29:59] | 1 | Quantidade de Propostas: 3
 
+ONDE EU QUERO TESTAR ESTA ABAIXO
 => Gerador#gerarHorario | aguarda o thread de solução iniciar
 ==> [thread de solução] | iniciado
 ==> [thread de solução] | aguardando permissão para iniciar o solver.Solve
@@ -103,10 +104,10 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 444
-  - wall time : 0.012737636s
+  - wall time : 0.008048911s
 ============================
 
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
-==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
+==> [thread de solução] | aguardando permissão para continuar a geração
