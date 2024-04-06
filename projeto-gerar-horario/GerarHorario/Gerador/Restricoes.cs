@@ -178,4 +178,28 @@ public class Restricoes
             }
         }
     }
+
+    public static void AplicarHorarioDeAlmoco(GerarHorarioContext contexto)
+    {
+        foreach (var turma in contexto.Options.Turmas)//TODAS AS TURMAS
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))//TODOS OS DIAS DA SEMANA
+            {
+                var propostasAoMosso = from carro in contexto.TodasAsPropostasDeAula
+                                       where
+                                           carro.DiaSemanaIso == diaSemanaIso // mesmo dia do loop
+                                           && carro.TurmaId == turma.Id // mesma turma do loop
+                                          &&
+                                           Intervalo.VerificarIntervalo(
+                                               new Intervalo("11:00", "13:00"),
+                                                contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex)
+                                            )
+
+                                       select carro.ModelBoolVar;//A VARIAVEL CARRO SALVA SOMENTE AS INFORMACOES QUE CONDIZEM COM AS CONDICOES ACIMA
+
+                contexto.Model.AddAtMostOne(propostasAoMosso);
+            }
+
+        }
+    }
 }

@@ -32,6 +32,8 @@ public class Gerador
         // ======================================
         // Mais restrições são implementadas aqui.
         // ====================================================================
+        System.Console.WriteLine("ONDE EU QUERO TESTAR ESTA ABAIXO");
+        Restricoes.AplicarHorarioDeAlmoco(contexto);
 
 
         // Ajudar o modelo para gerar o resultado mais satisfatório dentre

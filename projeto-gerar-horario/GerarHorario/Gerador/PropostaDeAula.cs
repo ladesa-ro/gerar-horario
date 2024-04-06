@@ -2,22 +2,9 @@ using Google.OrTools.Sat;
 
 namespace Sisgea.GerarHorario.Core;
 
-public class PropostaDeAula(
-    //
-    GerarHorarioContext contexto,
-    //
-    string turmaId,
-    string diarioId,
-    //
-    int diaSemanaIso,
-    int intervaloIndex,
-    //
-    BoolVar? modelBoolVar = null
-    //
-    )
+public class PropostaDeAula(GerarHorarioContext contexto,string turmaId,string diarioId,int diaSemanaIso,int intervaloIndex,BoolVar? modelBoolVar = null)
 {
 
-    //
     public GerarHorarioContext Contexto { get; set; } = contexto;
     //
     public string TurmaId { get; set; } = turmaId;

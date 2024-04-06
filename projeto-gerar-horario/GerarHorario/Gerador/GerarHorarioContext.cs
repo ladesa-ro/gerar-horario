@@ -7,7 +7,6 @@ public class GerarHorarioContext
 {
     public GerarHorarioOptions Options { get; init; }
     public CpModel Model { get; init; }
-
     public List<PropostaDeAula> TodasAsPropostasDeAula { get; init; }
 
 
