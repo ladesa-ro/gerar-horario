@@ -22,7 +22,7 @@ public class PropostaDeAula(GerarHorarioContext contexto,string turmaId,string d
         {
             if (this.CreatedModelBoolVar == null)
             {
-                var propostaLabel = $"dia_{this.DiaSemanaIso}::intervalo_{this.IntervaloIndex}::diario_{this.DiarioId}";
+                var propostaLabel = $"dia_{this.DiaSemanaIso}::intervalo_{this.IntervaloIndex}::diario_{this.DiarioId}::turma_{this.TurmaId}";
                 this.CreatedModelBoolVar = this.Contexto.Model.NewBoolVar(propostaLabel);
             }
 

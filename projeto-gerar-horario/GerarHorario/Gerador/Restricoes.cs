@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Runtime.InteropServices;
 using Google.OrTools.Sat;
 using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
@@ -132,6 +134,7 @@ public class Restricoes
                                         propostaAula.DiaSemanaIso == diaSemanaIso // mesmo dia
                                         && propostaAula.IntervaloIndex == intervaloIndex // mesmo horário
                                         && propostaAula.TurmaId == turma.Id // mesma turma
+
                                      select propostaAula.ModelBoolVar).ToList();
 
                     if (propostas.Any())
@@ -171,6 +174,7 @@ public class Restricoes
 
                     if (propostas.Any())
                     {
+
                         contexto.Model.AddAtMostOne(propostas);
                     }
 
@@ -179,27 +183,43 @@ public class Restricoes
         }
     }
 
+
+    static bool debugValor(PropostaDeAula carro, GerarHorarioContext contexto)
+    {
+
+       Console.WriteLine($"Debug valor: {carro.IntervaloIndex}");
+
+       System.Console.WriteLine("Resultado: " + Intervalo.VerificarIntervalo(new Intervalo("10:20", "11:59:59"), contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex)) + " usando o intervalo " + contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex) + " no dia " + carro.DiaSemanaIso);
+        return true;
+    }
+
     public static void AplicarHorarioDeAlmoco(GerarHorarioContext contexto)
     {
-        foreach (var turma in contexto.Options.Turmas)//TODAS AS TURMAS
+        foreach (var turma in contexto.Options.Turmas)
         {
-            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))//TODOS OS DIAS DA SEMANA
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
             {
-                var propostasAoMosso = from carro in contexto.TodasAsPropostasDeAula
-                                       where
-                                           carro.DiaSemanaIso == diaSemanaIso // mesmo dia do loop
-                                           && carro.TurmaId == turma.Id // mesma turma do loop
-                                          &&
-                                           Intervalo.VerificarIntervalo(
-                                               new Intervalo("11:00", "13:00"),
-                                                contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex)
-                                            )
-
-                                       select carro.ModelBoolVar;//A VARIAVEL CARRO SALVA SOMENTE AS INFORMACOES QUE CONDIZEM COM AS CONDICOES ACIMA
-
-                contexto.Model.AddAtMostOne(propostasAoMosso);
+                // Verifica se é terça ou quinta-feira
+                if (diaSemanaIso == 2 || diaSemanaIso == 4)
+                {
+                    var propostasNoIntervaloDeAlmoco = from proposta in contexto.TodasAsPropostasDeAula
+                                                       where proposta.DiaSemanaIso == diaSemanaIso
+                                                             && proposta.TurmaId == turma.Id
+                                                             && 
+                                                             Intervalo.VerificarIntervalo(
+                                                                 new Intervalo("10:20", "13:49:59"),
+                                                                 contexto.Options.HorarioDeAulaFindByIdStrict(proposta.IntervaloIndex))
+                                                                 &&
+                                                                 debugValor(proposta, contexto)
+                                                       select proposta.ModelBoolVar;
+                
+                    if (propostasNoIntervaloDeAlmoco.Any())
+                    {
+                        contexto.Model.AddAtMostOne(propostasNoIntervaloDeAlmoco);
+                    }
+                }
             }
-
         }
     }
+
 }
