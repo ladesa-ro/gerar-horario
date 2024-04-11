@@ -60,15 +60,16 @@ Dia: 5 | Intervalo: [15:50 - 16:39:59] | 1 | Quantidade de Propostas: 3
 Dia: 5 | Intervalo: [16:40 - 17:29:59] | 1 | Quantidade de Propostas: 3
 
 ONDE EU QUERO TESTAR ESTA ABAIXO
+=> Gerador#gerarHorario | aguarda o thread de solução iniciar
 ==> [thread de solução] | iniciado
 ==> [thread de solução] | aguardando permissão para iniciar o solver.Solve
-=> Gerador#gerarHorario | aguarda o thread de solução iniciar
 => Gerador#gerarHorario | thread de solução iniciou
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para iniciar a geração
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
+==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
 Turma (Id=1, Nome=1A INFORMATICA)
 
@@ -93,7 +94,6 @@ Turma (Id=2, Nome=1B INFORMATICA)
 
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
-==> [thread de solução] | aguardando permissão para continuar a geração
 ==> [thread de solução] | recebeu permissão para continuar a geração
 ==> [thread de solução] | sat: Optimal
 ==> [thread de solução] | solverScore: 12.
@@ -104,10 +104,10 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 444
-  - wall time : 0.012699907000000002s
+  - wall time : 0.012769303000000001s
 ============================
 
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
-=> Gerador#gerarHorario | geração do próximo horário recebida
 ==> [thread de solução] | aguardando permissão para continuar a geração
+=> Gerador#gerarHorario | geração do próximo horário recebida
