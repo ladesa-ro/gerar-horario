@@ -69,7 +69,7 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("07:30", "11:59:59")),
-                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("13:00", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:00", "11:59:59")),
                 ]
             ),
             new(
@@ -79,7 +79,7 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("07:30", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
-                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("07:30", "11:59:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("13:00", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("13:00", "17:29:59")),
                 ]
             ),
@@ -92,7 +92,7 @@ public class Main
             new("09:10", "09:59:59"),
             //
             new("10:20", "11:09:59"),
-            new("11:10", "11:59:59"),
+            new("11:10", "11:59:59"),//INTERVALO INDEX 4
             // =====================
           //  new("12:00", "12:59"),//RECREIO 
             // =====================

@@ -1,5 +1,6 @@
-﻿using NUnit.Allure.Core;
+﻿using Allure.NUnit;
 using Sisgea.GerarHorario.Core;
+
 
 namespace Sisgea.GerarHorario.Tests;
 

@@ -1,4 +1,4 @@
-using NUnit.Allure.Core;
+using Allure.NUnit;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Tests;
@@ -26,6 +26,14 @@ public class IntervaloTest
 
         Assert.Multiple(() =>
         {
+            var intervalo1 = new Intervalo("07:30", "17:29:59");
+            var intervalo2 = new Intervalo("16:40", "17:29:59");
+
+            Assert.That(Intervalo.VerificarIntervalo(intervalo1, intervalo2), Is.True);
+        });
+
+        Assert.Multiple(() =>
+        {
             var intervalo1 = new Intervalo("18:00", "19:59");
 
             Assert.That(Intervalo.VerificarIntervalo(intervalo1, "05:00"), Is.False);
@@ -47,6 +55,8 @@ public class IntervaloTest
             Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:59:00"), Is.True);
 
             Assert.That(Intervalo.VerificarIntervalo(intervalo1, "19:59:01"), Is.False);
+
+
         });
     }
 
