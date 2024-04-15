@@ -6,7 +6,7 @@ using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
 
-using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId);
+using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId);
 
 public class Restricoes
 {
@@ -46,7 +46,7 @@ public class Restricoes
                 {
                     foreach (var diario in options.DiariosByTurmaId(turma.Id))
                     {
-                        yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id);
+                        yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId);
                     }
                 }
             }
@@ -183,42 +183,35 @@ public class Restricoes
         }
     }
 
-
-    static bool debugValor(PropostaDeAula carro, GerarHorarioContext contexto)
+    public static void HorarioAlmocoProfessor(GerarHorarioContext contexto)
     {
-
-       Console.WriteLine($"Debug valor: {carro.IntervaloIndex}");
-
-       System.Console.WriteLine("Resultado: " + Intervalo.VerificarIntervalo(new Intervalo("10:20", "11:59:59"), contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex)) + " usando o intervalo " + contexto.Options.HorarioDeAulaFindByIdStrict(carro.IntervaloIndex) + " no dia " + carro.DiaSemanaIso);
-        return true;
-    }
-
-    public static void AplicarHorarioDeAlmoco(GerarHorarioContext contexto)
-    {
-        foreach (var turma in contexto.Options.Turmas)
+        foreach (var professor in contexto.Options.Professores)
         {
-            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+            foreach (var diario in contexto.TodasAsPropostasDeAula)
             {
-                // Verifica se é terça ou quinta-feira
-                if (diaSemanaIso == 2 || diaSemanaIso == 4)
+                foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
                 {
-                    var propostasNoIntervaloDeAlmoco = from proposta in contexto.TodasAsPropostasDeAula
-                                                       where proposta.DiaSemanaIso == diaSemanaIso
-                                                             && proposta.TurmaId == turma.Id
-                                                             && 
-                                                             Intervalo.VerificarIntervalo(
-                                                                 new Intervalo("10:20", "13:49:59"),
-                                                                 contexto.Options.HorarioDeAulaFindByIdStrict(proposta.IntervaloIndex))
-                                                                 &&
-                                                                 debugValor(proposta, contexto)
-                                                       select proposta.ModelBoolVar;
-                
-                    if (propostasNoIntervaloDeAlmoco.Any())
-                    {
-                        contexto.Model.AddAtMostOne(propostasNoIntervaloDeAlmoco);
-                    }
+
+                    var propostaAulaProfessor = from proposta in contexto.TodasAsPropostasDeAula
+                                                where proposta.DiaSemanaIso == diaSemanaIso
+                                                    && proposta.DiarioId == diario.DiarioId
+                                                    && proposta.ProfessorId == professor.Id
+                                                    && (
+                                                        Intervalo.VerificarIntervalo(
+                                                            new Intervalo("11:30:00", "12:00:00"),
+                                                            proposta.Intervalo.HorarioFim
+                                                        )
+                                                        || Intervalo.VerificarIntervalo(
+                                                            new Intervalo("13:00:00", "13:30:00"),
+                                                            proposta.Intervalo.HorarioInicio
+                                                        )
+                                                    )
+                                                select proposta.ModelBoolVar;
+
+                    contexto.Model.AddAtMostOne(propostaAulaProfessor);
                 }
             }
+
         }
     }
 

@@ -23,17 +23,16 @@ public class Gerador
         // ====================================================================
         // RESTRIÇÃO: Turma: não ter mais de uma aula ativa ao mesmo tempo.
         Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorTurmaEmUmHorario(contexto);
-        
+
         // ======================================
         // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
         //Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-      //Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        //Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
         // ======================================
         //RESTRIÇÃO: Aplicar horario de almoço.
-        Console.WriteLine("ONDE EU QUERO TESTAR ESTA ABAIXO");
-       Restricoes.AplicarHorarioDeAlmoco(contexto);
+        Restricoes.HorarioAlmocoProfessor(contexto);
         // ====================================================================
 
 
