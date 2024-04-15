@@ -7,7 +7,7 @@ namespace Sisgea.GerarHorario.Core;
 public class Gerador
 {
     ///<summary>
-    /// Ponto de partida que inicia, restringe e otimizar o modelo para
+    /// Ponto de partida que inicia, restringe e otimiza o modelo para
     /// solucionar o problema da geração de horário.
     ///</summary>
     public static GerarHorarioContext PrepararModelComRestricoes(GerarHorarioOptions options)
@@ -26,10 +26,10 @@ public class Gerador
 
         // ======================================
         // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
-        //Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-        //Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
         // ======================================
         //RESTRIÇÃO: Aplicar horario de almoço.
         Restricoes.HorarioAlmocoProfessor(contexto);
