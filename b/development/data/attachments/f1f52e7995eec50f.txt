@@ -74,16 +74,15 @@ Dia: 5 | Intervalo: [14:40 - 15:29:59] | 1 | Quantidade de Propostas: 1
 Dia: 5 | Intervalo: [15:50 - 16:39:59] | 1 | Quantidade de Propostas: 1
 Dia: 5 | Intervalo: [16:40 - 17:29:59] | 1 | Quantidade de Propostas: 1
 
-=> Gerador#gerarHorario | aguarda o thread de solução iniciar
 ==> [thread de solução] | iniciado
 ==> [thread de solução] | aguardando permissão para iniciar o solver.Solve
+=> Gerador#gerarHorario | aguarda o thread de solução iniciar
 => Gerador#gerarHorario | thread de solução iniciou
 => Gerador#gerarHorario | permite a geração do próximo horário
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para iniciar a geração
 ==> [thread de solução] | gerou um horário
 ==> [thread de solução] | disparando horário foi gerado
-==> [thread de solução] | aguardando permissão para continuar a geração
 => Gerador#gerarHorario | geração do próximo horário recebida
 Turma (Id=1, Nome=1A INFORMATICA)
 
@@ -97,8 +96,7 @@ Turma (Id=1, Nome=1A INFORMATICA)
 - Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 1
 - Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 1
 - Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 1
-- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 2
-- Dia: TER | Intervalo: [13:00 - 13:49:59] | Professor: 1
+- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 1
 - Dia: TER | Intervalo: [13:50 - 14:39:59] | Professor: 1
 - Dia: TER | Intervalo: [14:40 - 15:29:59] | Professor: 1
 - Dia: TER | Intervalo: [15:50 - 16:39:59] | Professor: 1
@@ -108,6 +106,7 @@ Turma (Id=1, Nome=1A INFORMATICA)
 - Dia: QUA | Intervalo: [08:20 - 09:09:59] | Professor: 1
 - Dia: QUA | Intervalo: [09:10 - 09:59:59] | Professor: 1
 - Dia: QUA | Intervalo: [10:20 - 11:09:59] | Professor: 1
+==> [thread de solução] | aguardando permissão para continuar a geração
 - Dia: QUA | Intervalo: [11:10 - 11:59:59] | Professor: 1
 
 - Dia: QUI | Intervalo: [07:30 - 08:19:59] | Professor: 1
@@ -129,7 +128,7 @@ Turma (Id=1, Nome=1A INFORMATICA)
 
 Turma (Id=2, Nome=1B INFORMATICA)
 
-- Dia: SEG | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: SEG | Intervalo: [13:00 - 13:49:59] | Professor: 1
 - Dia: SEG | Intervalo: [13:50 - 14:39:59] | Professor: 2
 - Dia: SEG | Intervalo: [14:40 - 15:29:59] | Professor: 2
 - Dia: SEG | Intervalo: [15:50 - 16:39:59] | Professor: 2
@@ -139,8 +138,7 @@ Turma (Id=2, Nome=1B INFORMATICA)
 - Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 2
 - Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 2
 - Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 2
-- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 1
-- Dia: TER | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 2
 - Dia: TER | Intervalo: [13:50 - 14:39:59] | Professor: 2
 - Dia: TER | Intervalo: [14:40 - 15:29:59] | Professor: 2
 - Dia: TER | Intervalo: [15:50 - 16:39:59] | Professor: 2
@@ -156,8 +154,6 @@ Turma (Id=2, Nome=1B INFORMATICA)
 - Dia: QUI | Intervalo: [08:20 - 09:09:59] | Professor: 1
 - Dia: QUI | Intervalo: [09:10 - 09:59:59] | Professor: 1
 - Dia: QUI | Intervalo: [10:20 - 11:09:59] | Professor: 1
-- Dia: QUI | Intervalo: [11:10 - 11:59:59] | Professor: 1
-- Dia: QUI | Intervalo: [13:00 - 13:49:59] | Professor: 2
 - Dia: QUI | Intervalo: [13:50 - 14:39:59] | Professor: 2
 - Dia: QUI | Intervalo: [14:40 - 15:29:59] | Professor: 2
 - Dia: QUI | Intervalo: [15:50 - 16:39:59] | Professor: 2
@@ -173,15 +169,15 @@ Turma (Id=2, Nome=1B INFORMATICA)
 => Gerador#gerarHorario | aguardando a geração do próximo horário
 ==> [thread de solução] | recebeu permissão para continuar a geração
 ==> [thread de solução] | sat: Optimal
-==> [thread de solução] | solverScore: 70.
+==> [thread de solução] | solverScore: 66.
 
 ============================
 Estatísticas
 Status da solução: Optimal
-  - Score do horário: 70
-  - conflitos : 521
-  - galhos    : 4001
-  - wall time : 0.037898634s
+  - Score do horário: 66
+  - conflitos : 130
+  - galhos    : 1215
+  - wall time : 0.021589193000000003s
 ============================
 
 ==> [thread de solução] | gerou um horário
