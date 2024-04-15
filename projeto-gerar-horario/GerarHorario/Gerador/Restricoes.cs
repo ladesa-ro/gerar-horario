@@ -187,31 +187,25 @@ public class Restricoes
     {
         foreach (var professor in contexto.Options.Professores)
         {
-            foreach (var diario in contexto.TodasAsPropostasDeAula)
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
             {
-                foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
-                {
-
-                    var propostaAulaProfessor = from proposta in contexto.TodasAsPropostasDeAula
-                                                where proposta.DiaSemanaIso == diaSemanaIso
-                                                    && proposta.DiarioId == diario.DiarioId
-                                                    && proposta.ProfessorId == professor.Id
-                                                    && (
-                                                        Intervalo.VerificarIntervalo(
-                                                            new Intervalo("11:30:00", "12:00:00"),
-                                                            proposta.Intervalo.HorarioFim
-                                                        )
-                                                        || Intervalo.VerificarIntervalo(
-                                                            new Intervalo("13:00:00", "13:30:00"),
-                                                            proposta.Intervalo.HorarioInicio
-                                                        )
+                var propostaAulaProfessor = from proposta in contexto.TodasAsPropostasDeAula
+                                            where proposta.DiaSemanaIso == diaSemanaIso
+                                                && proposta.ProfessorId == professor.Id
+                                                && (
+                                                    Intervalo.VerificarIntervalo(
+                                                        new Intervalo("11:30:00", "12:00:00"),
+                                                        proposta.Intervalo.HorarioFim
                                                     )
-                                                select proposta.ModelBoolVar;
+                                                    || Intervalo.VerificarIntervalo(
+                                                        new Intervalo("13:00:00", "13:30:00"),
+                                                        proposta.Intervalo.HorarioInicio
+                                                    )
+                                                )
+                                            select proposta.ModelBoolVar;
 
-                    contexto.Model.AddAtMostOne(propostaAulaProfessor);
-                }
+                contexto.Model.AddAtMostOne(propostaAulaProfessor);
             }
-
         }
     }
 
