@@ -5,13 +5,13 @@ on:
     branches:
       - development
     paths:
-      - projeto-gerar-horario/**
+      - /**
       - .github/workflows/test-and-deploy.yml
   pull_request:
     branches:
       - development
     paths:
-      - projeto-gerar-horario/**
+      - /**
       - .github/workflows/test-and-deploy.yml
   workflow_dispatch:
 
@@ -31,21 +31,17 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: |
-          cd projeto-gerar-horario/
-          dotnet restore
+        run: dotnet restore
 
       - name: Test
-        run: |
-          cd projeto-gerar-horario/
-          dotnet test
+        run: dotnet test
         continue-on-error: true
 
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4.3.1
         with:
           name: allure-results
-          path: projeto-gerar-horario/GerarHorario-Tests/bin/Debug/net8.0/allure-results
+          path: GerarHorario-Tests/bin/Debug/net8.0/allure-results
           if-no-files-found: error
           retention-days: 20
   report:

@@ -7,13 +7,13 @@ updates:
     open-pull-requests-limit: 10
 
   - package-ecosystem: nuget
-    directory: "/projeto-gerar-horario"
+    directory: "/"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
 
   - package-ecosystem: docker
-    directory: "/projeto-gerar-horario/.devops/dotnet-sdk"
+    directory: "/.devops/dotnet-sdk"
     schedule:
       interval: daily
     open-pull-requests-limit: 10

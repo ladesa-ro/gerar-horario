@@ -14,16 +14,14 @@ git clone https://github.com/sisgha/gerar-horario.git;
 ### Projeto Gerar Horário
 
 ```sh
-cd gerar-horario/projeto-gerar-horario;
-```
-
-```sh
 dotnet test;
 ```
 
+Scripts dev: Veja [./Makefile](./Makefile).
+
 ### Playground (com jupyter e .net interactive)
 
-```
+```sh
 cd gerar-horario/playground;
 ```
 
@@ -33,7 +31,7 @@ Continue em [`./playground/README.md`](./playground/README.md).
 
 ### Estudo
 
-```
+```sh
 git checkout estudo-ts;
 ```
 
