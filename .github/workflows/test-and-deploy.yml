@@ -5,13 +5,13 @@ on:
     branches:
       - development
     paths:
-      - /**
+      - "**/*"
       - .github/workflows/test-and-deploy.yml
   pull_request:
     branches:
       - development
     paths:
-      - /**
+      - "**/*"
       - .github/workflows/test-and-deploy.yml
   workflow_dispatch:
 
