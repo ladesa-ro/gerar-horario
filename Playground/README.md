@@ -8,7 +8,7 @@
 
 ```sh
 git clone https://github.com/sisgha/gerar-horario.git;
-cd gerar-horario/playground;
+cd gerar-horario/Playground;
 ```
 
 ### Scripts do projeto

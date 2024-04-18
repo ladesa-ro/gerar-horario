@@ -7,7 +7,7 @@ RUN apk add --update \
 	krb5-libs \
 	libgcc \
 	libintl \
-	libssl1.1 \
+	libssl3 \
 	libstdc++ \
 	zlib \
 	wget \
@@ -20,7 +20,7 @@ RUN apk add --update \
 	musl-dev \
 	linux-headers
 
-RUN pip3 install --no-cache-dir notebook
+RUN pip3 install --break-system-packages --no-cache-dir notebook 
 
 # Download e instalação do SDK do .NET
 RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
