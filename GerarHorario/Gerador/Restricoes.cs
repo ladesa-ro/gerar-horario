@@ -183,6 +183,10 @@ public class Restricoes
         }
     }
 
+    ///<summary>
+    /// RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor
+    ///</summary>
+
     public static void HorarioAlmocoProfessor(GerarHorarioContext contexto)
     {
         foreach (var professor in contexto.Options.Professores)
