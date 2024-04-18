@@ -137,9 +137,9 @@ public class Restricoes
 
                                      select propostaAula.ModelBoolVar).ToList();
 
-                    if (propostas.Any())
+                    if (propostas.Count != 0)
                     {
-                        Console.WriteLine($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
+                        contexto.Options.AddLogDebug($"Dia: {diaSemanaIso} | Intervalo: {contexto.Options.HorariosDeAula[intervaloIndex]} | {turma.Id} | Quantidade de Propostas: {propostas.Count}");
 
                         contexto.Model.AddAtMostOne(propostas);
                     }

@@ -69,13 +69,13 @@ public class Gerador
         // thread de solução de horário para essa requisição
         var solutionGeneratorThread = new Thread(() =>
         {
-            Console.WriteLine("==> [thread de solução] | iniciado");
+            contexto.Options.AddLogDebug("==> [thread de solução] | iniciado");
             tickThreadStarted.Set();
 
-            Console.WriteLine("==> [thread de solução] | aguardando permissão para iniciar o solver.Solve");
+            contexto.Options.AddLogDebug("==> [thread de solução] | aguardando permissão para iniciar o solver.Solve");
             tickGenerateNext.WaitOne();
 
-            Console.WriteLine("==> [thread de solução] | recebeu permissão para iniciar a geração");
+            contexto.Options.AddLogDebug("==> [thread de solução] | recebeu permissão para iniciar a geração");
 
             long? previousScore = null;
 
@@ -89,14 +89,14 @@ public class Gerador
                 var solutionPrinter = new GeradorSolutionCallback(contexto, (spHorarioGerado) =>
                 {
                     horarioGerado = spHorarioGerado;
-                    Console.WriteLine("==> [thread de solução] | gerou um horário");
+                    contexto.Options.AddLogDebug("==> [thread de solução] | gerou um horário");
 
-                    Console.WriteLine("==> [thread de solução] | disparando horário foi gerado");
+                    contexto.Options.AddLogDebug("==> [thread de solução] | disparando horário foi gerado");
                     tickGenerated.Set();
 
-                    Console.WriteLine("==> [thread de solução] | aguardando permissão para continuar a geração");
+                    contexto.Options.AddLogDebug("==> [thread de solução] | aguardando permissão para continuar a geração");
                     tickGenerateNext.WaitOne();
-                    Console.WriteLine("==> [thread de solução] | recebeu permissão para continuar a geração");
+                    contexto.Options.AddLogDebug("==> [thread de solução] | recebeu permissão para continuar a geração");
                 });
 
                 if (previousScore != null)
@@ -106,12 +106,12 @@ public class Gerador
 
                 var sat = solver.Solve(contexto.Model, solutionPrinter);
 
-                Console.WriteLine($"==> [thread de solução] | sat: {sat}");
+                contexto.Options.AddLogDebug($"==> [thread de solução] | sat: {sat}");
 
                 if (sat == CpSolverStatus.Feasible || sat == CpSolverStatus.Optimal)
                 {
                     var solverScore = solver.ObjectiveValue;
-                    Console.WriteLine($"==> [thread de solução] | solverScore: {solverScore}.");
+                    contexto.Options.AddLogDebug($"==> [thread de solução] | solverScore: {solverScore}.");
                     previousScore = (long)solverScore;
                 }
                 else
@@ -120,7 +120,7 @@ public class Gerador
                 }
 
                 Console.WriteLine("");
-                Console.WriteLine("============================");
+                contexto.Options.AddLogDebug("============================");
                 Console.WriteLine("Estatísticas");
                 Console.WriteLine($"Status da solução: {sat}");
 
@@ -137,11 +137,11 @@ public class Gerador
                 Console.WriteLine($"  - galhos    : {solver.NumBranches()}");
                 Console.WriteLine($"  - wall time : {solver.WallTime()}s");
 
-                Console.WriteLine("============================");
+                contexto.Options.AddLogDebug("============================");
                 Console.WriteLine("");
             } while (previousScore > 0);
 
-            Console.WriteLine("==> [thread de solução] | terminou a geração de todas as soluções possíveis");
+            contexto.Options.AddLogDebug("==> [thread de solução] | terminou a geração de todas as soluções possíveis");
 
             horarioGerado = null;
             tickGenerated.Set();
@@ -150,26 +150,26 @@ public class Gerador
 
         solutionGeneratorThread.Start();
 
-        Console.WriteLine("=> Gerador#gerarHorario | aguarda o thread de solução iniciar");
+        contexto.Options.AddLogDebug("=> Gerador#gerarHorario | aguarda o thread de solução iniciar");
         tickThreadStarted.WaitOne();
-        Console.WriteLine("=> Gerador#gerarHorario | thread de solução iniciou");
+        contexto.Options.AddLogDebug("=> Gerador#gerarHorario | thread de solução iniciou");
 
         do
         {
-            Console.WriteLine("=> Gerador#gerarHorario | permite a geração do próximo horário");
+            contexto.Options.AddLogDebug("=> Gerador#gerarHorario | permite a geração do próximo horário");
             tickGenerateNext.Set();
 
-            Console.WriteLine("=> Gerador#gerarHorario | aguardando a geração do próximo horário");
+            contexto.Options.AddLogDebug("=> Gerador#gerarHorario | aguardando a geração do próximo horário");
             tickGenerated.WaitOne();
 
             if (horarioGerado != null)
             {
-                Console.WriteLine("=> Gerador#gerarHorario | geração do próximo horário recebida");
+                contexto.Options.AddLogDebug("=> Gerador#gerarHorario | geração do próximo horário recebida");
                 yield return horarioGerado;
             }
             else
             {
-                Console.WriteLine("=> Gerador#gerarHorario | recebeu um horário nulo. bye.");
+                contexto.Options.AddLogDebug("=> Gerador#gerarHorario | recebeu um horário nulo. bye.");
             }
 
         } while (horarioGerado != null);

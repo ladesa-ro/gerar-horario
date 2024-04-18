@@ -42,10 +42,7 @@ public class GerarHorarioContext
 
             this.TodasAsPropostasDeAula.Add(propostaDeAula);
 
-            if (this.Options.LogDebug)
-            {
-                Console.WriteLine($"--> init proposta de aula | dia: {combinacao.diaSemanaIso} | intervalo: {combinacao.intervaloIndex} | diario: {combinacao.diarioId}");
-            }
+            this.Options.AddLogDebug($"--> init proposta de aula | dia: {combinacao.diaSemanaIso} | intervalo: {combinacao.intervaloIndex} | diario: {combinacao.diarioId}");
         }
 
         Console.WriteLine($"--> Quantidade de propostas: {this.TodasAsPropostasDeAula.Count}");

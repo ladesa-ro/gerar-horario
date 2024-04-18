@@ -12,6 +12,14 @@ public class GerarHorarioOptions
     public Intervalo[] HorariosDeAula { get; set; }
     public bool LogDebug { get; set; } = false;
 
+    public void AddLogDebug(string message)
+    {
+        if (this.LogDebug)
+        {
+            Console.WriteLine(message);
+        }
+    }
+
     public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula, bool logDebug = false)
     {
         DiaSemanaInicio = diaSemanaInicio;
