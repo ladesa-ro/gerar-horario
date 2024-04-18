@@ -1,3 +1,7 @@
+cold-start:
+	make stop;
+	make start;
+
 start:
 	docker compose build -q;
 	docker compose up -d;
@@ -11,3 +15,6 @@ logs:
 shell:
 	make start;
 	docker compose exec -it lab bash;
+
+open-linux:
+	nohup xdg-open http://127.0.0.1:8888/tree &>/dev/null
