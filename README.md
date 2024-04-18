@@ -22,12 +22,12 @@ Scripts dev: Veja [./Makefile](./Makefile).
 ### Playground (com jupyter e .net interactive)
 
 ```sh
-cd gerar-horario/playground;
+cd gerar-horario/Playground;
 ```
 
-- Notebooks Jupyter: [`./playground/notebooks`](./playground/notebooks);
+- Notebooks Jupyter: [`./Playground/notebooks`](./Playground/notebooks);
 
-Continue em [`./playground/README.md`](./playground/README.md).
+Continue em [`./Playground/README.md`](./Playground/README.md).
 
 ### Estudo
 
