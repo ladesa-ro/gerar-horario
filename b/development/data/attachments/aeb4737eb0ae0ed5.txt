@@ -31,5 +31,5 @@ Status da solução: Optimal
   - Score do horário: 12
   - conflitos : 0
   - galhos    : 414
-  - wall time : 0.008174646s
+  - wall time : 0.008511645s
 
