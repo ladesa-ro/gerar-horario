@@ -52,5 +52,5 @@ Status da solução: Optimal
   - Score do horário: 24
   - conflitos : 0
   - galhos    : 839
-  - wall time : 0.020493565000000002s
+  - wall time : 0.012397964000000001s
 
