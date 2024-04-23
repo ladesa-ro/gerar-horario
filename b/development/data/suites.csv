@@ -1,3 +1,3 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Apr 23 16:35:32 GMT 2024","Tue Apr 23 16:35:32 GMT 2024","110","","","","Tests","Test1","Test1",""
-"passed","Tue Apr 23 16:35:32 GMT 2024","Tue Apr 23 16:35:32 GMT 2024","6","","","","IntervaloTest","TestVerificarIntervalo","TestVerificarIntervalo",""
+"passed","Tue Apr 23 16:37:08 GMT 2024","Tue Apr 23 16:37:08 GMT 2024","118","","","","Tests","Test1","Test1",""
+"passed","Tue Apr 23 16:37:08 GMT 2024","Tue Apr 23 16:37:08 GMT 2024","5","","","","IntervaloTest","TestVerificarIntervalo","TestVerificarIntervalo",""
