@@ -213,4 +213,79 @@ public class Restricoes
         }
     }
 
+     ///<summary>
+    /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
+    ///</summary>
+    public static bool[] arrayVerificacao = new bool[3];
+    public static int idDia = 0;
+
+    static bool VerificarTurnosProfessores(PropostaDeAula carro, GerarHorarioContext contexto)
+    {
+        bool validar = false;
+        if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
+        {
+            arrayVerificacao[0] = false;
+            arrayVerificacao[1] = false;
+            arrayVerificacao[2] = false;
+        }
+        idDia = carro.DiaSemanaIso;
+
+        if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
+        {
+            arrayVerificacao[0] = true;
+            arrayVerificacao[1] = false;
+        }
+
+
+        if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
+        {
+            arrayVerificacao[1] = true;
+            arrayVerificacao[2] = false;
+
+        }
+
+
+        if (carro.IntervaloIndex >= 10 && carro.IntervaloIndex <= 14)//NOITE
+        {
+            arrayVerificacao[2] = true;
+        }
+
+        if (arrayVerificacao[0] == true)//MANHA
+        {
+            if (arrayVerificacao[1] == true)//TARDE
+            {
+                if (arrayVerificacao[2] == true)//NOITE
+                {
+                    System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
+                    validar = true;
+
+                }
+            }
+        }
+        return validar;
+    }
+
+    public static void ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(GerarHorarioContext contexto)
+    {
+        foreach (var professor in contexto.Options.Professores)
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+            {
+                var proposta = from propostas in contexto.TodasAsPropostasDeAula
+                               where
+                               propostas.ProfessorId == professor.Id
+                               &&
+                               propostas.DiaSemanaIso == diaSemanaIso
+                                &&
+                               VerificarTurnosProfessores(propostas, contexto)
+                               select propostas.ModelBoolVar;
+                contexto.Model.AddAtMostOne(proposta);
+            }
+        }
+    }
+
+
+    ///<summary>
+    /// RESTRIÇÃO: N/A
+    ///</summary>
 }
