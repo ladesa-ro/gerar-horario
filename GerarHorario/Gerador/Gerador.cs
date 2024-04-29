@@ -29,10 +29,12 @@ public class Gerador
         Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        // Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
         // ======================================
         //RESTRIÇÃO: Aplicar horario de almoço.
         Restricoes.HorarioAlmocoProfessor(contexto);
+
+        Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
         // ====================================================================
 
 
