@@ -213,7 +213,7 @@ public class Restricoes
         }
     }
 
-     ///<summary>
+    ///<summary>
     /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
     ///</summary>
     public static bool[] arrayVerificacao = new bool[3];
@@ -233,14 +233,13 @@ public class Restricoes
         if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
         {
             arrayVerificacao[0] = true;
-            arrayVerificacao[1] = false;
+
         }
 
 
         if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
         {
             arrayVerificacao[1] = true;
-            arrayVerificacao[2] = false;
 
         }
 
@@ -252,16 +251,28 @@ public class Restricoes
 
         if (arrayVerificacao[0] == true)//MANHA
         {
+            if (arrayVerificacao[0] == true && arrayVerificacao[2] == true && arrayVerificacao[1] == false)//TRABALHA MANHA E NOITE
+            {
+                System.Console.WriteLine("TRABALHA MANHA  E NOITE\nO intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
+                validar = true;
+
+
+            }
             if (arrayVerificacao[1] == true)//TARDE
             {
+
                 if (arrayVerificacao[2] == true)//NOITE
                 {
+
+
                     System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
                     validar = true;
 
                 }
             }
         }
+
+
         return validar;
     }
 
@@ -276,7 +287,7 @@ public class Restricoes
                                propostas.ProfessorId == professor.Id
                                &&
                                propostas.DiaSemanaIso == diaSemanaIso
-                                &&
+                               &&
                                VerificarTurnosProfessores(propostas, contexto)
                                select propostas.ModelBoolVar;
                 contexto.Model.AddAtMostOne(proposta);
