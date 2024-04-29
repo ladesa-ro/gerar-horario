@@ -1,0 +1,297 @@
+--> Quantidade de propostas: 300
+
+
+
+
+
+O QUE QUERO TESTAR ESTA ABAIXO
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 1 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 1 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 1 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 1 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 1 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 1 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 1 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 1 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 1 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 4 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 5 do professor 1 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 5 do professor 1 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 1 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 1 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:00 - 19:49:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [19:50 - 20:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [20:40 - 21:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [21:50 - 22:39:59] do dia 2 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 2 foi removido!
+O intervalo [22:40 - 23:29:59] do dia 2 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:00 - 19:49:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [19:50 - 20:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [20:40 - 21:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [21:50 - 22:39:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 2 foi removido!
+TRABALHA MANHA  E NOITE
+O intervalo [22:40 - 23:29:59] do dia 3 do professor 2 foi removido!
+Turma (Id=1, Nome=1A INFORMATICA)
+
+- Dia: SEG | Intervalo: [07:30 - 08:19:59] | Professor: 2
+- Dia: SEG | Intervalo: [08:20 - 09:09:59] | Professor: 2
+- Dia: SEG | Intervalo: [09:10 - 09:59:59] | Professor: 2
+- Dia: SEG | Intervalo: [10:20 - 11:09:59] | Professor: 2
+- Dia: SEG | Intervalo: [11:10 - 11:59:59] | Professor: 2
+
+- Dia: TER | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 1
+- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 1
+- Dia: TER | Intervalo: [13:00 - 13:49:59] | Professor: 1
+- Dia: TER | Intervalo: [13:50 - 14:39:59] | Professor: 1
+- Dia: TER | Intervalo: [14:40 - 15:29:59] | Professor: 1
+- Dia: TER | Intervalo: [15:50 - 16:39:59] | Professor: 1
+- Dia: TER | Intervalo: [16:40 - 17:29:59] | Professor: 1
+
+- Dia: QUA | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: QUA | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: QUA | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: QUA | Intervalo: [10:20 - 11:09:59] | Professor: 1
+- Dia: QUA | Intervalo: [11:10 - 11:59:59] | Professor: 1
+
+- Dia: QUI | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: QUI | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: QUI | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: QUI | Intervalo: [10:20 - 11:09:59] | Professor: 1
+- Dia: QUI | Intervalo: [11:10 - 11:59:59] | Professor: 1
+- Dia: QUI | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: QUI | Intervalo: [13:50 - 14:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [14:40 - 15:29:59] | Professor: 2
+- Dia: QUI | Intervalo: [15:50 - 16:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [16:40 - 17:29:59] | Professor: 2
+
+- Dia: SEX | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: SEX | Intervalo: [13:50 - 14:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [14:40 - 15:29:59] | Professor: 2
+- Dia: SEX | Intervalo: [15:50 - 16:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [16:40 - 17:29:59] | Professor: 2
+
+Turma (Id=2, Nome=1B INFORMATICA)
+
+- Dia: SEG | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: SEG | Intervalo: [13:50 - 14:39:59] | Professor: 2
+- Dia: SEG | Intervalo: [14:40 - 15:29:59] | Professor: 2
+- Dia: SEG | Intervalo: [15:50 - 16:39:59] | Professor: 2
+- Dia: SEG | Intervalo: [16:40 - 17:29:59] | Professor: 2
+
+- Dia: TER | Intervalo: [07:30 - 08:19:59] | Professor: 2
+- Dia: TER | Intervalo: [08:20 - 09:09:59] | Professor: 2
+- Dia: TER | Intervalo: [09:10 - 09:59:59] | Professor: 2
+- Dia: TER | Intervalo: [10:20 - 11:09:59] | Professor: 2
+- Dia: TER | Intervalo: [11:10 - 11:59:59] | Professor: 2
+- Dia: TER | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: TER | Intervalo: [13:50 - 14:39:59] | Professor: 2
+- Dia: TER | Intervalo: [14:40 - 15:29:59] | Professor: 2
+- Dia: TER | Intervalo: [15:50 - 16:39:59] | Professor: 2
+- Dia: TER | Intervalo: [16:40 - 17:29:59] | Professor: 2
+
+- Dia: QUA | Intervalo: [07:30 - 08:19:59] | Professor: 2
+- Dia: QUA | Intervalo: [08:20 - 09:09:59] | Professor: 2
+- Dia: QUA | Intervalo: [09:10 - 09:59:59] | Professor: 2
+- Dia: QUA | Intervalo: [10:20 - 11:09:59] | Professor: 2
+- Dia: QUA | Intervalo: [11:10 - 11:59:59] | Professor: 2
+
+- Dia: QUI | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: QUI | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: QUI | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: QUI | Intervalo: [10:20 - 11:09:59] | Professor: 1
+- Dia: QUI | Intervalo: [11:10 - 11:59:59] | Professor: 1
+- Dia: QUI | Intervalo: [13:00 - 13:49:59] | Professor: 2
+- Dia: QUI | Intervalo: [13:50 - 14:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [14:40 - 15:29:59] | Professor: 2
+- Dia: QUI | Intervalo: [15:50 - 16:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [16:40 - 17:29:59] | Professor: 2
+
+- Dia: SEX | Intervalo: [07:30 - 08:19:59] | Professor: 1
+- Dia: SEX | Intervalo: [08:20 - 09:09:59] | Professor: 1
+- Dia: SEX | Intervalo: [09:10 - 09:59:59] | Professor: 1
+- Dia: SEX | Intervalo: [10:20 - 11:09:59] | Professor: 1
+- Dia: SEX | Intervalo: [11:10 - 11:59:59] | Professor: 1
+
+Turma (Id=3, Nome=1 PERIODO ADS)
+
+- Dia: SEG | Intervalo: [19:00 - 19:49:59] | Professor: 1
+- Dia: SEG | Intervalo: [19:50 - 20:39:59] | Professor: 2
+- Dia: SEG | Intervalo: [20:40 - 21:29:59] | Professor: 1
+- Dia: SEG | Intervalo: [21:50 - 22:39:59] | Professor: 1
+- Dia: SEG | Intervalo: [22:40 - 23:29:59] | Professor: 1
+
+- Dia: TER | Intervalo: [19:00 - 19:49:59] | Professor: 1
+
+- Dia: QUA | Intervalo: [19:00 - 19:49:59] | Professor: 1
+
+- Dia: QUI | Intervalo: [19:00 - 19:49:59] | Professor: 2
+- Dia: QUI | Intervalo: [19:50 - 20:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [20:40 - 21:29:59] | Professor: 2
+- Dia: QUI | Intervalo: [21:50 - 22:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [22:40 - 23:29:59] | Professor: 1
+
+- Dia: SEX | Intervalo: [19:00 - 19:49:59] | Professor: 2
+- Dia: SEX | Intervalo: [19:50 - 20:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [20:40 - 21:29:59] | Professor: 2
+- Dia: SEX | Intervalo: [21:50 - 22:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [22:40 - 23:29:59] | Professor: 1
+
+Turma (Id=4, Nome=2 PERIODO ADS)
+
+- Dia: SEG | Intervalo: [19:00 - 19:49:59] | Professor: 1
+- Dia: SEG | Intervalo: [19:50 - 20:39:59] | Professor: 1
+- Dia: SEG | Intervalo: [20:40 - 21:29:59] | Professor: 1
+- Dia: SEG | Intervalo: [21:50 - 22:39:59] | Professor: 1
+- Dia: SEG | Intervalo: [22:40 - 23:29:59] | Professor: 1
+
+- Dia: TER | Intervalo: [19:00 - 19:49:59] | Professor: 2
+
+- Dia: QUA | Intervalo: [19:00 - 19:49:59] | Professor: 2
+
+- Dia: QUI | Intervalo: [19:00 - 19:49:59] | Professor: 2
+- Dia: QUI | Intervalo: [19:50 - 20:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [20:40 - 21:29:59] | Professor: 2
+- Dia: QUI | Intervalo: [21:50 - 22:39:59] | Professor: 2
+- Dia: QUI | Intervalo: [22:40 - 23:29:59] | Professor: 2
+
+- Dia: SEX | Intervalo: [19:00 - 19:49:59] | Professor: 2
+- Dia: SEX | Intervalo: [19:50 - 20:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [20:40 - 21:29:59] | Professor: 2
+- Dia: SEX | Intervalo: [21:50 - 22:39:59] | Professor: 2
+- Dia: SEX | Intervalo: [22:40 - 23:29:59] | Professor: 2
+
+
+Estatísticas
+Status da solução: Optimal
+  - Score do horário: 104
+  - conflitos : 513
+  - galhos    : 3975
+  - wall time : 0.042394038s
+
