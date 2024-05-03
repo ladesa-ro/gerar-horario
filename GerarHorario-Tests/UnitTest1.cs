@@ -15,6 +15,8 @@ public class Tests
     [Test]
     public void Test1()
     {
+                System.Console.WriteLine("Teste UniTest1.cs");
+
         var conexao = new Main();
 
         bool metodoTrue = conexao.Retorno();
@@ -43,7 +45,6 @@ public class Tests
                         }
                     }
                 }
-
             }
         }
         */
