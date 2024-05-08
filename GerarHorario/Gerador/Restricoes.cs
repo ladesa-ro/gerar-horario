@@ -213,4 +213,150 @@ public class Restricoes
         }
     }
 
+    ///<summary>
+    /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
+    ///</summary>
+    public static bool[] arrayVerificacao = new bool[3];
+    public static int idDia = 0;
+
+    static bool VerificarTurnosProfessores(PropostaDeAula carro, GerarHorarioContext contexto)
+    {
+        bool validar = false;
+        if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
+        {
+            arrayVerificacao[0] = false;
+            arrayVerificacao[1] = false;
+            arrayVerificacao[2] = false;
+        }
+        idDia = carro.DiaSemanaIso;
+
+        if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
+        {
+            arrayVerificacao[0] = true;
+        }
+
+
+        if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
+        {
+            arrayVerificacao[1] = true;
+        }
+
+
+        if (carro.IntervaloIndex >= 10 && carro.IntervaloIndex <= 14)//NOITE
+        {
+            arrayVerificacao[2] = true;
+        }
+
+        if (arrayVerificacao[0] == true)//MANHA
+        {
+            if (arrayVerificacao[0] == true && arrayVerificacao[2] == true && arrayVerificacao[1] == false)//TRABALHA MANHA E NOITE
+            {
+                System.Console.WriteLine("TRABALHA MANHA  E NOITE\nO intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
+                validar = true;
+
+
+            }
+            if (arrayVerificacao[1] == true)//TARDE
+            {
+
+                if (arrayVerificacao[2] == true)//NOITE
+                {
+
+
+                    System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
+                    validar = true;
+
+                }
+            }
+        }
+
+
+        return validar;
+    }
+
+    public static void ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(GerarHorarioContext contexto)
+    {
+        foreach (var professor in contexto.Options.Professores)
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+            {
+                var propostasManha = from proposta in contexto.TodasAsPropostasDeAula
+                                     where
+                                     proposta.ProfessorId == professor.Id
+                                     &&
+                                     proposta.DiaSemanaIso == diaSemanaIso
+                                     &&
+                                     proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4
+                                     select proposta.ModelBoolVar;
+
+                var propostasTarde = from proposta in contexto.TodasAsPropostasDeAula
+                                     where
+                                     proposta.ProfessorId == professor.Id
+                                     &&
+                                     proposta.DiaSemanaIso == diaSemanaIso
+                                     &&
+                                     proposta.IntervaloIndex >= 5 && proposta.IntervaloIndex <= 9
+                                     select proposta.ModelBoolVar;
+
+                var propostasNoite = from proposta in contexto.TodasAsPropostasDeAula
+                                     where
+                                     proposta.ProfessorId == professor.Id
+                                     &&
+                                     proposta.DiaSemanaIso == diaSemanaIso
+                                     &&
+                                     proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14
+                                     select proposta.ModelBoolVar;
+
+                /*
+                Possibilidades
+
+                | descricao            | manha | tarde | noite |
+                | -------------------- | ----- | ----- | ----- |
+                | nao dar aula no dia  | false | false | false | 
+                | dar aula so de MANHA |  true | false | false | 
+                |  dar aula so a tarde | false |  true | false | 
+                |  dar aula so a noite | false | false |  true | 
+                |       manha e tarde  |  true |  true | false | 
+                |       tarde e noite  | false |  true |  true | 
+                */
+
+                long[,] possibilidadesPermitidas = {
+                    { 0, 0, 0 }, // nao dar aula no dia
+                    { 1, 0, 0 }, //dar aula so de MANHA
+                    { 0, 1, 0 }, //dar aula so a tarde
+                    { 0, 0, 1 }, //dar aula so a noite
+                    { 1, 1, 0 }, //manha e tarde
+                    { 0, 1, 1 }  //tarde e noite
+                };
+
+
+                var qntAulasManha = contexto.Model.NewIntVar(0, propostasManha.Count(), $"qnt_ativo_{professor.Id}_{diaSemanaIso}_Manha");
+                var qntAulasTarde = contexto.Model.NewIntVar(0, propostasTarde.Count(), $"qnt_ativo_{professor.Id}_{diaSemanaIso}_Tarde");
+                var qntAulasNoite = contexto.Model.NewIntVar(0, propostasNoite.Count(), $"qnt_ativo_{professor.Id}_{diaSemanaIso}_Noite");
+
+                contexto.Model.Add(qntAulasManha == LinearExpr.Sum(propostasManha));
+                contexto.Model.Add(qntAulasTarde == LinearExpr.Sum(propostasTarde));
+                contexto.Model.Add(qntAulasNoite == LinearExpr.Sum(propostasNoite));
+
+                var alumgaAulaManha = contexto.Model.NewBoolVar($"ativo_{professor.Id}_{diaSemanaIso}_Manha"); // == LinearExpr.Sum(propostasManha) > 0;
+                var alumgaAulaTarde = contexto.Model.NewBoolVar($"ativo_{professor.Id}_{diaSemanaIso}_Tarde"); // == LinearExpr.Sum(propostasTarde) > 0;
+                var alumgaAulaNoite = contexto.Model.NewBoolVar($"ativo_{professor.Id}_{diaSemanaIso}_Noite"); // == LinearExpr.Sum(propostasNoite) > 0;
+
+                contexto.Model.Add(qntAulasManha >= 1).OnlyEnforceIf(alumgaAulaManha);
+                contexto.Model.Add(qntAulasTarde >= 1).OnlyEnforceIf(alumgaAulaTarde);
+                contexto.Model.Add(qntAulasNoite >= 1).OnlyEnforceIf(alumgaAulaNoite);
+
+                contexto.Model.Add(qntAulasManha < 1).OnlyEnforceIf(alumgaAulaManha.Not());
+                contexto.Model.Add(qntAulasTarde < 1).OnlyEnforceIf(alumgaAulaTarde.Not());
+                contexto.Model.Add(qntAulasNoite < 1).OnlyEnforceIf(alumgaAulaNoite.Not());
+
+                contexto.Model.AddAllowedAssignments([alumgaAulaManha, alumgaAulaTarde, alumgaAulaNoite]).AddTuples(possibilidadesPermitidas);
+            }
+        }
+    }
+
+
+    ///<summary>
+    /// RESTRIÇÃO: N/A
+    ///</summary>
 }
