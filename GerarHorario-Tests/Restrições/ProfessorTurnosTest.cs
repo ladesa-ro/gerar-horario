@@ -15,6 +15,7 @@ public class ProfessorTurnosTest
 
     }
 
+    public static bool Retorno { get; set; }
     [Test]
     public void Test1()
     {
@@ -197,27 +198,40 @@ public class ProfessorTurnosTest
                                propostas.ProfessorId == professor.Id
                                &&
                                propostas.DiaSemanaIso == diaSemanaIso
-                               &&
-                               VerificarTurnosProfessores(propostas)
-
-                               
+                              // &&
+                                //VerificarTurnosProfessores(propostas)
+                                &&
+                                FornecerValor(VerificarTurnosProfessores(propostas))
                                select propostas;
 
-
-                               
+                foreach (var p in proposta)
+                {
+                    Assert.That(Retorno, Is.True);
+                }
             }
-        }
 
-        
+
+        }
     }
+
+
+
 
     ///<summary>
     /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
     ///</summary>
+    ///
+    public static bool FornecerValor(bool valor)
+    {
+        System.Console.WriteLine("EXECUTADO E O VALOR DE DEBUG É: " + Retorno);
+        Retorno = valor;
+        return true;
+    }
     public static bool[] arrayVerificacao = new bool[3];
     public static int idDia = 0;
     static bool VerificarTurnosProfessores(PropostaDeAula carro)
     {
+        System.Console.WriteLine("EXECUTADO FUNCAO VERIFICARTURNOSPROFESSORES");
         bool validar = false;
         if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
         {
@@ -262,8 +276,7 @@ public class ProfessorTurnosTest
                 }
             }
         }
-        Assert.That(validar, Is.True);
-
+        //Assert.That(validar, Is.True);
         return validar;
 
     }
