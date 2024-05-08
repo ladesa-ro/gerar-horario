@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.OrTools" Version="9.9.3963" />
+    <PackageReference Include="Google.OrTools" Version="9.10.4067" />
   </ItemGroup>
 </Project>
