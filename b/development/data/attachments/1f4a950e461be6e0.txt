@@ -1,0 +1,4 @@
+Teste ProfessorTurnosTest.cs
+--> Quantidade de propostas: 300
+EXECUTADO FUNCAO VERIFICARTURNOSPROFESSORES
+EXECUTADO E O VALOR DE DEBUG É: False
