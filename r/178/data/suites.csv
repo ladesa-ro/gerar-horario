@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed May 15 11:23:05 GMT 2024","Wed May 15 11:23:05 GMT 2024","5","","","","IntervaloTest","TestVerificarIntervalo","TestVerificarIntervalo",""
+"failed","Wed May 15 11:23:05 GMT 2024","Wed May 15 11:23:05 GMT 2024","51","","","","ProfessorTurnosTest","Test1","Test1",""
+"passed","Wed May 15 11:23:05 GMT 2024","Wed May 15 11:23:05 GMT 2024","168","","","","Tests","Test1","Test1",""
