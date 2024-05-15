@@ -1,3 +1,3 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0.204
+FROM mcr.microsoft.com/dotnet/sdk:8.0.300
 
 RUN useradd -u 1000 -ms /bin/bash ladesa
