@@ -213,67 +213,39 @@ public class Restricoes
         }
     }
 
+     ///<summary>
+    /// RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma
+    ///</summary>
+
+    public static void HorarioAlmocoTurma(GerarHorarioContext contexto)
+    {
+        foreach (var turma in contexto.Options.Turmas)
+        {
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+            {
+                var propostaAulaProfessor = from proposta in contexto.TodasAsPropostasDeAula
+                                            where proposta.DiaSemanaIso == diaSemanaIso
+                                                && proposta.TurmaId == turma.Id
+                                                && (
+                                                    Intervalo.VerificarIntervalo(
+                                                        new Intervalo("11:30:00", "12:00:00"),
+                                                        proposta.Intervalo.HorarioFim
+                                                    )
+                                                    || Intervalo.VerificarIntervalo(
+                                                        new Intervalo("13:00:00", "13:30:00"),
+                                                        proposta.Intervalo.HorarioInicio
+                                                    )
+                                                )
+                                            select proposta.ModelBoolVar;
+
+                contexto.Model.AddAtMostOne(propostaAulaProfessor);
+            }
+        }
+    }
+
     ///<summary>
     /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
     ///</summary>
-    public static bool[] arrayVerificacao = new bool[3];
-    public static int idDia = 0;
-
-    static bool VerificarTurnosProfessores(PropostaDeAula carro, GerarHorarioContext contexto)
-    {
-        bool validar = false;
-        if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
-        {
-            arrayVerificacao[0] = false;
-            arrayVerificacao[1] = false;
-            arrayVerificacao[2] = false;
-        }
-        idDia = carro.DiaSemanaIso;
-
-        if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
-        {
-            arrayVerificacao[0] = true;
-        }
-
-
-        if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
-        {
-            arrayVerificacao[1] = true;
-        }
-
-
-        if (carro.IntervaloIndex >= 10 && carro.IntervaloIndex <= 14)//NOITE
-        {
-            arrayVerificacao[2] = true;
-        }
-
-        if (arrayVerificacao[0] == true)//MANHA
-        {
-            if (arrayVerificacao[0] == true && arrayVerificacao[2] == true && arrayVerificacao[1] == false)//TRABALHA MANHA E NOITE
-            {
-                System.Console.WriteLine("TRABALHA MANHA  E NOITE\nO intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                validar = true;
-
-
-            }
-            if (arrayVerificacao[1] == true)//TARDE
-            {
-
-                if (arrayVerificacao[2] == true)//NOITE
-                {
-
-
-                    System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                    validar = true;
-
-                }
-            }
-        }
-
-
-        return validar;
-    }
-
     public static void ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(GerarHorarioContext contexto)
     {
         foreach (var professor in contexto.Options.Professores)

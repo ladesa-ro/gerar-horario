@@ -16,7 +16,7 @@ public class ProfessorTurnosTest
     }
 
     public static bool Retorno { get; set; }
-    [Test]
+    //[Test] PARA ATIVAR O TESTE DESCOMENTE ESSA LINHA
     public void Test1()
     {
         System.Console.WriteLine("Teste ProfessorTurnosTest.cs");

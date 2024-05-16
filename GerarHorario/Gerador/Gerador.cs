@@ -27,13 +27,21 @@ public class Gerador
         // ======================================
         // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
         Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-        // Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+
         // ======================================
-        //RESTRIÇÃO: Aplicar horario de almoço.
+        //RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor.
         Restricoes.HorarioAlmocoProfessor(contexto);
 
+        // ======================================
+        //RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma.
+        Restricoes.HorarioAlmocoTurma(contexto);
+
+        // ======================================
+        //RESTRIÇÃO: O professor não pode trabalhar 3 turnos e o professor não pode trabalhar de manhã e à noite.
         Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
         // ====================================================================
 
