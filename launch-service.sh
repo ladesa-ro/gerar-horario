@@ -8,4 +8,4 @@ else
 	docker build -f "$(pwd)/Dockerfile.service" -t some-app .
 fi
 
-docker run -e UserName=user -e HostName=host -e Password=pass some-app
+docker run --env-file "$(pwd)/Microsservicos/GerarHorario-Service/.env" some-app
