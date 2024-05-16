@@ -13,9 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="GerarHorario">
-      <HintPath>..\..\GerarHorario\bin\Debug\net8.0\GerarHorario.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\GerarHorario\GerarHorario.csproj" />
   </ItemGroup>
+
 
 </Project>
