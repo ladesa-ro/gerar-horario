@@ -3,17 +3,13 @@ WORKDIR /App
 # Copy everything
 COPY . ./
 # Restore as distinct layers
-RUN dotnet restore
+RUN dotnet restore Microsservicos/GerarHorario-Service
 # Build and publish a release
-RUN dotnet publish -c Release -o out
+RUN dotnet publish Microsservicos/GerarHorario-Service -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
-ENV Password=admin
-ENV UserName=admin
-ENV HostName=localhost
-ENV ListenQueue=gerar_horario
-ENV PublishQueue=horario_gerado 
+
 
 WORKDIR /App
 COPY --from=build-env /App/out .
