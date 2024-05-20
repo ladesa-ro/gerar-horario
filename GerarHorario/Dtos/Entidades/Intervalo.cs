@@ -33,4 +33,15 @@ public record Intervalo
     {
         return VerificarIntervalo(intervalo, intervalo2.HorarioInicio) && VerificarIntervalo(intervalo, intervalo2.HorarioFim);
     }
+
+    public static int Somar12Horas(int horarioIndex)
+    {
+
+        int indexDesejado = horarioIndex - 9;
+       // System.Console.WriteLine("EXECUTADO: " + indexDesejado + "\n");
+        return indexDesejado;
+
+
+
+    }
 }

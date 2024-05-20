@@ -213,7 +213,7 @@ public class Restricoes
         }
     }
 
-     ///<summary>
+    ///<summary>
     /// RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma
     ///</summary>
 
@@ -327,8 +327,60 @@ public class Restricoes
         }
     }
 
-
     ///<summary>
-    /// RESTRIÇÃO: N/A
+    /// RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
     ///</summary>
+   
+
+    public static void DiferencaTurnos12Horas(GerarHorarioContext contexto)
+    {
+
+        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim - 1))
+        {
+            foreach (var professor in contexto.Options.Professores)
+            {
+                var propostasNoite = from proposta in contexto.TodasAsPropostasDeAula
+                                     where
+                                     proposta.ProfessorId == professor.Id
+                                     &&
+                                           proposta.DiaSemanaIso == diaSemanaIso
+
+                                           && proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14
+                                     group proposta by proposta.ProfessorId into grupoPropostas
+                                     select new
+                                     {
+                                         ProfessorId = grupoPropostas.Key,
+                                         UltimoIntervaloIndex = grupoPropostas.Max(p => p.IntervaloIndex)
+                                     };
+
+
+
+                // DIA SEGUIBTE
+                int diaSemanaIsoSeguinte = (diaSemanaIso % 7) + 1;
+
+                var propostasConflitantesManhaSeguinte = from proposta in contexto.TodasAsPropostasDeAula
+                                                         join pNoite in propostasNoite
+                                                         on proposta.ProfessorId equals pNoite.ProfessorId
+                                                         where proposta.DiaSemanaIso == diaSemanaIsoSeguinte
+                                                               && proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4
+                                                               && proposta.IntervaloIndex <= pNoite.UltimoIntervaloIndex - 10
+                                                         select proposta.ModelBoolVar;
+               
+               //DEBUG
+                foreach (var resultado in propostasConflitantesManhaSeguinte)
+                {
+                    Console.WriteLine(resultado);
+                }
+
+                contexto.Model.AddAtMostOne(propostasConflitantesManhaSeguinte);
+            }
+        }
+
+    }
 }
+
+
+
+///<summary>
+/// RESTRIÇÃO: N/A
+///</summary>

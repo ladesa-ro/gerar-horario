@@ -34,16 +34,18 @@ public class Gerador
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor.
-        Restricoes.HorarioAlmocoProfessor(contexto);
+        //Restricoes.HorarioAlmocoProfessor(contexto);
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma.
-        Restricoes.HorarioAlmocoTurma(contexto);
+        //Restricoes.HorarioAlmocoTurma(contexto);
 
         // ======================================
         //RESTRIÇÃO: O professor não pode trabalhar 3 turnos e o professor não pode trabalhar de manhã e à noite.
         //Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
         // ====================================================================
+
+        Restricoes.DiferencaTurnos12Horas(contexto);
 
 
 
