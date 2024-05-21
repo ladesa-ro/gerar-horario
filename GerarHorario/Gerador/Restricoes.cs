@@ -330,11 +330,10 @@ public class Restricoes
     ///<summary>
     /// RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
     ///</summary>
-   
+
 
     public static void DiferencaTurnos12Horas(GerarHorarioContext contexto)
     {
-
         foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim - 1))
         {
             foreach (var professor in contexto.Options.Professores)
@@ -343,36 +342,28 @@ public class Restricoes
                                      where
                                      proposta.ProfessorId == professor.Id
                                      &&
-                                           proposta.DiaSemanaIso == diaSemanaIso
+                                     proposta.DiaSemanaIso == diaSemanaIso
+                                     &&
+                                     proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14
+                                     select proposta;
 
-                                           && proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14
-                                     group proposta by proposta.ProfessorId into grupoPropostas
-                                     select new
-                                     {
-                                         ProfessorId = grupoPropostas.Key,
-                                         UltimoIntervaloIndex = grupoPropostas.Max(p => p.IntervaloIndex)
-                                     };
-
-
-
-                // DIA SEGUIBTE
-                int diaSemanaIsoSeguinte = (diaSemanaIso % 7) + 1;
-
-                var propostasConflitantesManhaSeguinte = from proposta in contexto.TodasAsPropostasDeAula
-                                                         join pNoite in propostasNoite
-                                                         on proposta.ProfessorId equals pNoite.ProfessorId
-                                                         where proposta.DiaSemanaIso == diaSemanaIsoSeguinte
-                                                               && proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4
-                                                               && proposta.IntervaloIndex <= pNoite.UltimoIntervaloIndex - 10
-                                                         select proposta.ModelBoolVar;
-               
-               //DEBUG
-                foreach (var resultado in propostasConflitantesManhaSeguinte)
+                foreach (var propostaNoite in propostasNoite)
                 {
-                    Console.WriteLine(resultado);
-                }
+                    // DIA SEGUIBTE
+                    int diaSemanaIsoSeguinte = (diaSemanaIso % 7) + 1;
 
-                contexto.Model.AddAtMostOne(propostasConflitantesManhaSeguinte);
+                    var propostasConflitantesManhaSeguinte = from proposta in contexto.TodasAsPropostasDeAula
+                                                             where proposta.DiaSemanaIso == diaSemanaIsoSeguinte
+                                                             &&
+                                                             proposta.ProfessorId == propostaNoite.ProfessorId
+                                                                   && proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4//SELECIONA OS INTERVALOS DE 0 A 4
+                                                                   && proposta.IntervaloIndex <= propostaNoite.IntervaloIndex - 10//DIMUI 10 DO ULTIMO INTERVALO QUE SERA IGUAL AO INTERVALO QUE DEVERA SER REMOVIDO
+                                                             select proposta.ModelBoolVar;
+
+                    var negatedVariables = propostasConflitantesManhaSeguinte.Select(v => v.Not()).ToArray();
+
+                    contexto.Model.AddBoolAnd(negatedVariables).OnlyEnforceIf(propostaNoite.ModelBoolVar);
+                }
             }
         }
 

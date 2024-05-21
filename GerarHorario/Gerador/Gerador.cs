@@ -26,7 +26,7 @@ public class Gerador
 
         // ======================================
         // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
-        //Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+        Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
 
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
