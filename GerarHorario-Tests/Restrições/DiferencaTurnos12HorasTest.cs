@@ -7,7 +7,7 @@ using Sisgea.GerarHorario.Core.Dtos.Entidades;
 namespace Sisgea.GerarHorario.Tests;
 
 [AllureNUnit]
-public class ProfessorTurnosTest
+public class DiferencaTurnos12HorasTest
 {
     [SetUp]
     public void Setup()
@@ -19,8 +19,8 @@ public class ProfessorTurnosTest
     //[Test] PARA ATIVAR O TESTE DESCOMENTE ESSA LINHA
     public void Test1()
     {
-        // RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
-        System.Console.WriteLine("Teste ProfessorTurnosTest.cs");
+        // RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
+        System.Console.WriteLine("Teste DiferencaTurnos12Horas.cs");
         var turmas = new Turma[] {
             new(
                 "1",//TURMA
@@ -190,96 +190,47 @@ public class ProfessorTurnosTest
            logDebug: false
        );
         var contexto = new GerarHorarioContext(gerarHorarioOptions, iniciarTodasAsPropostasDeAula: true);
-        foreach (var professor in contexto.Options.Professores)
-        {
-            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
-            {
-                var proposta = from propostas in contexto.TodasAsPropostasDeAula
-                               where
-                               propostas.ProfessorId == professor.Id
-                               &&
-                               propostas.DiaSemanaIso == diaSemanaIso
-                              // &&
-                                //VerificarTurnosProfessores(propostas)
-                                &&
-                                FornecerValor(VerificarTurnosProfessores(propostas))
-                               select propostas;
 
-                foreach (var p in proposta)
+
+        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim - 1))
+        {
+            foreach (var professor in contexto.Options.Professores)
+            {
+                var propostasNoite = new List<PropostaDeAula>();
+
+                foreach (var proposta in contexto.TodasAsPropostasDeAula)
                 {
-                    Assert.That(Retorno, Is.True);
+                    if (proposta.ProfessorId == professor.Id && proposta.DiaSemanaIso == diaSemanaIso && proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14)
+                    {
+                        propostasNoite.Add(proposta);
+                    }
+                }
+
+                foreach (var propostaNoite in propostasNoite)
+                {
+                    int diaSemanaIsoSeguinte = (diaSemanaIso % 7) + 1;
+
+                    var propostasConflitantesManhaSeguinte = new List<PropostaDeAula>();
+
+                    foreach (var proposta in contexto.TodasAsPropostasDeAula)
+                    {
+                        if (proposta.DiaSemanaIso == diaSemanaIsoSeguinte && proposta.ProfessorId == propostaNoite.ProfessorId && proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4 && proposta.IntervaloIndex <= propostaNoite.IntervaloIndex - 10)
+                        {
+                            propostasConflitantesManhaSeguinte.Add(proposta);
+                        }
+                    }
+
+                    foreach (var propostaConflitante in propostasConflitantesManhaSeguinte)
+                    {
+                        Console.WriteLine($"- Dia: {propostaConflitante.DiaSemanaIso} | Intervalo: {horariosDeAula[propostaConflitante.IntervaloIndex]} | Professor: {propostaConflitante.ProfessorId} | Turma: {propostaConflitante.TurmaId}");
+                        Retorno = true;
+
+                    }
                 }
             }
-
-
+            System.Console.WriteLine("\n");
         }
-    }
-
-
-
-
-    ///<summary>
-    /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
-    ///</summary>
-    ///
-    public static bool FornecerValor(bool valor)
-    {
-        System.Console.WriteLine("EXECUTADO E O VALOR DE DEBUG É: " + Retorno);
-        Retorno = valor;
-        return true;
-    }
-    public static bool[] arrayVerificacao = new bool[3];
-    public static int idDia = 0;
-    static bool VerificarTurnosProfessores(PropostaDeAula carro)
-    {
-        System.Console.WriteLine("EXECUTADO FUNCAO VERIFICARTURNOSPROFESSORES");
-        bool validar = false;
-        if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
-        {
-            arrayVerificacao[0] = false;
-            arrayVerificacao[1] = false;
-            arrayVerificacao[2] = false;
-        }
-        idDia = carro.DiaSemanaIso;
-        if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
-        {
-            arrayVerificacao[0] = true;
-            arrayVerificacao[1] = false;
-
-        }
-
-
-        if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
-        {
-            arrayVerificacao[1] = true;
-            arrayVerificacao[2] = false;
-
-        }
-        if (arrayVerificacao[0] == true)//MANHA
-        {
-            if (arrayVerificacao[0] == true && arrayVerificacao[2] == true && arrayVerificacao[1] == false)//TRABALHA MANHA E NOITE
-            {
-                //System.Console.WriteLine("TRABALHA MANHA  E NOITE\nO intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                validar = true;
-
-
-            }
-            if (arrayVerificacao[1] == true)//TARDE
-            {
-
-                if (arrayVerificacao[2] == true)//NOITE
-                {
-
-
-                    // System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                    validar = true;
-
-                }
-            }
-        }
-        //Assert.That(validar, Is.True);
-        return validar;
-
+        Assert.That(Retorno, Is.False);
     }
 }
 

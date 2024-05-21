@@ -117,7 +117,7 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("07:30", "11:59:59")),
-                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:00", "11:59:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:30", "11:59:59")),
 
                     new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("19:00", "23:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("19:00", "23:29:59")),
@@ -134,12 +134,12 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("13:00", "17:29:59")),
-                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("13:00", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:30", "17:29:59")),
 
-                     new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("19:00", "23:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("19:00", "23:29:59")),
                     new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("19:00", "23:29:59")),
-                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("19:00", "22:39:59")),
                     new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("19:00", "23:29:59")),
                 ]
             ),
@@ -147,28 +147,28 @@ public class Main
 
         var horariosDeAula = new Intervalo[] {
             // =====================
-            new("07:30", "08:19:59"),
-            new("08:20", "09:09:59"),
-            new("09:10", "09:59:59"),
+            new("07:30", "08:19:59"),//0
+            new("08:20", "09:09:59"),//1
+            new("09:10", "09:59:59"),//2
             //
-            new("10:20", "11:09:59"),
-            new("11:10", "11:59:59"),//INTERVALO INDEX 4
+            new("10:20", "11:09:59"),//3
+            new("11:10", "11:59:59"),//4
             // =====================
           //  new("12:00", "12:59"),//RECREIO 
             // =====================
-            new("13:00", "13:49:59"),
-            new("13:50", "14:39:59"),
-            new("14:40", "15:29:59"),
+            new("13:00", "13:49:59"),//5
+            new("13:50", "14:39:59"),//6
+            new("14:40", "15:29:59"),//7
             //
-            new("15:50", "16:39:59"),
-            new("16:40", "17:29:59"),
+            new("15:50", "16:39:59"),//8
+            new("16:40", "17:29:59"),//9
             // =====================
-            new("19:00", "19:49:59"),
-            new("19:50", "20:39:59"),
-            new("20:40", "21:29:59"),
+            new("19:00", "19:49:59"),//10
+            new("19:50", "20:39:59"),//11
+            new("20:40", "21:29:59"),//12
             //
-            new("21:50", "22:39:59"),
-            new("22:40", "23:29:59"),
+            new("21:50", "22:39:59"),//13
+            new("22:40", "23:29:59"),//14
         };
 
         var gerarHorarioOptions = new GerarHorarioOptions(

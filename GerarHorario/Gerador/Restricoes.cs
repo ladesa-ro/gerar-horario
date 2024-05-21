@@ -214,66 +214,38 @@ public class Restricoes
     }
 
     ///<summary>
-    /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
+    /// RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma
     ///</summary>
-    public static bool[] arrayVerificacao = new bool[3];
-    public static int idDia = 0;
 
-    static bool VerificarTurnosProfessores(PropostaDeAula carro, GerarHorarioContext contexto)
+    public static void HorarioAlmocoTurma(GerarHorarioContext contexto)
     {
-        bool validar = false;
-        if (carro.DiaSemanaIso != idDia)//AO MUDAR O DIA ZERA O ARRAY
+        foreach (var turma in contexto.Options.Turmas)
         {
-            arrayVerificacao[0] = false;
-            arrayVerificacao[1] = false;
-            arrayVerificacao[2] = false;
-        }
-        idDia = carro.DiaSemanaIso;
-
-        if (carro.IntervaloIndex >= 0 && carro.IntervaloIndex <= 4)//MANHA
-        {
-            arrayVerificacao[0] = true;
-        }
-
-
-        if (carro.IntervaloIndex >= 5 && carro.IntervaloIndex <= 9)//TARDE
-        {
-            arrayVerificacao[1] = true;
-        }
-
-
-        if (carro.IntervaloIndex >= 10 && carro.IntervaloIndex <= 14)//NOITE
-        {
-            arrayVerificacao[2] = true;
-        }
-
-        if (arrayVerificacao[0] == true)//MANHA
-        {
-            if (arrayVerificacao[0] == true && arrayVerificacao[2] == true && arrayVerificacao[1] == false)//TRABALHA MANHA E NOITE
+            foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
             {
-                System.Console.WriteLine("TRABALHA MANHA  E NOITE\nO intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                validar = true;
+                var propostaAulaProfessor = from proposta in contexto.TodasAsPropostasDeAula
+                                            where proposta.DiaSemanaIso == diaSemanaIso
+                                                && proposta.TurmaId == turma.Id
+                                                && (
+                                                    Intervalo.VerificarIntervalo(
+                                                        new Intervalo("11:30:00", "12:00:00"),
+                                                        proposta.Intervalo.HorarioFim
+                                                    )
+                                                    || Intervalo.VerificarIntervalo(
+                                                        new Intervalo("13:00:00", "13:30:00"),
+                                                        proposta.Intervalo.HorarioInicio
+                                                    )
+                                                )
+                                            select proposta.ModelBoolVar;
 
-
-            }
-            if (arrayVerificacao[1] == true)//TARDE
-            {
-
-                if (arrayVerificacao[2] == true)//NOITE
-                {
-
-
-                    System.Console.WriteLine("O intervalo " + contexto.Options.HorariosDeAula[carro.IntervaloIndex] + " do dia " + carro.DiaSemanaIso + " do professor " + carro.ProfessorId + " foi removido!");
-                    validar = true;
-
-                }
+                contexto.Model.AddAtMostOne(propostaAulaProfessor);
             }
         }
-
-
-        return validar;
     }
 
+    ///<summary>
+    /// RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
+    ///</summary>
     public static void ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(GerarHorarioContext contexto)
     {
         foreach (var professor in contexto.Options.Professores)
@@ -355,8 +327,51 @@ public class Restricoes
         }
     }
 
-
     ///<summary>
-    /// RESTRIÇÃO: N/A
+    /// RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
     ///</summary>
+
+
+    public static void DiferencaTurnos12Horas(GerarHorarioContext contexto)
+    {
+        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim - 1))
+        {
+            foreach (var professor in contexto.Options.Professores)
+            {
+                var propostasNoite = from proposta in contexto.TodasAsPropostasDeAula
+                                     where
+                                     proposta.ProfessorId == professor.Id
+                                     &&
+                                     proposta.DiaSemanaIso == diaSemanaIso
+                                     &&
+                                     proposta.IntervaloIndex >= 10 && proposta.IntervaloIndex <= 14
+                                     select proposta;
+
+                foreach (var propostaNoite in propostasNoite)
+                {
+                    // DIA SEGUIBTE
+                    int diaSemanaIsoSeguinte = (diaSemanaIso % 7) + 1;
+
+                    var propostasConflitantesManhaSeguinte = from proposta in contexto.TodasAsPropostasDeAula
+                                                             where proposta.DiaSemanaIso == diaSemanaIsoSeguinte
+                                                             &&
+                                                             proposta.ProfessorId == propostaNoite.ProfessorId
+                                                                   && proposta.IntervaloIndex >= 0 && proposta.IntervaloIndex <= 4//SELECIONA OS INTERVALOS DE 0 A 4
+                                                                   && proposta.IntervaloIndex <= propostaNoite.IntervaloIndex - 10//DIMUI 10 DO ULTIMO INTERVALO QUE SERA IGUAL AO INTERVALO QUE DEVERA SER REMOVIDO
+                                                             select proposta.ModelBoolVar;
+
+                    var negatedVariables = propostasConflitantesManhaSeguinte.Select(v => v.Not()).ToArray();
+
+                    contexto.Model.AddBoolAnd(negatedVariables).OnlyEnforceIf(propostaNoite.ModelBoolVar);
+                }
+            }
+        }
+
+    }
 }
+
+
+
+///<summary>
+/// RESTRIÇÃO: N/A
+///</summary>
