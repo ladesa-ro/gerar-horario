@@ -19,6 +19,7 @@ public class ProfessorTurnosTest
     //[Test] PARA ATIVAR O TESTE DESCOMENTE ESSA LINHA
     public void Test1()
     {
+        // RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
         System.Console.WriteLine("Teste ProfessorTurnosTest.cs");
         var turmas = new Turma[] {
             new(

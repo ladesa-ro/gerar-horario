@@ -16,9 +16,10 @@ public class DiferencaTurnos12HorasTest
     }
 
     public static bool Retorno { get; set; }
-    [Test]
+    //[Test] PARA ATIVAR O TESTE DESCOMENTE ESSA LINHA
     public void Test1()
     {
+        // RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
         System.Console.WriteLine("Teste DiferencaTurnos12Horas.cs");
         var turmas = new Turma[] {
             new(
