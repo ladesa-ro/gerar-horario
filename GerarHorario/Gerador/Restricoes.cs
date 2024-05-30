@@ -6,7 +6,7 @@ using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
 
-using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId);
+using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId, DateTime dataAnual);
 
 public class Restricoes
 {
@@ -46,7 +46,13 @@ public class Restricoes
                 {
                     foreach (var diario in options.DiariosByTurmaId(turma.Id))
                     {
-                        yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId);
+                        foreach (var data in options.DataAnual)
+                        {
+                            if (data.diaSemanaIso == diaSemanaIso)
+                            {
+                                yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId, data.dataAnual);
+                            }
+                        }
                     }
                 }
             }
@@ -71,6 +77,7 @@ public class Restricoes
                 diario.ProfessorId,
                 exceptionContext: $" (diário: {diario.Id}, turma: {turma.Id})"
             )!;
+
 
             // =====================================================================================
 
@@ -368,7 +375,57 @@ public class Restricoes
         }
 
     }
+
+    ///<summary>
+    /// RESTRIÇÃO: Feriados devem estar automáticos no calendário, mas precisa ter a opção para cadastrar o feriado como letivo.
+    ///</summary>
+
+    public static void AdicionarFeriados(GerarHorarioContext contexto)
+    {
+        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim - 1))
+        {
+
+            var propostas = from proposta in contexto.TodasAsPropostasDeAula
+                            where
+                            proposta.DiaSemanaIso == diaSemanaIso
+                            &&
+                            (
+                                proposta.DataAnual.dataAnual == new DateTime(2024,2,12)
+                                ||
+                                proposta.DataAnual.dataAnual == new DateTime(2024,2,13)
+
+                            )
+
+                            select proposta.ModelBoolVar;
+
+
+                    var negatedVariables = propostas.Select(v => v.Not()).ToArray();
+
+                    contexto.Model.AddBoolAnd(negatedVariables);
+
+
+            /*foreach (var debug in propostas)
+            {
+                System.Console.WriteLine(debug.DiaSemanaIso + " | " + debug.IntervaloIndex + " | " + debug.ProfessorId + " | " + debug.DataAnual.dataAnual);
+            }*/
+
+            //ConfigurarDatas(contexto);
+
+
+
+
+
+        }
+
+    }
 }
+
+
+
+
+
+
+
 
 
 

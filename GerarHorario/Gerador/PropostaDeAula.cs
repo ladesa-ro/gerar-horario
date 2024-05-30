@@ -10,6 +10,7 @@ public class PropostaDeAula(
     string professorId,
     int diaSemanaIso,
     int intervaloIndex,
+    DateTime dataAnual,
     Intervalo intervalo,
     BoolVar? modelBoolVar = null
 )
@@ -28,6 +29,8 @@ public class PropostaDeAula(
     public int IntervaloIndex { get; set; } = intervaloIndex;
 
     public Intervalo Intervalo { get; set; } = intervalo;
+
+    public Data DataAnual {get; set;} = new Data(dataAnual, diaSemanaIso);
 
     //
     private BoolVar? CreatedModelBoolVar { get; set; } = modelBoolVar;

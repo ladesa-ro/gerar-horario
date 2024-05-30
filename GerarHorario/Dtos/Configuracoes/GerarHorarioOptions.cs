@@ -7,6 +7,7 @@ public class GerarHorarioOptions
 
     public int DiaSemanaInicio { get; set; }
     public int DiaSemanaFim { get; set; }
+    public Data[] DataAnual {get; set;}
     public Turma[] Turmas { get; set; }
     public Professor[] Professores { get; set; }
     public Intervalo[] HorariosDeAula { get; set; }
@@ -20,10 +21,11 @@ public class GerarHorarioOptions
         }
     }
 
-    public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula, bool logDebug = false)
+    public GerarHorarioOptions(int diaSemanaInicio, int diaSemanaFim, Data[] dataAnual, Turma[] turmas, Professor[] professores, Intervalo[] horariosDeAula, bool logDebug = false)
     {
         DiaSemanaInicio = diaSemanaInicio;
         DiaSemanaFim = diaSemanaFim;
+        DataAnual = dataAnual;
         Turmas = turmas;
         Professores = professores;
         HorariosDeAula = horariosDeAula;
