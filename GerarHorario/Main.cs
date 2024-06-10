@@ -15,7 +15,7 @@ public class Main
                 "1",//TURMA
                 "1A INFORMATICA",//NOME DA TURMA
                 [
-                    new Diario (Id: "diario:1_3", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:3", QuantidadeMaximaSemana: 1),
+                    new Diario (Id: "diario:1_3", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:3", QuantidadeMaximaSemana: 2),
                     new Diario (Id: "diario:1_1", TurmaId: "turma:1", ProfessorId:  "2", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 3),
                     new Diario (Id: "diario:1_2", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 2),
                 ],
@@ -180,6 +180,8 @@ public class Main
             logDebug: false
         );
 
+
+
         // ====================================================
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);
         // ====================================================
@@ -264,7 +266,7 @@ public class Main
                             Console.WriteLine("");
                         }
 
-                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Professor: {diario.ProfessorId}");
+                        Console.WriteLine($"- Dia: {dia} | Intervalo: {horariosDeAula[aula.IntervaloDeTempo]} | Professor: {diario.ProfessorId} | Diario: {diario.Id}");
 
 
 

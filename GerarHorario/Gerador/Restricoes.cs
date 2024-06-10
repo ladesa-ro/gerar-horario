@@ -1,4 +1,6 @@
+using System.ComponentModel.Design;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Google.OrTools.Sat;
 using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
@@ -368,7 +370,80 @@ public class Restricoes
         }
 
     }
+
+    static bool debugValor(PropostaDeAula carro)
+    {
+
+        System.Console.WriteLine("Diario: " + carro.DiarioId + " | Dia: " + carro.DiaSemanaIso + " Intervalo: " + carro.IntervaloIndex);
+        return true;
+    }
+    public static void AgruparDisciplinas(GerarHorarioContext contexto)
+    {
+        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+        {
+
+            foreach (var diario in contexto.Options.Diarios)
+            {
+                // Filtrar propostas de aula para o diário e dia da semana atual, ordenando por IntervaloIndex
+                var propostasOrdenadas = from proposta in contexto.TodasAsPropostasDeAula
+                                         where proposta.DiarioId == diario.Id
+                                            && proposta.DiaSemanaIso == diaSemanaIso
+                                         orderby proposta.IntervaloIndex
+                                         select proposta;
+
+
+                var consecutivas = propostasOrdenadas.Take(diario.QuantidadeMaximaSemana).ToList();
+                var naoConsecutivas = propostasOrdenadas.Skip(diario.QuantidadeMaximaSemana).ToList();
+
+                var propostasBoolVars = consecutivas.Select(p => p.ModelBoolVar).ToArray();
+                var propostasBoolVars2 = naoConsecutivas.Select(p => p.ModelBoolVar).ToArray();
+
+
+                var negatedVariables = propostasBoolVars2.Select(v => v.Not()).ToArray();
+
+                contexto.Model.AddBoolAnd(negatedVariables);
+
+                
+
+
+
+                Console.WriteLine($"Propostas NAO consecutivas para Diário {diario.Id}, Dia {diaSemanaIso}:");
+                foreach (var proposta in naoConsecutivas)
+                {
+                    Console.WriteLine($"Diario: {proposta.DiarioId} | Dia: {proposta.DiaSemanaIso} | Intervalo: {proposta.IntervaloIndex}");
+                }
+                System.Console.WriteLine("\n");
+
+                /*Console.WriteLine($"Propostas consecutivas para Diário {diario.Id}, Dia {diaSemanaIso}:");
+
+                foreach (var carro in consecutivas)
+                {
+                    System.Console.WriteLine("Diario: " + carro.DiarioId + " | Dia: " + carro.DiaSemanaIso + " Intervalo: " + carro.IntervaloIndex);
+                }
+                System.Console.WriteLine("\n");*/
+
+
+            }
+
+
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
