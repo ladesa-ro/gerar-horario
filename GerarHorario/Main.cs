@@ -193,6 +193,7 @@ public class Main
             diaSemanaInicio: DiaSemanaIso.SEGUNDA,
             diaSemanaFim: DiaSemanaIso.SEXTA,
             dataAnual: datas,
+            dataAnual: datas,
             turmas: turmas,
             professores: professores,
             horariosDeAula: horariosDeAula,

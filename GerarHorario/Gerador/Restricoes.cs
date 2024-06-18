@@ -55,13 +55,6 @@ public class Restricoes
                                 yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId, data.dataAnual);
                             }
                         }
-                        foreach (var data in options.DataAnual)
-                        {
-                            if (data.diaSemanaIso == diaSemanaIso)
-                            {
-                                yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId, data.dataAnual);
-                            }
-                        }
                     }
                 }
             }
