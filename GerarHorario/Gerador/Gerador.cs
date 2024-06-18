@@ -45,11 +45,9 @@ public class Gerador
         // ======================================
         //RESTRIÇÃO: O professor não pode trabalhar 3 turnos e o professor não pode trabalhar de manhã e à noite.
        // Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
-       // Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
 
         // ======================================
         // RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
-       // Restricoes.DiferencaTurnos12Horas(contexto);
        // Restricoes.DiferencaTurnos12Horas(contexto);
 
         // ====================================================================
