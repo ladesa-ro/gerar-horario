@@ -9,7 +9,6 @@ using Sisgea.GerarHorario.Core.Dtos.Entidades;
 namespace Sisgea.GerarHorario.Core;
 
 using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId, DateTime dataAnual);
-using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId, DateTime dataAnual);
 
 public class Restricoes
 {
