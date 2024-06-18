@@ -118,6 +118,7 @@ public class Restricoes
             }
         }
 
+
     }
 
     ///<summary>
@@ -379,54 +380,55 @@ public class Restricoes
     }
     public static void AgruparDisciplinas(GerarHorarioContext contexto)
     {
-        foreach (var diaSemanaIso in Enumerable.Range(contexto.Options.DiaSemanaInicio, contexto.Options.DiaSemanaFim))
+        foreach (var turma in contexto.Options.Turmas)
         {
-
-            foreach (var diario in contexto.Options.Diarios)
+            foreach (var diario in turma.DiariosDaTurma)
             {
-                // Filtrar propostas de aula para o diário e dia da semana atual, ordenando por IntervaloIndex
-                var propostasOrdenadas = from proposta in contexto.TodasAsPropostasDeAula
-                                         where proposta.DiarioId == diario.Id
-                                            && proposta.DiaSemanaIso == diaSemanaIso
-                                         orderby proposta.IntervaloIndex
-                                         select proposta;
+                var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
+                                        where
+                                            propostaAula.DiarioId == diario.Id
+                                        select propostaAula;
 
-
-                var consecutivas = propostasOrdenadas.Take(diario.QuantidadeMaximaSemana).ToList();
-                var naoConsecutivas = propostasOrdenadas.Skip(diario.QuantidadeMaximaSemana).ToList();
-
-                var propostasBoolVars = consecutivas.Select(p => p.ModelBoolVar).ToArray();
-                var propostasBoolVars2 = naoConsecutivas.Select(p => p.ModelBoolVar).ToArray();
-
-
-                var negatedVariables = propostasBoolVars2.Select(v => v.Not()).ToArray();
-
-                contexto.Model.AddBoolAnd(negatedVariables);
-
-                
-
-
-
-                Console.WriteLine($"Propostas NAO consecutivas para Diário {diario.Id}, Dia {diaSemanaIso}:");
-                foreach (var proposta in naoConsecutivas)
+                var consecutivas = propostasDoDiario.Take(diario.QuantidadeMaximaSemana).ToList();
+                if (diario.QuantidadeMaximaSemana == 4)
                 {
-                    Console.WriteLine($"Diario: {proposta.DiarioId} | Dia: {proposta.DiaSemanaIso} | Intervalo: {proposta.IntervaloIndex}");
-                }
-                System.Console.WriteLine("\n");
+                    var primeiraDivisao = propostasDoDiario.Take(diario.QuantidadeMaximaSemana - 2).ToList();
+                    var segundaDivisao = propostasDoDiario.Skip(5).Take(diario.QuantidadeMaximaSemana - 2).ToList();
+                  
 
-                /*Console.WriteLine($"Propostas consecutivas para Diário {diario.Id}, Dia {diaSemanaIso}:");
+                }
+                else if (diario.QuantidadeMaximaSemana == 2)
+                {
+                    consecutivas = propostasDoDiario.Skip(diario.QuantidadeMaximaSemana + 5).Take(diario.QuantidadeMaximaSemana).ToList();
+                }
+                else if (diario.QuantidadeMaximaSemana == 1)
+                {
+                    
+                    consecutivas = propostasDoDiario.Skip(diario.QuantidadeMaximaSemana + 5).Take(diario.QuantidadeMaximaSemana).ToList();
+                }
+                var propostasBoolVars = consecutivas.Select(p => p.ModelBoolVar).ToArray();
+
+                // Adiciona a restrição para garantir que todas as propostas que não estão em consecutivas sejam falsas
+                foreach (var carro in propostasDoDiario)
+                {
+                    if (!consecutivas.Contains(carro))
+                    {
+                        contexto.Model.Add(carro.ModelBoolVar == 0);
+                    }
+                }
+
 
                 foreach (var carro in consecutivas)
                 {
+
                     System.Console.WriteLine("Diario: " + carro.DiarioId + " | Dia: " + carro.DiaSemanaIso + " Intervalo: " + carro.IntervaloIndex);
                 }
-                System.Console.WriteLine("\n");*/
 
+                System.Console.WriteLine("\n");
 
             }
-
-
         }
+
     }
 }
 

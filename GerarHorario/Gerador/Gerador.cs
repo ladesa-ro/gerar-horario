@@ -30,8 +30,8 @@ public class Gerador
 
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-       Restricoes.AgruparDisciplinas(contexto);
-   Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+      Restricoes.AgruparDisciplinas(contexto);
+  // Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor.
