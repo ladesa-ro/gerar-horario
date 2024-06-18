@@ -8,7 +8,7 @@ using Sisgea.GerarHorario.Core.Dtos.Entidades;
 
 namespace Sisgea.GerarHorario.Core;
 
-using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId);
+using CombinacaoAula = (int diaSemanaIso, int intervaloIndex, string turmaId, string diarioId, string professorId, DateTime dataAnual);
 
 public class Restricoes
 {
@@ -48,7 +48,13 @@ public class Restricoes
                 {
                     foreach (var diario in options.DiariosByTurmaId(turma.Id))
                     {
-                        yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId);
+                        foreach (var data in options.DataAnual)
+                        {
+                            if (data.diaSemanaIso == diaSemanaIso)
+                            {
+                                yield return (diaSemanaIso, intervaloIndex, turma.Id, diario.Id, diario.ProfessorId, data.dataAnual);
+                            }
+                        }
                     }
                 }
             }
@@ -73,6 +79,7 @@ public class Restricoes
                 diario.ProfessorId,
                 exceptionContext: $" (diário: {diario.Id}, turma: {turma.Id})"
             )!;
+
 
             // =====================================================================================
 

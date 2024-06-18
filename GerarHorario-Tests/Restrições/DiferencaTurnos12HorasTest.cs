@@ -181,14 +181,25 @@ public class DiferencaTurnos12HorasTest
             new("21:50", "22:39:59"),
             new("22:40", "23:29:59"),
         };
+         var datas = new Data[]
+        {
+            new Data(new DateTime(2024, 2, 12), DiaSemanaIso.SEGUNDA),
+            new Data(new DateTime(2024, 2, 13), DiaSemanaIso.TERCA),
+            new Data(new DateTime(2024, 2, 14), DiaSemanaIso.QUARTA),
+            new Data(new DateTime(2024, 2, 15), DiaSemanaIso.QUINTA),
+            new Data(new DateTime(2024, 2, 16), DiaSemanaIso.SEXTA)
+
+        };
+
         var gerarHorarioOptions = new GerarHorarioOptions(
-           diaSemanaInicio: DiaSemanaIso.SEGUNDA,
-           diaSemanaFim: DiaSemanaIso.SEXTA,
-           turmas: turmas,
-           professores: professores,
-           horariosDeAula: horariosDeAula,
-           logDebug: false
-       );
+            diaSemanaInicio: DiaSemanaIso.SEGUNDA,
+            diaSemanaFim: DiaSemanaIso.SEXTA,
+            dataAnual: datas,
+            turmas: turmas,
+            professores: professores,
+            horariosDeAula: horariosDeAula,
+            logDebug: false
+        );
         var contexto = new GerarHorarioContext(gerarHorarioOptions, iniciarTodasAsPropostasDeAula: true);
 
 
