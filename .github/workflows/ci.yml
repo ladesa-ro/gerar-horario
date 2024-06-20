@@ -1,0 +1,93 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "development"
+      - "production"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI_DEVELOPMENT_BRANCH: ${{ vars.CI_DEVELOPMENT_BRANCH }}
+  CI_PRODUCTION_BRANCH: ${{ vars.CI_PRODUCTION_BRANCH }}
+
+  ENABLE_BUILD_IMAGE: ${{ vars.ENABLE_BUILD_IMAGE }}
+  IMAGE_TAG_DEVELOPMENT: ${{ vars.IMAGE_TAG_DEVELOPMENT }}
+  IMAGE_TAG_PRODUCTION: ${{ vars.IMAGE_TAG_PRODUCTION }}
+
+  ENABLE_PUSH_IMAGE: ${{ vars.ENABLE_PUSH_IMAGE }}
+
+  # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+  # REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+  # REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+  # IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+
+  REGISTRY_URL: ghcr.io
+  REGISTRY_USERNAME: ${{ github.actor }}
+  REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SERVICE_IMAGE_NAME: gerar-horario-service
+
+  ENABLE_TRIGGER_DEPLOY: ${{ vars.ENABLE_TRIGGER_DEPLOY }}
+  DEPLOY_DISPATCH_TOKEN: ${{ secrets.DEPLOY_DISPATCH_TOKEN }}
+  DEPLOY_OWNER: ${{ vars.DEPLOY_OWNER }}
+  DEPLOY_REPOSITORY: ${{ vars.DEPLOY_REPOSITORY }}
+  DEPLOY_WORKFLOW: ${{ vars.DEPLOY_WORKFLOW }}
+  DEPLOY_BRANCH: ${{ vars.DEPLOY_BRANCH }}
+
+jobs:
+  image-build-push-service:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Registry
+        if: ${{ env.ENABLE_PUSH_IMAGE == 'true' }}
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ env.REGISTRY_USERNAME }}
+          password: ${{ env.REGISTRY_TOKEN }}
+
+      - name: Build (and push if enabled) channel development
+        if: ${{ env.ENABLE_BUILD_IMAGE == 'true' && github.ref_name == env.CI_DEVELOPMENT_BRANCH }}
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile.service
+          push: ${{ env.ENABLE_PUSH_IMAGE == 'true' }}
+          tags: ${{ env.REGISTRY_URL }}/${{ env.SERVICE_IMAGE_NAME }}:${{ env.IMAGE_TAG_DEVELOPMENT }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build (and push if enabled) channel production
+        if: ${{ env.ENABLE_BUILD_IMAGE == 'true' && github.ref_name == env.CI_PRODUCTION_BRANCH }}
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile.service
+          push: ${{ env.ENABLE_PUSH_IMAGE == 'true' }}
+          tags: ${{ env.REGISTRY_URL }}/${{ env.SERVICE_IMAGE_NAME }}:${{ env.IMAGE_TAG_PRODUCTION }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Dispatch infrastructure deploy workflow
+        if: ${{ env.ENABLE_BUILD_IMAGE == 'true' && env.ENABLE_PUSH_IMAGE == 'true' && env.ENABLE_TRIGGER_DEPLOY == 'true' }}
+        run: |
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ env.DEPLOY_DISPATCH_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ env.DEPLOY_OWNER }}/${{ env.DEPLOY_REPOSITORY }}/actions/workflows/${{ env.DEPLOY_WORKFLOW }}/dispatches \
+            -d '{"ref":"${{ env.DEPLOY_BRANCH }}","inputs":{}}'
