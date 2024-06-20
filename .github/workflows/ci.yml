@@ -29,7 +29,7 @@ env:
   REGISTRY_URL: ghcr.io
   REGISTRY_USERNAME: ${{ github.actor }}
   REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SERVICE_IMAGE_NAME: gerar-horario-service
+  IMAGE_NAME: ${{ github.repository }}
 
   ENABLE_TRIGGER_DEPLOY: ${{ vars.ENABLE_TRIGGER_DEPLOY }}
   DEPLOY_DISPATCH_TOKEN: ${{ secrets.DEPLOY_DISPATCH_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
         with:
           file: Dockerfile.service
           push: ${{ env.ENABLE_PUSH_IMAGE == 'true' }}
-          tags: ${{ env.REGISTRY_URL }}/${{ env.SERVICE_IMAGE_NAME }}:${{ env.IMAGE_TAG_DEVELOPMENT }}
+          tags: ${{ env.REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG_DEVELOPMENT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -77,7 +77,7 @@ jobs:
         with:
           file: Dockerfile.service
           push: ${{ env.ENABLE_PUSH_IMAGE == 'true' }}
-          tags: ${{ env.REGISTRY_URL }}/${{ env.SERVICE_IMAGE_NAME }}:${{ env.IMAGE_TAG_PRODUCTION }}
+          tags: ${{ env.REGISTRY_URL }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG_PRODUCTION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
