@@ -380,6 +380,7 @@ public class Restricoes
         }
 
     }
+    //PADRONALIZADO
     public static void AgruparDisciplinas(GerarHorarioContext contexto)
     {
         foreach (var turma in contexto.Options.Turmas)
@@ -396,6 +397,8 @@ public class Restricoes
                 int skipCount = 0;
                 int skipCount1 = 0;
                 int skipCount2 = 10;
+                PropostaDeAula propostaAnterior = null;
+
 
                 while (consecutivas.Count < diario.QuantidadeMaximaSemana && skipCount < propostasDoDiario.Count())
                 {
@@ -411,25 +414,29 @@ public class Restricoes
                     }
 
 
-                    foreach (var proposta in propostasSkipadas)
-                    {
-                        if (proposta.IntervaloIndex == 14)
-                        {
-                            skipCount++;
-                            propostasSkipadas = propostasDoDiario.Skip(skipCount).Take(1).ToList();
-                        }
-                    }
+
                     foreach (var proposta in propostasSkipadas)
                     {
                         if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
                         {
+                            // Verifica se a proposta anterior está nos últimos intervalos do dia (IntervaloIndex == 14)
+                            if (propostaAnterior != null && propostaAnterior.IntervaloIndex == 14)
+                            {
+                                // Muda as propostas para o próximo dia
+                                int proximoDia = propostaAnterior.DiaSemanaIso + 1;
+                                propostaAnterior.DiaSemanaIso = proximoDia;
+                                propostaAnterior.IntervaloIndex =  proposta.IntervaloIndex;
+                                proposta.IntervaloIndex = proposta.IntervaloIndex+1;
+                            }
+
                             consecutivas.Add(proposta);
                             horariosUsados.Add((proposta.DiaSemanaIso, proposta.IntervaloIndex));
+                            propostaAnterior = proposta;
                         }
                     }
                     skipCount++;
-                    skipCount1+=2;
-                    skipCount2+=5;
+                    skipCount1 += 2;
+                    skipCount2 += 5;
                 }
 
 
