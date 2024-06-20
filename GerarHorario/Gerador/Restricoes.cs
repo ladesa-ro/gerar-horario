@@ -2,6 +2,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using Google.OrTools.Sat;
 using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
 using Sisgea.GerarHorario.Core.Dtos.Entidades;
@@ -379,65 +380,79 @@ public class Restricoes
         }
 
     }
-
-    static bool debugValor(PropostaDeAula carro)
-    {
-
-        System.Console.WriteLine("Diario: " + carro.DiarioId + " | Dia: " + carro.DiaSemanaIso + " Intervalo: " + carro.IntervaloIndex);
-        return true;
-    }
     public static void AgruparDisciplinas(GerarHorarioContext contexto)
     {
         foreach (var turma in contexto.Options.Turmas)
         {
+            var horariosUsados = new HashSet<(int DiaSemanaIso, int IntervaloIndex)>();
+
             foreach (var diario in turma.DiariosDaTurma)
             {
                 var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
-                                        where
-                                            propostaAula.DiarioId == diario.Id
+                                        where propostaAula.DiarioId == diario.Id
                                         select propostaAula;
 
-                var consecutivas = propostasDoDiario.Take(diario.QuantidadeMaximaSemana).ToList();
-                if (diario.QuantidadeMaximaSemana == 4)
-                {
-                    var primeiraDivisao = propostasDoDiario.Take(diario.QuantidadeMaximaSemana - 2).ToList();
-                    var segundaDivisao = propostasDoDiario.Skip(5).Take(diario.QuantidadeMaximaSemana - 2).ToList();
-                  
+                var consecutivas = new List<PropostaDeAula>();
+                int skipCount = 0;
+                int skipCount1 = 0;
+                int skipCount2 = 10;
 
-                }
-                else if (diario.QuantidadeMaximaSemana == 2)
+                while (consecutivas.Count < diario.QuantidadeMaximaSemana && skipCount < propostasDoDiario.Count())
                 {
-                    consecutivas = propostasDoDiario.Skip(diario.QuantidadeMaximaSemana + 5).Take(diario.QuantidadeMaximaSemana).ToList();
+                    var propostasSkipadas = propostasDoDiario.Skip(skipCount).Take(1).ToList();
+
+                    if (diario.QuantidadeMaximaSemana == 4)
+                    {
+                        var primeiraDivisao = propostasDoDiario.Skip(skipCount1).Take(2).ToList();
+                        var segundaDivisao = propostasDoDiario.Skip(skipCount2).Take(2).ToList();
+                        propostasSkipadas.Clear();
+                        propostasSkipadas.AddRange(primeiraDivisao);
+                        propostasSkipadas.AddRange(segundaDivisao);
+                    }
+
+
+                    foreach (var proposta in propostasSkipadas)
+                    {
+                        if (proposta.IntervaloIndex == 14)
+                        {
+                            skipCount++;
+                            propostasSkipadas = propostasDoDiario.Skip(skipCount).Take(1).ToList();
+                        }
+                    }
+                    foreach (var proposta in propostasSkipadas)
+                    {
+                        if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
+                        {
+                            consecutivas.Add(proposta);
+                            horariosUsados.Add((proposta.DiaSemanaIso, proposta.IntervaloIndex));
+                        }
+                    }
+                    skipCount++;
+                    skipCount1+=2;
+                    skipCount2+=5;
                 }
-                else if (diario.QuantidadeMaximaSemana == 1)
-                {
-                    
-                    consecutivas = propostasDoDiario.Skip(diario.QuantidadeMaximaSemana + 5).Take(diario.QuantidadeMaximaSemana).ToList();
-                }
-                var propostasBoolVars = consecutivas.Select(p => p.ModelBoolVar).ToArray();
+
 
                 // Adiciona a restrição para garantir que todas as propostas que não estão em consecutivas sejam falsas
-                foreach (var carro in propostasDoDiario)
+                foreach (var proposta in propostasDoDiario)
                 {
-                    if (!consecutivas.Contains(carro))
+                    if (!consecutivas.Contains(proposta))
                     {
-                        contexto.Model.Add(carro.ModelBoolVar == 0);
+                        contexto.Model.Add(proposta.ModelBoolVar == 0);
                     }
                 }
 
-
-                foreach (var carro in consecutivas)
+                //DEBUG
+                foreach (var proposta in consecutivas)
                 {
-
-                    System.Console.WriteLine("Diario: " + carro.DiarioId + " | Dia: " + carro.DiaSemanaIso + " Intervalo: " + carro.IntervaloIndex);
+                    System.Console.WriteLine("Diario CONSECUTIVO: " + proposta.DiarioId + " | Dia: " + proposta.DiaSemanaIso + " Intervalo: " + proposta.IntervaloIndex);
                 }
 
                 System.Console.WriteLine("\n");
-
             }
         }
-
     }
+
 }
 
 
