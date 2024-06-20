@@ -15,11 +15,10 @@ public class AgruparDisciplinasTest
 
     }
 
-   // [Test] DESCOMENTE ESSA LINHA PARA O TESTE FUNCIONAR
+   //[Test] 
     public void Test1()
     {
 
-        // RESTRIÇÃO: O professor não pode trabalhar 3 turnos.
         System.Console.WriteLine("Teste AgruparDisciplinas.cs");
         var turmas = new Turma[] {
             new(

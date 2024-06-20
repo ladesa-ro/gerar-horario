@@ -1,5 +1,6 @@
 using Google.OrTools.Sat;
 using Sisgea.GerarHorario.Core.Dtos.Configuracoes;
+using Sisgea.GerarHorario.Core.Dtos.Entidades;
 using Sisgea.GerarHorario.Core.Dtos.HorarioGerado;
 
 namespace Sisgea.GerarHorario.Core;
@@ -30,31 +31,39 @@ public class Gerador
 
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-      Restricoes.AgruparDisciplinas(contexto);
-  // Restricoes.AplicarLimiteDeDiarioNaSemana(contexto);
+        //Restricoes.AgruparDisciplinasPadronizado(contexto);
+        Restricoes.AgruparDisciplinasParametro(contexto, ["diario:1_1", "diario:1_2", "diario:1_3"], [1, 2, 3],
+            [
+                new("07:30", "11:09:59"),
+                new("07:30", "09:59:59"),
+                new("07:30", "11:09:59"),
+
+            ]
+        );
+
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor.
-       // Restricoes.HorarioAlmocoProfessor(contexto);
-       // Restricoes.HorarioAlmocoProfessor(contexto);
+        // Restricoes.HorarioAlmocoProfessor(contexto);
+        // Restricoes.HorarioAlmocoProfessor(contexto);
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma.
-       // Restricoes.HorarioAlmocoTurma(contexto);
+        // Restricoes.HorarioAlmocoTurma(contexto);
 
         // ======================================
         //RESTRIÇÃO: O professor não pode trabalhar 3 turnos e o professor não pode trabalhar de manhã e à noite.
-       // Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
+        // Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
 
         // ======================================
         // RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
-       // Restricoes.DiferencaTurnos12Horas(contexto);
+        // Restricoes.DiferencaTurnos12Horas(contexto);
 
         // ====================================================================
 
-      
 
-        
+
+
 
 
         // Ajudar o modelo para gerar o resultado mais satisfatório dentre

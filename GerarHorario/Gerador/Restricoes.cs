@@ -381,7 +381,7 @@ public class Restricoes
 
     }
     //PADRONALIZADO
-    public static void AgruparDisciplinas(GerarHorarioContext contexto)
+    public static void AgruparDisciplinasPadronizado(GerarHorarioContext contexto)
     {
         foreach (var turma in contexto.Options.Turmas)
         {
@@ -425,8 +425,8 @@ public class Restricoes
                                 // Muda as propostas para o próximo dia
                                 int proximoDia = propostaAnterior.DiaSemanaIso + 1;
                                 propostaAnterior.DiaSemanaIso = proximoDia;
-                                propostaAnterior.IntervaloIndex =  proposta.IntervaloIndex;
-                                proposta.IntervaloIndex = proposta.IntervaloIndex+1;
+                                propostaAnterior.IntervaloIndex = proposta.IntervaloIndex;
+                                proposta.IntervaloIndex = proposta.IntervaloIndex + 1;
                             }
 
                             consecutivas.Add(proposta);
@@ -460,7 +460,58 @@ public class Restricoes
         }
     }
 
+    public static void AgruparDisciplinasParametro(GerarHorarioContext contexto, string[] diarioId, int[] diaSemana, Intervalo[] intervalos)
+    {
+        var consecutivas = new List<PropostaDeAula>();
+        var horariosUsados = new HashSet<(int DiaSemanaIso, int IntervaloIndex)>();
+
+
+        var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
+                        select propostaAula;
+
+
+
+        for (int i = 0; i < diarioId.Length; i++)
+        {
+            var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
+                                    where propostaAula.DiarioId == diarioId[i]
+                                    && propostaAula.DiaSemanaIso == diaSemana[i]
+                                    &&
+                                    Intervalo.VerificarIntervalo(intervalos[i], propostaAula.Intervalo.HorarioFim)
+                                    select propostaAula;
+
+            int quantidadeDeAulas = contexto.Options.DiarioFindById(diarioId[i]).QuantidadeMaximaSemana;
+
+
+            foreach (var proposta in propostasDoDiario)
+            {
+                if (propostasDoDiario.Count() <= quantidadeDeAulas)
+                {
+                    if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
+                    {
+                        consecutivas.Add(proposta);
+                        horariosUsados.Add((proposta.DiaSemanaIso, proposta.IntervaloIndex));
+
+                    }
+                }
+            }
+        }
+
+        foreach (var proposta in propostas)
+        {
+            if (!consecutivas.Contains(proposta))
+            {
+                contexto.Model.Add(proposta.ModelBoolVar == 0);
+            }
+        }
+
+    }
 }
+
+
+
+
+
 
 
 
