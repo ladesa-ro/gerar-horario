@@ -107,7 +107,7 @@ public class Restricoes
     ///<summary>
     /// RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
     ///</summary>
-    public static void AplicarLimiteDeDiarioNaSemana(
+   /* public static void AplicarLimiteDeDiarioNaSemana(
       GerarHorarioContext contexto
     )
     {
@@ -128,7 +128,7 @@ public class Restricoes
         }
 
 
-    }
+    }*/
 
     ///<summary>
     /// RESTRIÇÃO: Turma: não ter mais de uma aula ativa ao mesmo tempo.
@@ -166,6 +166,13 @@ public class Restricoes
     ///<summary>
     /// RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
     ///</summary>
+    ///
+    static bool debugValor(PropostaDeAula proposta)
+    {
+        System.Console.WriteLine("Diario CONSECUTIVO: " + proposta.DiarioId + " | Dia: " + proposta.DiaSemanaIso + " Intervalo: " + proposta.IntervaloIndex);
+        System.Console.WriteLine("\n");
+        return true;
+    }
     public static void AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(GerarHorarioContext contexto)
     {
 
@@ -182,6 +189,7 @@ public class Restricoes
                                         propostaDeAula.IntervaloIndex == intervaloIndex
                                         &&
                                         contexto.Options.ProfessorEstaVinculadoAoDiario(diarioId: propostaDeAula.DiarioId, professorId: professor.Id)
+                                        && debugValor(propostaDeAula)
                                     select propostaDeAula.ModelBoolVar;
 
                     if (propostas.Any())
@@ -394,19 +402,25 @@ public class Restricoes
                                         select propostaAula;
 
                 var consecutivas = new List<PropostaDeAula>();
-                int skipCount = 0;
+                Random sorteio = new Random();
+                int skip = sorteio.Next(propostasDoDiario.Count() - diario.QuantidadeMaximaSemana);
                 int skipCount1 = 0;
                 int skipCount2 = 10;
                 PropostaDeAula propostaAnterior = null;
 
 
-                while (consecutivas.Count < diario.QuantidadeMaximaSemana && skipCount < propostasDoDiario.Count())
+                while (consecutivas.Count < diario.QuantidadeMaximaSemana)
                 {
-                    var propostasSkipadas = propostasDoDiario.Skip(skipCount).Take(1).ToList();
+                    System.Console.WriteLine("O skip foi de: " + skip);
+                    var propostasSkipadas = propostasDoDiario.Skip(skip).Take(1).ToList();
 
                     if (diario.QuantidadeMaximaSemana == 4)
                     {
+
+
                         var primeiraDivisao = propostasDoDiario.Skip(skipCount1).Take(2).ToList();
+                        skip = sorteio.Next(propostasDoDiario.Count() - diario.QuantidadeMaximaSemana);
+                        System.Console.WriteLine("O skip2 foi de: " + skip);
                         var segundaDivisao = propostasDoDiario.Skip(skipCount2).Take(2).ToList();
                         propostasSkipadas.Clear();
                         propostasSkipadas.AddRange(primeiraDivisao);
@@ -420,13 +434,14 @@ public class Restricoes
                         if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
                         {
                             // Verifica se a proposta anterior está nos últimos intervalos do dia (IntervaloIndex == 14)
-                            if (propostaAnterior != null && propostaAnterior.IntervaloIndex == 14)
+                            if (propostaAnterior != null && propostaAnterior.IntervaloIndex == 14 || propostaAnterior != null && propostaAnterior.IntervaloIndex == 9 || propostaAnterior != null && propostaAnterior.IntervaloIndex == 4)
                             {
                                 // Muda as propostas para o próximo dia
                                 int proximoDia = propostaAnterior.DiaSemanaIso + 1;
                                 propostaAnterior.DiaSemanaIso = proximoDia;
                                 propostaAnterior.IntervaloIndex = proposta.IntervaloIndex;
                                 proposta.IntervaloIndex = proposta.IntervaloIndex + 1;
+
                             }
 
                             consecutivas.Add(proposta);
@@ -434,7 +449,7 @@ public class Restricoes
                             propostaAnterior = proposta;
                         }
                     }
-                    skipCount++;
+                    skip++;
                     skipCount1 += 2;
                     skipCount2 += 5;
                 }
@@ -460,6 +475,72 @@ public class Restricoes
         }
     }
 
+
+
+    public static void AgruparDisciplinasParametro2(GerarHorarioContext contexto, string[] diarioId, int[] diaSemana, int[] quantidadeDesejada)
+    {
+        var horariosUsados = new HashSet<(int DiaSemanaIso, int IntervaloIndex)>();
+        var consecutivas = new List<PropostaDeAula>();
+        var propostas = from propostaAula in contexto.TodasAsPropostasDeAula
+                        select propostaAula;
+
+
+        for (int i = 0; i < diarioId.Length; i++)
+        {
+            var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
+                                    where propostaAula.DiarioId == diarioId[i]
+                                    && propostaAula.DiaSemanaIso == diaSemana[i]
+                                    select propostaAula;
+
+            int quantidadeDeAulas = contexto.Options.DiarioFindById(diarioId[i]).QuantidadeMaximaSemana;
+            var propostasSkipadas = new List<PropostaDeAula>();
+
+
+            bool validacao = false;
+
+
+
+            while (!validacao)
+            {
+                Random sorteio = new Random();
+                int skip = sorteio.Next(propostasDoDiario.Count() - quantidadeDeAulas);
+                System.Console.WriteLine(propostasDoDiario.Count());
+                System.Console.WriteLine("O skip foi de: " + skip);
+
+                for (int j = 0; j < quantidadeDesejada[i]; j++)
+                {
+                    propostasSkipadas.AddRange(propostasDoDiario.Skip(skip).Take(1).ToList());
+                    skip++;
+                }
+
+                foreach (var proposta in propostasSkipadas)
+                {
+                    System.Console.WriteLine("Diario CONSECUTIVO: " + proposta.DiarioId + " | Dia: " + proposta.DiaSemanaIso + " Intervalo: " + proposta.IntervaloIndex);
+
+                    var primeiraProposta = propostasSkipadas.First();
+                    if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
+                    {
+                        if (primeiraProposta.IntervaloIndex + quantidadeDesejada[i] - 1 <= 4 || primeiraProposta.IntervaloIndex + quantidadeDesejada[i] - 1 >= 6)
+                        {
+                            System.Console.WriteLine("Diario CONSECUTIVO PASSADAS: " + proposta.DiarioId + " | Dia: " + proposta.DiaSemanaIso + " Intervalo: " + proposta.IntervaloIndex);
+
+                            consecutivas.Add(proposta);
+                            horariosUsados.Add((proposta.DiaSemanaIso, proposta.IntervaloIndex));
+                            validacao = true;
+                        }
+                    }
+                }
+            }
+        }
+        foreach (var proposta in propostas)
+        {
+            if (!consecutivas.Contains(proposta))
+            {
+                contexto.Model.Add(proposta.ModelBoolVar == 0);
+            }
+        }
+
+    }
     public static void AgruparDisciplinasParametro(GerarHorarioContext contexto, string[] diarioId, int[] diaSemana, Intervalo[] intervalos)
     {
         var consecutivas = new List<PropostaDeAula>();
@@ -480,7 +561,10 @@ public class Restricoes
                                     Intervalo.VerificarIntervalo(intervalos[i], propostaAula.Intervalo.HorarioFim)
                                     select propostaAula;
 
+
             int quantidadeDeAulas = contexto.Options.DiarioFindById(diarioId[i]).QuantidadeMaximaSemana;
+
+
 
 
             foreach (var proposta in propostasDoDiario)
@@ -506,7 +590,12 @@ public class Restricoes
         }
 
     }
+
+
 }
+
+
+
 
 
 

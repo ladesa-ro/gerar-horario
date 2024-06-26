@@ -15,18 +15,19 @@ public class AgruparDisciplinasTest
 
     }
 
-   //[Test] 
+    //[Test]
     public void Test1()
     {
-
-        System.Console.WriteLine("Teste AgruparDisciplinas.cs");
-        var turmas = new Turma[] {
+        for (int i = 0; i <= 100000; i++)
+        {
+            System.Console.WriteLine("Teste AgruparDisciplinas.cs");
+            var turmas = new Turma[] {
             new(
                 "1",//TURMA
                 "1A INFORMATICA",//NOME DA TURMA
                 [
-                    new Diario (Id: "diario:1_3", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:3", QuantidadeMaximaSemana: 3),
-                    new Diario (Id: "diario:1_1", TurmaId: "turma:1", ProfessorId:  "2", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 1),
+                    new Diario (Id: "diario:1_3", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:3", QuantidadeMaximaSemana: 4),
+                    new Diario (Id: "diario:1_1", TurmaId: "turma:1", ProfessorId:  "2", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 4),
                     new Diario (Id: "diario:1_2", TurmaId: "turma:1", ProfessorId: "1", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 4),
                 ],
                 [
@@ -118,7 +119,7 @@ public class AgruparDisciplinasTest
             ),
         };
 
-        var professores = new Professor[] {
+            var professores = new Professor[] {
             new(
                 "1",
                 "Flinstons",
@@ -155,7 +156,7 @@ public class AgruparDisciplinasTest
             ),
         };
 
-        var horariosDeAula = new Intervalo[] {
+            var horariosDeAula = new Intervalo[] {
             // =====================
             new("07:30", "08:19:59"),
             new("08:20", "09:09:59"),
@@ -180,58 +181,58 @@ public class AgruparDisciplinasTest
             new("21:50", "22:39:59"),
             new("22:40", "23:29:59"),
         };
-        var datas = new Data[]
-       {
+            var datas = new Data[]
+           {
             new Data(new DateTime(2024, 2, 12), DiaSemanaIso.SEGUNDA),
             new Data(new DateTime(2024, 2, 13), DiaSemanaIso.TERCA),
             new Data(new DateTime(2024, 2, 14), DiaSemanaIso.QUARTA),
             new Data(new DateTime(2024, 2, 15), DiaSemanaIso.QUINTA),
             new Data(new DateTime(2024, 2, 16), DiaSemanaIso.SEXTA)
 
-       };
+           };
 
-        var gerarHorarioOptions = new GerarHorarioOptions(
-            diaSemanaInicio: DiaSemanaIso.SEGUNDA,
-            diaSemanaFim: DiaSemanaIso.SEXTA,
-            dataAnual: datas,
-            turmas: turmas,
-            professores: professores,
-            horariosDeAula: horariosDeAula,
-            logDebug: false
-        );
-        var contexto = new GerarHorarioContext(gerarHorarioOptions, iniciarTodasAsPropostasDeAula: true);
-        AgruparDisciplinasTestFunction(AgruparDisciplinas(contexto));
+            var gerarHorarioOptions = new GerarHorarioOptions(
+                diaSemanaInicio: DiaSemanaIso.SEGUNDA,
+                diaSemanaFim: DiaSemanaIso.SEXTA,
+                dataAnual: datas,
+                turmas: turmas,
+                professores: professores,
+                horariosDeAula: horariosDeAula,
+                logDebug: false
+            );
+            var contexto = new GerarHorarioContext(gerarHorarioOptions, iniciarTodasAsPropostasDeAula: true);
+            AgruparDisciplinasTestFunction(AgruparDisciplinasPadronizado(contexto));
+
+        }
 
 
     }
-
-
-    public static (List<PropostaDeAula>, List<Diario>) AgruparDisciplinas(GerarHorarioContext contexto)
+    public static (List<PropostaDeAula>, List<Diario>) AgruparDisciplinasPadronizado(GerarHorarioContext contexto)
     {
         var propostas = new List<PropostaDeAula>();
         var diarios = new List<Diario>();
-
         foreach (var turma in contexto.Options.Turmas)
         {
             var horariosUsados = new HashSet<(int DiaSemanaIso, int IntervaloIndex)>();
 
             foreach (var diario in turma.DiariosDaTurma)
             {
-                diarios.Add(diario);
                 var propostasDoDiario = from propostaAula in contexto.TodasAsPropostasDeAula
                                         where propostaAula.DiarioId == diario.Id
                                         select propostaAula;
 
                 var consecutivas = new List<PropostaDeAula>();
-                int skipCount = 0;
+                Random sorteio = new Random();
+                int skip = sorteio.Next(propostasDoDiario.Count() - diario.QuantidadeMaximaSemana);
                 int skipCount1 = 0;
                 int skipCount2 = 10;
                 PropostaDeAula propostaAnterior = null;
 
 
-                while (consecutivas.Count < diario.QuantidadeMaximaSemana && skipCount < propostasDoDiario.Count())
+                while (consecutivas.Count < diario.QuantidadeMaximaSemana && skip < propostasDoDiario.Count())
                 {
-                    var propostasSkipadas = propostasDoDiario.Skip(skipCount).Take(1).ToList();
+                    System.Console.WriteLine("O skip foi de: " + skip);
+                    var propostasSkipadas = propostasDoDiario.Skip(skip).Take(1).ToList();
 
                     if (diario.QuantidadeMaximaSemana == 4)
                     {
@@ -242,12 +243,14 @@ public class AgruparDisciplinasTest
                         propostasSkipadas.AddRange(segundaDivisao);
                     }
 
+
+
                     foreach (var proposta in propostasSkipadas)
                     {
                         if (!horariosUsados.Contains((proposta.DiaSemanaIso, proposta.IntervaloIndex)))
                         {
                             // Verifica se a proposta anterior está nos últimos intervalos do dia (IntervaloIndex == 14)
-                            if ((propostaAnterior != null && propostaAnterior.IntervaloIndex == 14) || (propostaAnterior != null && propostaAnterior.IntervaloIndex == 9) || (propostaAnterior != null && propostaAnterior.IntervaloIndex == 4))
+                            if (propostaAnterior != null && propostaAnterior.IntervaloIndex == 14 || propostaAnterior != null && propostaAnterior.IntervaloIndex == 9 || propostaAnterior != null && propostaAnterior.IntervaloIndex == 4)
                             {
                                 // Muda as propostas para o próximo dia
                                 int proximoDia = propostaAnterior.DiaSemanaIso + 1;
@@ -261,7 +264,7 @@ public class AgruparDisciplinasTest
                             propostaAnterior = proposta;
                         }
                     }
-                    skipCount++;
+                    skip++;
                     skipCount1 += 2;
                     skipCount2 += 5;
                 }
@@ -287,6 +290,8 @@ public class AgruparDisciplinasTest
         }
         return (propostas, diarios);
     }
+
+
 
     public static void AgruparDisciplinasTestFunction((List<PropostaDeAula>, List<Diario>) dados)
     {

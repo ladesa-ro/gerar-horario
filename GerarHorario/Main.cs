@@ -39,9 +39,9 @@ public class Main
                 "2",
                 "1B INFORMATICA",
                 [
-                    new Diario (Id: "diario:2_1", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:4", QuantidadeMaximaSemana: 2),
-                    new Diario (Id: "diario:2_3", TurmaId: "turma:2", ProfessorId: "1", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 2),
-                    new Diario (Id: "diario:2_2", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 4),
+                    new Diario (Id: "diario:2_1", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:4", QuantidadeMaximaSemana: 1),
+                    new Diario (Id: "diario:2_3", TurmaId: "turma:2", ProfessorId: "1", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 3),
+                    new Diario (Id: "diario:2_2", TurmaId: "turma:2", ProfessorId: "2", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 2),
                 ],
                 [
                     //
@@ -63,7 +63,7 @@ public class Main
                 "3",
                 "1 PERIODO ADS",
                 [
-                    new Diario (Id: "diario:3_1", TurmaId: "turma:3", ProfessorId: "2", DisciplinaId: "disciplina:4", QuantidadeMaximaSemana: 4),
+                    new Diario (Id: "diario:3_1", TurmaId: "turma:3", ProfessorId: "2", DisciplinaId: "disciplina:4", QuantidadeMaximaSemana: 1),
                     new Diario (Id: "diario:3_3", TurmaId: "turma:3", ProfessorId: "1", DisciplinaId: "disciplina:1", QuantidadeMaximaSemana: 3),
                     new Diario (Id: "diario:3_2", TurmaId: "turma:3", ProfessorId: "2", DisciplinaId: "disciplina:2", QuantidadeMaximaSemana: 2),
                 ],
@@ -143,6 +143,41 @@ public class Main
                     new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("19:00", "23:29:59")),
                 ]
             ),
+            new(
+                "3",
+                "Bonoro",
+                [
+                    new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("13:00", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("07:30", "11:59:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:30", "11:59:59")),
+
+                    new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("19:00", "23:29:59")),
+                ]
+            ),
+            new(
+                "4",
+                "Serjao",
+                [
+                    new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("07:30", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("07:30", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("07:30", "11:59:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("13:00", "17:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("07:30", "17:29:59")),
+
+                    new DisponibilidadeDia(DiaSemanaIso.SEGUNDA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.TERCA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUARTA, new Intervalo("19:00", "23:29:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.QUINTA, new Intervalo("19:00", "22:39:59")),
+                    new DisponibilidadeDia(DiaSemanaIso.SEXTA, new Intervalo("19:00", "23:29:59")),
+                ]
+            ),
+
         };
 
         var horariosDeAula = new Intervalo[] {
@@ -170,15 +205,15 @@ public class Main
             new("21:50", "22:39:59"),//13
             new("22:40", "23:29:59"),//14
         };
-          var datas = new Data[]
-        {
+        var datas = new Data[]
+      {
             new Data(new DateTime(2024, 2, 12), DiaSemanaIso.SEGUNDA),
             new Data(new DateTime(2024, 2, 13), DiaSemanaIso.TERCA),
             new Data(new DateTime(2024, 2, 14), DiaSemanaIso.QUARTA),
             new Data(new DateTime(2024, 2, 15), DiaSemanaIso.QUINTA),
             new Data(new DateTime(2024, 2, 16), DiaSemanaIso.SEXTA)
 
-        };
+      };
 
         var gerarHorarioOptions = new GerarHorarioOptions(
             diaSemanaInicio: DiaSemanaIso.SEGUNDA,
@@ -190,7 +225,7 @@ public class Main
             logDebug: false
         );
 
-      
+
 
         // ====================================================
         var horarioGeradoEnumerator = Gerador.GerarHorario(gerarHorarioOptions);

@@ -27,33 +27,33 @@ public class Gerador
 
         // ======================================
         // RESTRIÇÃO: Professor: não ter mais de uma aula ativa ao mesmo tempo.
-        //Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto);
+       // Restricoes.AplicarLimiteDeNoMaximoUmDiarioAtivoPorProfessorEmUmHorario(contexto); 
 
         // ======================================
         // RESTRIÇÃO: Diário: respeitar limite de quantidade máxima na semana.
-        //Restricoes.AgruparDisciplinasPadronizado(contexto);
-        Restricoes.AgruparDisciplinasParametro(contexto, ["diario:1_1", "diario:1_2", "diario:1_3"], [1, 2, 3],
+        Restricoes.AgruparDisciplinasPadronizado(contexto);
+        /*Restricoes.AgruparDisciplinasParametro(contexto, ["diario:1_1", "diario:1_2", "diario:1_3"], [1, 2, 3],
             [
                 new("07:30", "11:09:59"),
                 new("07:30", "09:59:59"),
                 new("07:30", "11:09:59"),
 
             ]
-        );
+        );*/
+       //Restricoes.AgruparDisciplinasParametro2(contexto, ["diario:1_3", "diario:1_1"], [4, 3], [2, 2]);
 
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para o professor.
-        // Restricoes.HorarioAlmocoProfessor(contexto);
-        // Restricoes.HorarioAlmocoProfessor(contexto);
+        // Restricoes.HorarioAlmocoProfessor(contexto); ERROR AQ
 
         // ======================================
         //RESTRIÇÃO: Mínimo de 1h30 de almoço para a turma.
-        // Restricoes.HorarioAlmocoTurma(contexto);
+        //Restricoes.HorarioAlmocoTurma(contexto); CERTO AQ
 
         // ======================================
         //RESTRIÇÃO: O professor não pode trabalhar 3 turnos e o professor não pode trabalhar de manhã e à noite.
-        // Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto);
+        //Restricoes.ProfessorNaoPodeTrabalharEmTresTurnosDiferentes(contexto); ERROR AQ
 
         // ======================================
         // RESTRIÇÃO: A diferença entre os turnos de trabalho do professor deve ser de 12 horas.
