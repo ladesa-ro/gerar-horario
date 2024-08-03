@@ -7,7 +7,7 @@ RUN dotnet restore Microsservicos/GerarHorario-Service
 # Build and publish a release
 RUN dotnet publish Microsservicos/GerarHorario-Service -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/runtime:8.0
 
 
 

@@ -8,4 +8,4 @@ else
 	docker build -f "$(pwd)/Dockerfile.service" -t some-app .
 fi
 
-docker run --env-file "$(pwd)/Microsservicos/GerarHorario-Service/.env" some-app
+docker run -it --env-file "$(pwd)/Microsservicos/GerarHorario-Service/.env" --name gerar-horario --network ladesa-net some-app
