@@ -561,8 +561,8 @@ var mock = @"{
 
 var joptions = new JsonSerializerOptions
 {
-    PropertyNameCaseInsensitive = true,
-    Converters = { new JsonStringEnumConverter() }
+  PropertyNameCaseInsensitive = true,
+  Converters = { new JsonStringEnumConverter() }
 };
 
 var options = JsonSerializer.Deserialize<GerarHorarioOptions>(mock, joptions);
@@ -571,10 +571,12 @@ Console.WriteLine(options.Professores[0].Nome);
 
 var horario = Gerador.GerarHorario(options);
 
+
 foreach (var hora in horario)
 {
-    Console.WriteLine(hora.Aulas[0].DiaDaSemanaIso);
-    break;
+  var json = JsonSerializer.Serialize(hora);
+  Console.WriteLine(json);
+  break;
 }
 /*
 #region Queue Tweaks
